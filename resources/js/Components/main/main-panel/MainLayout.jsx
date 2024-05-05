@@ -1,0 +1,127 @@
+import React, { useState, useEffect } from "react";
+import Row from "./Row";
+import {
+    DndContext,
+    KeyboardSensor,
+    PointerSensor,
+    TouchSensor,
+    closestCorners,
+    useSensor,
+    useSensors,
+} from "@dnd-kit/core";
+import { v4 } from "uuid";
+import { arrayMove, sortableKeyboardCoordinates } from "@dnd-kit/sortable";
+
+const MainLayout = () => {
+    const [list, setList] = useState([
+        {
+            id: v4(),
+            text: "tes",
+        },
+        {
+            id: v4(),
+            text: "coba 2",
+        },
+        {
+            id: v4(),
+            text: "coba 3",
+        },
+        {
+            id: v4(),
+            text: "coba 4",
+        },
+        {
+            id: v4(),
+            text: "coba 5",
+        },
+    ]);
+
+    const getListIndexPosition = (id) => {
+        return list.findIndex((lists) => {
+            return lists.id === id;
+        });
+    };
+
+    const handleDragEnd = (event) => {
+        const { active, over } = event;
+
+        if (active.id === over.id) {
+            return;
+        }
+
+        setList((prev) => {
+            const originalPosition = getListIndexPosition(active.id);
+            const newPosition = getListIndexPosition(over.id);
+            console.log(`A:${originalPosition} OVER:${newPosition}`);
+            return arrayMove(prev, originalPosition, newPosition);
+        });
+    };
+
+    // useEffect(() => {
+    //     console.log(list);
+    // }, [list]);
+
+    const sensors = useSensors(
+        useSensor(PointerSensor),
+        useSensor(TouchSensor),
+        useSensor(KeyboardSensor, {
+            coordinateGetter: sortableKeyboardCoordinates,
+        })
+    );
+
+    return (
+        <div
+            className="overflow-auto h-full p-2 text-[#678f9c] pe-11 pb-11"
+            style={{
+                scrollbarWidth: "thin",
+                scrollbarColor: "#616161 #66000000",
+            }}
+        >
+            <div className="mt-1 divide-y divide-gradient-to-r from-indigo-500">
+                <div>
+                    <a
+                        href="#"
+                        className="bg-[#2c508a] p-1 rounded-sm px-7 h-4 text-sm text-white font-medium hover:"
+                    >
+                        + Row
+                    </a>
+                    <a
+                        href="#"
+                        className="bg-[#2c508a] ms-2 p-1 rounded-sm px-7 h-4 text-sm text-white font-medium hover:"
+                    >
+                        + Save
+                    </a>
+                    <a
+                        href="#"
+                        className="bg-[#2c508a] ms-2 p-1 rounded-sm px-7 h-4 text-sm text-white font-medium "
+                    >
+                        + Reverse option position
+                    </a>
+                </div>
+                <div className="mt-2"></div>
+            </div>
+            <label className="text-sm mt-1 text-zinc-300">
+                Right click to delete items/keys
+            </label>
+
+            <DndContext
+                sensors={sensors}
+                onDragEnd={handleDragEnd}
+                collisionDetection={closestCorners}
+            >
+                <Row lists={list} />
+            </DndContext>
+            {/* <div className="w-screen h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
+                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
+                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
+                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
+                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
+                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
+                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
+                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
+                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div> */}
+        </div>
+    );
+};
+
+export default MainLayout;

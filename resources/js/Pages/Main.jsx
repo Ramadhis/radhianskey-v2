@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import SideMenu from "../Components/main/side-menu-panel/SideMenu";
+import Header from "../Components/main/header-panel/Header";
+import MainLayout from "../Components/main/main-panel/MainLayout";
+import PreviewLayout from "../Components/main/preview-panel/PreviewLayout";
+import Footer from "../Components/main/footer-panel/Footer";
 const Main = () => {
     const [isDraggingPortrait, setIsDraggingPortrait] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
@@ -14,41 +18,7 @@ const Main = () => {
                             defaultSize={6}
                             minSize={6}
                         >
-                            <div className="text-white w-full h-full ms-2 flex justify-between items-center">
-                                <div className="w-40 text-lg font-semibold">
-                                    Radhians-Keys
-                                </div>
-                                <div className="px-2 bg-[#1f1f1f] w-80 h-7 lg:block md:block hidden relative overflow-hidden group rounded-sm hover:scale-110 delay-150 ease-in-out duration-300">
-                                    <div className="animate-spin-slow group-hover:animate-none transition-all group-hover:delay-100 group-hover::duration-150 w-96 h-20 m-auto -left-3 right-0 bg-white absolute"></div>
-                                    <a
-                                        href="#"
-                                        className="inset-[1px] bg-[#1c1e20] absolute flex justify-center items-center text-[11px] rounded-sm "
-                                    >
-                                        Test your keyboard here...
-                                    </a>
-                                </div>{" "}
-                                {/*Test your keyboard here...*/}
-                                <div className="h-full flex items-center group">
-                                    <div className="me-2 text-sm font-semibold">
-                                        Ramadhiansyah
-                                    </div>
-                                    <a href="#" className="pe-6">
-                                        <img
-                                            alt="name"
-                                            src="https://i.stack.imgur.com/HgkK0.png"
-                                            class="object-none w-8 h-8 rounded-full inline border-2"
-                                        />
-                                    </a>
-                                    <div className="bg-[#1f1f1f] border border-zinc-300  w-36 h-20 z-30 absolute top-9 right-5 rounded text-black hidden group-hover:block group-hover:transition">
-                                        <div className="hover:bg-[#2c508a] mt-2 text-zinc-300 ps-2">
-                                            <a href="#">Account setting</a>
-                                        </div>
-                                        <div className="hover:bg-[#2c508a] mt-2 text-zinc-300 ps-2">
-                                            <a href="#">Sign out</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <Header />
                         </Panel>
                         <PanelResizeHandle disabled={true}>
                             <div className="w-full h-px bg-[#313131]"></div>
@@ -62,7 +32,14 @@ const Main = () => {
                                 direction="horizontal"
                                 className="w-full h-full"
                             >
-                                <SideMenu />
+                                <Panel
+                                    className="bg-[#181818]"
+                                    minSize={10}
+                                    maxSize={30}
+                                    defaultSize={15}
+                                >
+                                    <SideMenu />
+                                </Panel>
                                 <PanelResizeHandle
                                     onDragging={setIsDraggingPortrait}
                                     className="relative z-10"
@@ -82,52 +59,7 @@ const Main = () => {
                                             className="bg-[#1f1f1f] w-full mx-auto ps-2 pb-1"
                                             defaultSize={70}
                                         >
-                                            <div
-                                                className="overflow-auto h-full p-2 text-[#678f9c] pe-11 pb-11"
-                                                style={{
-                                                    scrollbarWidth: "thin",
-                                                    scrollbarColor:
-                                                        "#616161 #66000000",
-                                                }}
-                                            >
-                                                <div className="mt-1 divide-y divide-gradient-to-r from-indigo-500">
-                                                    <div>
-                                                        <a
-                                                            href="#"
-                                                            className="bg-[#2c508a] p-1 rounded-sm px-7 h-4 text-sm text-white font-medium hover:"
-                                                        >
-                                                            + Row
-                                                        </a>
-                                                        <a
-                                                            href="#"
-                                                            className="bg-[#2c508a] ms-2 p-1 rounded-sm px-7 h-4 text-sm text-white font-medium hover:"
-                                                        >
-                                                            + Save
-                                                        </a>
-                                                        <a
-                                                            href="#"
-                                                            className="bg-[#2c508a] ms-2 p-1 rounded-sm px-7 h-4 text-sm text-white font-medium "
-                                                        >
-                                                            + Reverse option
-                                                            position
-                                                        </a>
-                                                    </div>
-                                                    <div className="mt-2"></div>
-                                                </div>
-                                                <label className="text-sm mt-1 text-zinc-300">
-                                                    Right click to delete
-                                                    items/keys
-                                                </label>
-                                                <div className="w-screen h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
-                                                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
-                                                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
-                                                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
-                                                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
-                                                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
-                                                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
-                                                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
-                                                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
-                                            </div>
+                                            <MainLayout />
                                         </Panel>
                                         <PanelResizeHandle
                                             onDragging={setIsDragging}
@@ -149,25 +81,7 @@ const Main = () => {
                                             maxSize={80}
                                             defaultSize={30}
                                         >
-                                            <div
-                                                className=" h-full text-[#678f9c] overflow-hidden hover:overflow-auto "
-                                                style={{
-                                                    scrollbarWidth: "thin",
-                                                    scrollbarColor:
-                                                        "#616161 #66000000",
-                                                }}
-                                            >
-                                                {" "}
-                                                <div className=" text-sm ps-1 pe-3 pt-3 pb-2 w-full fixed bg-[#181818]">
-                                                    <div className="ms-4 mt-2 text-zinc-300 hover:text-white inline">
-                                                        PREVIEW LAYOUT
-                                                    </div>
-                                                    {/* <div className="ms-4 mt-1 text-zinc-300 hover:text-white inline">PREVIEW LAYOUT</div> */}
-
-                                                    {/* <hr /> */}
-                                                </div>
-                                                <div className="w-screen h-48 overflow-hidden bg-gray-700 border rounded-sm ms-4 me-11 mt-12 mb-11"></div>
-                                            </div>
+                                            <PreviewLayout />
                                         </Panel>
                                     </PanelGroup>
                                 </Panel>
@@ -181,9 +95,7 @@ const Main = () => {
                             defaultSize={3}
                             minSize={3}
                         >
-                            <div className="text-sm text-white ms-1">
-                                © 2023 Radhians-Keys
-                            </div>
+                            <Footer />
                         </Panel>
                     </PanelGroup>
                 </Panel>
