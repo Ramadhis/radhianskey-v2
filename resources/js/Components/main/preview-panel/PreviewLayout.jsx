@@ -14,11 +14,12 @@ const PreviewLayout = () => {
                 <div className="ms-4 mt-2 text-zinc-300 hover:text-white inline">
                     PREVIEW LAYOUT
                 </div>
-                {/* <div className="ms-4 mt-1 text-zinc-300 hover:text-white inline">PREVIEW LAYOUT</div> */}
-
-                {/* <hr /> */}
             </div>
-            <div className="w-screen h-48 overflow-hidden bg-gray-700 border rounded-sm ms-4 me-11 mt-12 mb-11"></div>
+            <div className="case">
+                <div className="bg-[#e8c4b8] border rounded-[4px] ms-4 me-11 mt-12 mb-11 p-2">
+                    <div className="h-48 bg-[#332b29] border border-[#706662] rounded-[9px]"></div>
+                </div>
+            </div>
         </div>
     );
 };
