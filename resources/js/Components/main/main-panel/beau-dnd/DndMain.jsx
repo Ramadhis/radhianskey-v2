@@ -1,77 +1,14 @@
 import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import { v4 } from "uuid";
+
 import ContainerBody from "./ContainerBody";
 import ItemColumn from "./ItemColumn";
 import AddKeys from "./AddKeys";
+import { useListKeys } from "../../../../Context/listKeys";
+
 const DndMain = () => {
-    const [list, setList] = useState({
-        keyDownBorder: " 1px solid blue ",
-        keyDownBackground: "lightskyblue",
-        fontSize: "13px",
-        layoutData: [
-            {
-                id: v4(),
-                column: [
-                    {
-                        id: v4(),
-                        width: "150",
-                        text: "1!",
-                        keycapsSizeUnit: "2.25",
-                        keycapsStyle: {
-                            color1: "",
-                            color2: "",
-                        },
-                    },
-                    {
-                        id: v4(),
-                        width: "50",
-                        text: "2@",
-                    },
-                ],
-            },
-            {
-                id: v4(),
-                column: [
-                    {
-                        id: v4(),
-                        width: "150",
-                        text: "Q",
-                    },
-                    {
-                        id: v4(),
-                        width: "100",
-                        text: "W",
-                    },
-                    {
-                        id: v4(),
-                        width: "45",
-                        text: "E",
-                    },
-                ],
-            },
-            {
-                id: v4(),
-                column: [
-                    {
-                        id: v4(),
-                        width: "150",
-                        text: "A",
-                    },
-                    {
-                        id: v4(),
-                        width: "100",
-                        text: "S",
-                    },
-                    {
-                        id: v4(),
-                        width: "45",
-                        text: "D",
-                    },
-                ],
-            },
-        ],
-    });
+    const listKeysContext = useListKeys();
+    const { listKeys, updateListKeys } = listKeysContext;
 
     const handleDragEnd = (e) => {
         //destination = dropped item
@@ -99,25 +36,25 @@ const DndMain = () => {
             destination.droppableId === "all-columns"
         ) {
             //sort for row
-            setList((prev) => {
-                let arrKeys = [...prev.layoutData];
-                //swap array in row object
-                arrKeys.splice(source.index, 1);
-                arrKeys.splice(
-                    destination.index,
-                    0,
-                    prev.layoutData[source.index]
-                );
-                return { ...prev, layoutData: arrKeys };
-                //End swap array in row object
-            });
+
+            let arrKeys = [...listKeys.layoutData];
+            //swap array in row object
+            arrKeys.splice(source.index, 1);
+            arrKeys.splice(
+                destination.index,
+                0,
+                listKeys.layoutData[source.index]
+            );
+            updateListKeys({ layoutData: arrKeys });
+            //End swap array in row object
+
             // console.log(keys);
         } else if (
             source.droppableId != "all-columns" &&
             destination.droppableId != "all-columns"
         ) {
             //column sorting
-            let layout = [...list.layoutData];
+            let layout = [...listKeys.layoutData];
 
             let findIndexSource = layout.findIndex((val) => {
                 return val.id === source.droppableId;
@@ -128,7 +65,7 @@ const DndMain = () => {
 
             //get dragged object
             let saveItem = {
-                ...list.layoutData[findIndexSource].column[source.index],
+                ...listKeys.layoutData[findIndexSource].column[source.index],
             };
 
             layout[findIndexSource].column.splice(source.index, 1);
@@ -137,9 +74,10 @@ const DndMain = () => {
                 0,
                 saveItem
             );
-            setList((prev) => {
-                return { ...prev, layoutData: layout };
-            });
+            // setList((listKeys) => {
+            //     return { ...listKeys, layoutData: layout };
+            // });
+            updateListKeys({ layoutData: layout });
         } else {
             return;
         }
@@ -159,7 +97,7 @@ const DndMain = () => {
                                 ref={provided.innerRef}
                                 {...provided.droppableProps}
                             >
-                                {list.layoutData.map((row, index) => {
+                                {listKeys.layoutData.map((row, index) => {
                                     return (
                                         <ContainerBody
                                             id={row.id}

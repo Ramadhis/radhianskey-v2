@@ -5,11 +5,14 @@ import Header from "../Components/main/header-panel/Header";
 import MainLayout from "../Components/main/main-panel/MainLayout";
 import PreviewLayout from "../Components/main/preview-panel/PreviewLayout";
 import Footer from "../Components/main/footer-panel/Footer";
+import ListKeysProvider, { useListKeys } from "../Context/listKeys";
+
 const Main = () => {
     const [isDraggingPortrait, setIsDraggingPortrait] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
+
     return (
-        <>
+        <ListKeysProvider>
             <PanelGroup direction="horizontal" className="w-full h-screen">
                 <Panel className="h-screen" minSize={20} defaultSize={40}>
                     <PanelGroup direction="vertical">
@@ -100,7 +103,7 @@ const Main = () => {
                     </PanelGroup>
                 </Panel>
             </PanelGroup>
-        </>
+        </ListKeysProvider>
     );
 };
 

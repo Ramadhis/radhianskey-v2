@@ -4,30 +4,11 @@ import DragAndDrop from "./dnd-kit/DragAndDrop";
 import DndMain from "./beau-dnd/DndMain";
 import AddRowBtn from "./partial-components/AddRowBtn";
 import SaveBtn from "./partial-components/SaveBtn";
+import { useListKeys } from "../../../Context/listKeys";
 
 const MainLayout = () => {
-    const [list, setList] = useState([
-        {
-            id: v4(),
-            text: "tes",
-        },
-        {
-            id: v4(),
-            text: "coba 2",
-        },
-        {
-            id: v4(),
-            text: "coba 3",
-        },
-        {
-            id: v4(),
-            text: "coba 4",
-        },
-        {
-            id: v4(),
-            text: "coba 5",
-        },
-    ]);
+    const listKeysContext = useListKeys();
+    const { listKeys, updateListKeys } = listKeysContext;
 
     return (
         <div
@@ -57,15 +38,6 @@ const MainLayout = () => {
                 {/* <DragAndDrop /> */}
                 <DndMain></DndMain>
             </div>
-            {/* <div className="w-screen h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
-                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
-                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
-                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
-                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
-                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
-                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
-                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div>
-                <div className="w-2/3 h-14 overflow-hidden mt-2 bg-gray-700 border rounded-sm"></div> */}
         </div>
     );
 };
