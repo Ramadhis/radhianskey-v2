@@ -26,7 +26,8 @@ const MainLayout = () => {
                         href="#"
                         className="bg-[#2c508a] ms-2 p-1 rounded-sm px-7 h-4 text-sm text-white font-medium "
                     >
-                        + Reverse option position
+                        <i className="bi bi-arrow-left-right"></i> Reverse
+                        option position
                     </a>
                 </div>
                 <div className="mt-2"></div>
