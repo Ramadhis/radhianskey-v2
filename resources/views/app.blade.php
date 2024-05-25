@@ -10,7 +10,7 @@
   @inertiaHead
   <style>
   body {
-    background-color: lightgray
+    background-color: #1f1f1f
   }
   </style>
 </head>

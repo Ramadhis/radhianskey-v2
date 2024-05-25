@@ -16,9 +16,12 @@ const ModalLayout = ({ open, close, children }) => {
             >
                 <div
                     onClick={close}
-                    className="absolute -top-4 -right-3 w-7 h-7 bg-red-600 cursor-pointer hover:text-red-600 hover:bg-white rounded-full border border-white hover:border-red-600 flex justify-center"
+                    className="absolute -top-5 -right-4 w-9 h-9 bg-red-600 cursor-pointer text-white hover:text-red-600 hover:bg-white rounded-full border border-white hover:border-red-600 flex items-center justify-center "
                 >
-                    <i className="bi bi-x-lg "></i>
+                    <i
+                        className="bi bi-x-lg "
+                        style={{ WebkitTextStroke: "2px" }}
+                    ></i>
                 </div>
                 {children}
             </div>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
+use App\Http\Controllers\KeyboardTestController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/home', [MainController::class, 'index'])->name('home');
+Route::get('/keyboard-test', [KeyboardTestController::class, 'index'])->name('home');
