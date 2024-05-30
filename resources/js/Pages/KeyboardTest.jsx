@@ -21,17 +21,20 @@ const KeyboardTest = () => {
             </div>
             <div className="body flex justify-center mt-14">
                 <div className="w-[600px] bg-[#181818] shadow-lg border border-[#313131] rounded-md px-5 py-2 flex justify-around">
-                    <div className="text-zinc-300 hover:text-white cursor-pointer">
-                        Reset
+                    <div className=" text-white hover:text-red-600 font-bold cursor-pointer transition-all delay-75">
+                        <i className="bi bi-arrow-clockwise"></i> Reset
                     </div>
-                    <div className="text-zinc-300 hover:text-white cursor-pointer">
-                        Skeleton layout
+                    <div className="text-zinc-300 hover:text-white cursor-pointer transition-all">
+                        Layout-test
                     </div>
-                    <div className="text-zinc-300 hover:text-white cursor-pointer">
-                        Statistic test
+                    <div className="text-zinc-300 hover:text-white cursor-pointer transition-all">
+                        Skeleton-layout
                     </div>
-                    <div className="text-zinc-300 hover:text-white cursor-pointer">
-                        My layout
+                    <div className="text-zinc-300 hover:text-white cursor-pointer transition-all">
+                        Statistic-test
+                    </div>
+                    <div className="text-zinc-300 hover:text-white cursor-pointer transition-all">
+                        My-layout
                     </div>
                 </div>
             </div>

@@ -1,0 +1,16 @@
+import React from "react";
+
+const DeleteKeys = () => {
+    return (
+        <div className="absolute -left-5 -top-5 hidden group-hover:block w-6 h-6 mt-1 rounded-full bg-red-600 cursor-pointer text-white hover:text-red-600 hover:bg-white border border-white hover:border-red-600 ">
+            <div className="w-full h-full flex items-center justify-center ">
+                <i
+                    className="bi bi-x-lg text-[10px] "
+                    style={{ WebkitTextStroke: "1px" }}
+                ></i>
+            </div>
+        </div>
+    );
+};
+
+export default DeleteKeys;

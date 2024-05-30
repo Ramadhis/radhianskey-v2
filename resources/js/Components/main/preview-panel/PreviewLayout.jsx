@@ -14,7 +14,7 @@ const PreviewLayout = () => {
             }}
         >
             {" "}
-            <div className=" text-sm ps-1 pe-3 pt-3 pb-2 w-full fixed bg-[#181818]">
+            <div className=" text-sm ps-1 pe-3 pt-3 pb-2 w-full fixed bg-[#181818] z-[5]">
                 <div className="ms-4 mt-2 text-zinc-300 hover:text-white inline">
                     PREVIEW LAYOUT
                 </div>
@@ -32,7 +32,7 @@ const PreviewLayout = () => {
                                         return (
                                             <div
                                                 key={index2}
-                                                className="w-[58px] h-[58px] ms-[3px] bg-stone-400 border border-r-stone-500 border-b-stone-500 border-l-stone-200 border-t-stone-200 text-black rounded-sm flex justify-center flex-shrink-0"
+                                                className="w-[58px] h-[58px] ms-[3px] bg-stone-400 border border-r-stone-500 border-b-stone-500 border-l-stone-200 border-t-stone-200 text-black rounded-sm flex justify-center flex-shrink-0 relative z-0"
                                                 //normal Width keycaps 68x68
                                                 //untuk simulasi di kurang 10px = 58px
                                             >
@@ -40,6 +40,33 @@ const PreviewLayout = () => {
                                                 <div className="w-[45px] h-[45px] mt-[3px] ps-[2px] border border-r-stone-500 border-b-stone-500 border-l-stone-200 border-t-stone-200 bg-stone-200 rounded-sm text-[15px]">
                                                     {col.text}
                                                 </div>
+                                                {col.keyConnect1 ? (
+                                                    <>
+                                                        <div
+                                                            className={`w-[58px] h-[22px] z-[5] bg-stone-400 border border-y-0 border-l-stone-200 border-r-stone-500 absolute top-[-15px]`}
+                                                        ></div>
+                                                        <div
+                                                            className={`w-[45px] h-[22px] z-[5] bg-stone-200 border border-y-0 border-r-stone-500 absolute top-[-15px]`}
+                                                        ></div>
+                                                    </>
+                                                ) : (
+                                                    false
+                                                )}
+
+                                                {col.keyConnect2 ? (
+                                                    <>
+                                                        <>
+                                                            <div
+                                                                className={`w-[22px] h-[58px] mt-[-1px] z-[5] bg-stone-400 border border-x-0 border-t-stone-200 border-b-stone-500 absolute left-[-15px]`}
+                                                            ></div>
+                                                            <div
+                                                                className={`w-[22px] h-[45px] mt-[3px] z-[5] bg-stone-200 border border-x-0 border-b-stone-500 absolute left-[-15px]`}
+                                                            ></div>
+                                                        </>
+                                                    </>
+                                                ) : (
+                                                    false
+                                                )}
                                             </div>
                                         );
                                     })}

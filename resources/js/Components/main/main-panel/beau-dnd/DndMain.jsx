@@ -4,6 +4,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import ContainerBody from "./ContainerBody";
 import ItemColumn from "./ItemColumn";
 import AddKeys from "./AddKeys";
+import DeleteKeys from "./DeleteKeys";
 import { useListKeys } from "../../../../Context/listKeys";
 
 const DndMain = () => {
@@ -104,7 +105,11 @@ const DndMain = () => {
                                             index={index}
                                             key={index}
                                         >
-                                            <AddKeys />
+                                            <div className="relative">
+                                                <AddKeys />
+                                                <DeleteKeys />
+                                            </div>
+
                                             {row.column.map((col, index2) => {
                                                 return (
                                                     <ItemColumn

@@ -11,7 +11,7 @@ const ContainerBody = ({ id, index, children }) => {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
-                            className="bg-white m-1 flex"
+                            className=" m-1 flex"
                         >
                             <Droppable droppableId={id} direction="horizontal">
                                 {(provided, snapshot) => {
@@ -23,7 +23,7 @@ const ContainerBody = ({ id, index, children }) => {
                                                 minWidth: "1000px",
                                                 minHeight: "70px",
                                             }}
-                                            className=" p-2 bg-gray-700 border rounded-sm flex flex-shrink-0 flex-grow"
+                                            className=" p-2 bg-gray-700 border group hover:border-[#0d6efd] rounded-sm flex flex-shrink-0 flex-grow"
                                         >
                                             {children}
                                             {provided.placeholder}

@@ -79,7 +79,7 @@ const AuthHeaderTemplate = () => {
                 <div className="h-full flex items-center group">
                     <button
                         onClick={openSignInModal}
-                        className="border bg-[#1c1e20] hover:bg-slate-50 text-white hover:text-[#0d6efd] border-[#0d6efd] hover:border-none text-[14px] pt-[3px] pb-[3px] ps-2 pe-2 me-2 rounded-sm font-semibold"
+                        className="border bg-none hover:bg-slate-50 text-white hover:text-[#0d6efd] border-[#0d6efd] hover:border-none text-[14px] pt-[3px] pb-[3px] ps-2 pe-2 me-2 rounded-sm font-semibold"
                     >
                         Sign in
                     </button>

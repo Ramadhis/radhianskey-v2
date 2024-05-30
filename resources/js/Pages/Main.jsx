@@ -80,8 +80,8 @@ const Main = () => {
                                         </PanelResizeHandle>
                                         <Panel
                                             className="bg-[#181818] w-full mx-auto pb-1"
-                                            minSize={20}
-                                            maxSize={80}
+                                            minSize={10}
+                                            maxSize={90}
                                             defaultSize={30}
                                         >
                                             <PreviewLayout />
