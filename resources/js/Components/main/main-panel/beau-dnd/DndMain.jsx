@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 import ContainerBody from "./ContainerBody";
@@ -6,10 +6,21 @@ import ItemColumn from "./ItemColumn";
 import AddKeys from "./AddKeys";
 import DeleteKeys from "./DeleteKeys";
 import { useListKeys } from "../../../../Context/listKeys";
+import { useSelector, useDispatch } from "react-redux";
+import { updateLayoutData } from "../../../../Store/Slices/main/layoutSlice";
 
 const DndMain = () => {
     const listKeysContext = useListKeys();
-    const { listKeys, updateListKeys } = listKeysContext;
+    // const { listKeys, updateListKeys } = listKeysContext;
+
+    const listKeys = JSON.parse(
+        JSON.stringify(useSelector((state) => state.layout))
+    );
+    const dispatch = useDispatch();
+
+    // useEffect(() => {
+    //     console.log(listKeys);
+    // }, []);
 
     const handleDragEnd = (e) => {
         //destination = dropped item
@@ -46,7 +57,9 @@ const DndMain = () => {
                 0,
                 listKeys.layoutData[source.index]
             );
-            updateListKeys({ layoutData: arrKeys });
+            // updateListKeys({ layoutData: arrKeys });
+
+            dispatch(updateLayoutData({ layoutData: arrKeys }));
             //End swap array in row object
 
             // console.log(keys);
@@ -55,6 +68,7 @@ const DndMain = () => {
             destination.droppableId != "all-columns"
         ) {
             //column sorting
+
             let layout = [...listKeys.layoutData];
 
             let findIndexSource = layout.findIndex((val) => {
@@ -66,8 +80,12 @@ const DndMain = () => {
 
             //get dragged object
             let saveItem = {
-                ...listKeys.layoutData[findIndexSource].column[source.index],
+                ...layout[findIndexSource].column[source.index],
             };
+
+            console.log(
+                `source: ${source.index} , destination: ${destination.index}`
+            );
 
             layout[findIndexSource].column.splice(source.index, 1);
             layout[findIndexDestination].column.splice(
@@ -75,10 +93,13 @@ const DndMain = () => {
                 0,
                 saveItem
             );
+
             // setList((listKeys) => {
             //     return { ...listKeys, layoutData: layout };
             // });
-            updateListKeys({ layoutData: layout });
+            // updateLayout({ layoutData: layout });
+
+            dispatch(updateLayoutData({ layoutData: layout }));
         } else {
             return;
         }

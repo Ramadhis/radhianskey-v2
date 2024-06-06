@@ -1,9 +1,14 @@
 import React from "react";
-import { useListKeys } from "../../../Context/listKeys";
+// import { useListKeys } from "../../../Context/listKeys";
+import { useSelector, useDispatch } from "react-redux";
 
 const PreviewLayout = () => {
-    const listKeysContext = useListKeys();
-    const { listKeys, updateListKeys } = listKeysContext;
+    // const listKeysContext = useListKeys();
+    // const { listKeys, updateListKeys } = listKeysContext;
+
+    const listKeys = JSON.parse(
+        JSON.stringify(useSelector((state) => state.layout))
+    );
 
     return (
         <div

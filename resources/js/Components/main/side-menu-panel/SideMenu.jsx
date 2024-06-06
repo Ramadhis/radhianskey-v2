@@ -1,6 +1,69 @@
 import React, { useState } from "react";
-
+import CaseForm from "./partial-components/CaseForm";
+import KeysForm from "./partial-components/KeysForm";
+import LayoutDescForm from "./partial-components/LayoutDescForm";
+import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { v4 } from "uuid";
+import MenuLayout from "./partial-components/MenuLayout";
 const SideMenu = () => {
+    const [menuList, setMenuList] = useState([
+        {
+            id: v4(),
+            title: "Case",
+            layout: <CaseForm />,
+        },
+        {
+            id: v4(),
+            title: "Layout desciption",
+            layout: <LayoutDescForm />,
+        },
+        {
+            id: v4(),
+            title: "keys",
+            layout: <KeysForm />,
+        },
+    ]);
+
+    const handleDragEnd = (e) => {
+        //destination = dropped item
+        let destination = e.destination;
+        //source = dragged item
+        let source = e.source;
+
+        // drag drop validation
+        if (!destination) {
+            // console.log("not dropped in droppable");
+            return;
+        }
+
+        if (
+            destination.index === source.index &&
+            destination.droppableId == source.droppableId
+        ) {
+            // console.log("drop in same place");
+            return;
+        }
+
+        // row sorting
+        if (
+            source.droppableId === "all-columns" &&
+            destination.droppableId === "all-columns"
+        ) {
+            //sort for row
+
+            let arrKeys = [...menuList];
+            //swap array in row object
+            arrKeys.splice(source.index, 1);
+            arrKeys.splice(destination.index, 0, menuList[source.index]);
+            return setMenuList((prev) => {
+                return [...arrKeys];
+            });
+            //End swap array in row object
+        } else {
+            return;
+        }
+    };
+
     return (
         <div
             className="w-full h-full overflow-hidden hover:overflow-auto"
@@ -10,142 +73,54 @@ const SideMenu = () => {
             }}
         >
             <div className="h-full p-1">
-                <div className="menu my-2 text-zinc-300">
-                    <div className="bg-gray-700 w-full p-1 rounded-t-sm">
-                        Layout Description
-                    </div>
-                    <div className="accor-body bg-[#1f1f1f] rounded-b-sm h-40 p-1 border-s border-b border-e border-gray-700">
-                        <div className="w-full mt-1">
-                            <label className="text-sm">Layout name</label>
-                            <input
-                                type="text"
-                                placeholder="Layout name"
-                                className="w-full h-7 bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
-                            />
-                        </div>
-                        <div className="w-full mt-1">
-                            <label className="text-sm">
-                                Layout Description
-                            </label>
-                            <input
-                                type="text"
-                                placeholder="Layout name"
-                                className="w-full h-7 bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
-                            />
-                        </div>
-                        <div className="w-full mt-3 mb-3 text-right">
-                            <a
-                                href="#"
-                                className="bg-[#2c508a] p-1 rounded-sm px-2 h-4 text-sm font-medium "
-                            >
-                                Apply
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div className="menu my-2 text-zinc-300">
-                    <div className="bg-gray-700 w-full p-1 rounded-t-sm text-sm font-medium">
-                        Keys
-                    </div>
-                    <div className="accor-body h-auto bg-[#1f1f1f] rounded-b-sm  p-1 border-s border-b border-e border-gray-700">
-                        <div className="w-full mt-1">
-                            <label className="text-sm">Keys legend</label>
-                            <input
-                                type="text"
-                                placeholder="keys legend (Max 10 character)"
-                                className="w-full h-7 bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
-                            />
-                        </div>
-                        <div className="w-full mt-1">
-                            <label className="text-sm">On key pressed</label>
-                            <input
-                                type="text"
-                                placeholder="On key pressed..."
-                                className="w-full h-7 bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
-                            />
-                        </div>
-                        <div className="w-full mt-1">
-                            <label className="text-sm">Key size</label>
-                            <input
-                                type="text"
-                                placeholder="Key size"
-                                className="w-full h-7 bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
-                            />
-                        </div>
-                        <div className="w-full mt-1">
-                            <label className="text-sm">Font style</label>
-                            <input
-                                type="text"
-                                placeholder="Font Style"
-                                className="w-full h-7 bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
-                            />
-                        </div>
-                        <div className="w-full mt-1">
-                            <label className="text-sm">Text align</label>
-                            <input
-                                type="text"
-                                placeholder="Text align"
-                                className="w-full h-7 bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
-                            />
-                        </div>
-                        <div className="w-full mt-1">
-                            <label className="text-sm">Keycaps color</label>
-                            <input
-                                type="text"
-                                placeholder="Keycaps color"
-                                className="w-full h-7 bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
-                            />
-                        </div>
-                        <div className="w-full mt-1">
-                            <label className="text-sm">Keycaps connect</label>
-                            <input
-                                type="text"
-                                placeholder="Keycaps color"
-                                className="w-full h-7 bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
-                            />
-                        </div>
-                        <div className="w-full mt-3 mb-3 text-right">
-                            <a
-                                href="#"
-                                className="bg-[#2c508a] p-1 rounded-sm px-2 h-4 text-sm font-medium "
-                            >
-                                Apply
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="menu my-2 text-zinc-300">
-                    <div className="bg-gray-700 w-full p-1 rounded-t-sm">
-                        Layout case
-                    </div>
-                    <div className="accor-body bg-[#1f1f1f] rounded-b-sm h-40 p-1 border-s border-b border-e border-gray-700">
-                        <div className="w-full mt-1">
-                            <label className="text-sm">Case Color</label>
-                            <input
-                                type="text"
-                                placeholder="Case Color"
-                                className="w-full h-7 bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
-                            />
-                        </div>
-                        <div className="w-full mt-1">
-                            <label className="text-sm">Padding</label>
-                            <input
-                                type="text"
-                                placeholder="Case Color"
-                                className="w-full h-7 bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
-                            />
-                        </div>
-                        <div className="w-full mt-3 mb-3 text-right">
-                            <a
-                                href="#"
-                                className="bg-[#2c508a] p-1 rounded-sm px-2 h-4 text-sm font-medium "
-                            >
-                                Apply
-                            </a>
-                        </div>
-                    </div>
-                </div>
+                <DragDropContext onDragEnd={handleDragEnd}>
+                    <Droppable
+                        droppableId="all-columns"
+                        direction="vertical"
+                        type="column"
+                    >
+                        {(provided, snapshot) => {
+                            return (
+                                <div
+                                    ref={provided.innerRef}
+                                    {...provided.droppableProps}
+                                >
+                                    {menuList.map((val, index) => {
+                                        return (
+                                            <Draggable
+                                                draggableId={val.id}
+                                                index={index}
+                                                key={val.id}
+                                            >
+                                                {(provided) => {
+                                                    return (
+                                                        <div
+                                                            ref={
+                                                                provided.innerRef
+                                                            }
+                                                            {...provided.draggableProps}
+                                                        >
+                                                            <MenuLayout
+                                                                headerTitle={
+                                                                    val.title
+                                                                }
+                                                                dragHandle={{
+                                                                    ...provided.dragHandleProps,
+                                                                }}
+                                                            >
+                                                                {val.layout}
+                                                            </MenuLayout>
+                                                        </div>
+                                                    );
+                                                }}
+                                            </Draggable>
+                                        );
+                                    })}
+                                </div>
+                            );
+                        }}
+                    </Droppable>
+                </DragDropContext>
             </div>
         </div>
     );

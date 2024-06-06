@@ -1,0 +1,41 @@
+import React, { useState } from "react";
+import { Draggable } from "react-beautiful-dnd";
+
+const MenuLayout = ({ headerTitle, dragHandle, children }) => {
+    const [minimize, setMinimize] = useState(false);
+
+    return (
+        <div className="menu my-2 text-zinc-300">
+            <div className="bg-gray-700 w-full p-1 rounded-t-sm relative">
+                <div>{headerTitle}</div>
+                <div className="absolute right-0 top-0 me-1 mt-1 flex">
+                    <div
+                        onClick={() => {
+                            if (minimize) {
+                                return setMinimize(false);
+                            } else {
+                                return setMinimize(true);
+                            }
+                        }}
+                        className="border border-[#2c508a] bg-gray-700 hover:bg-[#2c508a] px-2 font-bold me-1 text-[13px] rounded-sm cursor-pointer"
+                    >
+                        __
+                    </div>
+                    <div
+                        {...dragHandle}
+                        className="border border-[#2c508a]  bg-gray-700 hover:bg-[#2c508a] px-2 font-bold text-[13px] rounded-sm cursor-pointer"
+                    >
+                        <i className="bi bi-arrows-move"></i>
+                    </div>
+                </div>
+            </div>
+            <div className="accor-body bg-[#1f1f1f] rounded-b-sm h-auto p-1 border-s border-b border-e border-gray-700">
+                <div className={`h-full ${minimize ? `hidden` : `block`} `}>
+                    {children}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default MenuLayout;

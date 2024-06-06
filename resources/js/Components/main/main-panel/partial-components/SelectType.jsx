@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { changeSelectionType } from "../../../../Store/Slices/main/selectionKeySlice";
 
 const SelectType = () => {
     const [selectedValue, setSelectedValue] = useState("single");
+    const selectionKey = JSON.parse(
+        JSON.stringify(useSelector((state) => state.selectionKey))
+    );
+    const dispatch = useDispatch();
 
     const changeSelectType = (e) => {
-        return setSelectedValue(e.target.value);
+        return dispatch(changeSelectionType({ selectionType: e.target.value }));
     };
 
-    useEffect(() => {
-        console.log(selectedValue);
-    }, [selectedValue]);
-
     return (
-        <>
+        <div className="ms-1">
             <label className="me-2">
                 <input
                     type="radio"
                     name="select"
                     className="me-1"
                     value="single"
-                    checked={selectedValue === "single"}
+                    checked={selectionKey.selectionType == "single"}
                     onChange={changeSelectType}
                 />
                 <i>Single Select</i>
@@ -31,12 +33,12 @@ const SelectType = () => {
                     className="me-1"
                     name="select"
                     value="multiple"
-                    checked={selectedValue === "multiple"}
+                    checked={selectionKey.selectionType == "multiple"}
                     onChange={changeSelectType}
                 ></input>
                 <i>Multiple Select</i>
             </label>
-        </>
+        </div>
     );
 };
 
