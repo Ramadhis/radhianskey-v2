@@ -11,12 +11,30 @@ const initialState = {
             column: [
                 {
                     id: v4(),
-                    width: "150",
                     text: "Num",
                     keycapsSizeUnit: "2.25",
-                    keycapsStyle: {
-                        color1: "",
-                        color2: "",
+                    keycapsTextStyle: {
+                        fontSize: "12px",
+                        fontFamily: "",
+                    },
+                    keycapsColor: {
+                        theme: "custom",
+                        style: {
+                            backgroundColorLayer1: "",
+                            backgroundColorLayer2: "",
+                            borderLayer1: {
+                                top: "",
+                                bottom: "",
+                                left: "",
+                                right: "",
+                            },
+                            borderLayer2: {
+                                top: "",
+                                bottom: "",
+                                left: "",
+                                right: "",
+                            },
+                        },
                     },
                 },
                 {
@@ -36,111 +54,111 @@ const initialState = {
                 },
             ],
         },
-        {
-            id: v4(),
-            column: [
-                {
-                    id: v4(),
-                    width: "150",
-                    text: "7",
-                },
-                {
-                    id: v4(),
-                    width: "100",
-                    text: "8",
-                },
-                {
-                    id: v4(),
-                    width: "45",
-                    text: "9",
-                },
-                {
-                    id: v4(),
-                    width: "45",
-                    text: "+",
-                },
-            ],
-        },
-        {
-            id: v4(),
-            column: [
-                {
-                    id: v4(),
-                    width: "150",
-                    text: "4",
-                },
-                {
-                    id: v4(),
-                    width: "100",
-                    text: "5",
-                },
-                {
-                    id: v4(),
-                    width: "45",
-                    text: "6",
-                },
-                {
-                    id: v4(),
-                    width: "45",
-                    text: "+",
-                    keyConnect1: true,
-                },
-            ],
-        },
-        {
-            id: v4(),
-            column: [
-                {
-                    id: v4(),
-                    width: "150",
-                    text: "1",
-                },
-                {
-                    id: v4(),
-                    width: "100",
-                    text: "2",
-                },
-                {
-                    id: v4(),
-                    width: "45",
-                    text: "3",
-                },
-                {
-                    id: v4(),
-                    width: "150",
-                    text: "ent",
-                },
-            ],
-        },
-        {
-            id: v4(),
-            column: [
-                {
-                    id: v4(),
-                    width: "150",
-                    text: "0",
-                },
-                {
-                    id: v4(),
-                    width: "100",
-                    text: "0",
-                    keyConnect1: false,
-                    keyConnect2: true,
-                },
-                {
-                    id: v4(),
-                    width: "45",
-                    text: ". Del",
-                },
-                {
-                    id: v4(),
-                    width: "150",
-                    text: "ent",
-                    keyConnect1: true,
-                    keyConnect2: false,
-                },
-            ],
-        },
+        // {
+        //     id: v4(),
+        //     column: [
+        //         {
+        //             id: v4(),
+        //             width: "150",
+        //             text: "7",
+        //         },
+        //         {
+        //             id: v4(),
+        //             width: "100",
+        //             text: "8",
+        //         },
+        //         {
+        //             id: v4(),
+        //             width: "45",
+        //             text: "9",
+        //         },
+        //         {
+        //             id: v4(),
+        //             width: "45",
+        //             text: "+",
+        //         },
+        //     ],
+        // },
+        // {
+        //     id: v4(),
+        //     column: [
+        //         {
+        //             id: v4(),
+        //             width: "150",
+        //             text: "4",
+        //         },
+        //         {
+        //             id: v4(),
+        //             width: "100",
+        //             text: "5",
+        //         },
+        //         {
+        //             id: v4(),
+        //             width: "45",
+        //             text: "6",
+        //         },
+        //         {
+        //             id: v4(),
+        //             width: "45",
+        //             text: "+",
+        //             keyConnect1: true,
+        //         },
+        //     ],
+        // },
+        // {
+        //     id: v4(),
+        //     column: [
+        //         {
+        //             id: v4(),
+        //             width: "150",
+        //             text: "1",
+        //         },
+        //         {
+        //             id: v4(),
+        //             width: "100",
+        //             text: "2",
+        //         },
+        //         {
+        //             id: v4(),
+        //             width: "45",
+        //             text: "3",
+        //         },
+        //         {
+        //             id: v4(),
+        //             width: "150",
+        //             text: "ent",
+        //         },
+        //     ],
+        // },
+        // {
+        //     id: v4(),
+        //     column: [
+        //         {
+        //             id: v4(),
+        //             width: "150",
+        //             text: "0",
+        //         },
+        //         {
+        //             id: v4(),
+        //             width: "100",
+        //             text: "0",
+        //             keyConnect1: false,
+        //             keyConnect2: true,
+        //         },
+        //         {
+        //             id: v4(),
+        //             width: "45",
+        //             text: ". Del",
+        //         },
+        //         {
+        //             id: v4(),
+        //             width: "150",
+        //             text: "ent",
+        //             keyConnect1: true,
+        //             keyConnect2: false,
+        //         },
+        //     ],
+        // },
     ],
 };
 

@@ -1,44 +1,53 @@
 import React, { useState } from "react";
 import ModalSignIn from "./ModalSignIn";
 import ModalSignUp from "./ModalSignUp";
-import ModalforgotPassword from "./ModalforgotPassword";
+import ModalForgotPassword from "./ModalForgotPassword";
 import ModalLayout from "../template-layout/ModalLayout";
+import ModalAccountSetting from "./ModalAccountSetting";
+import ModalMyLayout from "./ModalMyLayout";
 
 const AuthHeaderTemplate = () => {
-    const loginStatus = false;
+    const loginStatus = true;
     const [signInModalOpen, setSignInModalOpen] = useState(false);
     const [signUpModalOpen, setSignUpModalOpen] = useState(false);
     const [forgotPasswordModalOpen, setForgotPasswordModalOpen] =
         useState(false);
+    const [myLayoutModalOpen, setMyLayoutModalOpen] = useState(false);
+    const [accountSettingModalOpen, setAccountsettingModalOpen] =
+        useState(false);
+
+    const closeAllModal = (e) => {
+        setSignUpModalOpen(false);
+        setSignInModalOpen(false);
+        setForgotPasswordModalOpen(false);
+        setMyLayoutModalOpen(false);
+    };
 
     const openSignInModal = (e) => {
         e.preventDefault();
-        setSignUpModalOpen(false);
+        closeAllModal();
         return setSignInModalOpen(true);
     };
 
     const closeSignInModal = (e) => {
         e.preventDefault();
-        console.log("close");
         return setSignInModalOpen(false);
     };
 
     const openSignUpModal = (e) => {
         e.preventDefault();
-        setSignInModalOpen(false);
+        closeAllModal();
         return setSignUpModalOpen(true);
     };
 
     const closeSignUpModal = (e) => {
         e.preventDefault();
-        console.log("close");
         return setSignUpModalOpen(false);
     };
 
     const openForgotPasswordModal = (e) => {
         e.preventDefault();
-        setSignUpModalOpen(false);
-        setSignInModalOpen(false);
+        closeAllModal();
         return setForgotPasswordModalOpen(true);
     };
 
@@ -47,28 +56,58 @@ const AuthHeaderTemplate = () => {
         return setForgotPasswordModalOpen(false);
     };
 
+    const openMyLayoutModal = (e) => {
+        e.preventDefault();
+        closeAllModal();
+        return setMyLayoutModalOpen(true);
+    };
+
+    const closeMyLayoutModal = (e) => {
+        e.preventDefault();
+        return setMyLayoutModalOpen(false);
+    };
+
+    const openAccountsettingModal = (e) => {
+        e.preventDefault();
+        closeAllModal();
+        return setAccountsettingModalOpen(true);
+    };
+
+    const closeAccountsettingModal = (e) => {
+        e.preventDefault();
+        return setAccountsettingModalOpen(false);
+    };
+
     return (
         <>
             {loginStatus ? (
                 <div className="h-full flex items-center group">
-                    <div className="me-2 text-sm font-semibold cursor-pointer">
+                    <div className="me-2 text-sm font-semibold cursor-pointer text-white">
                         Ramadhiansyah
                     </div>
-                    <a href="#" className="pe-6">
+                    <a href="#" className="">
                         <img
                             alt="name"
-                            src="https://i.stack.imgur.com/HgkK0.png"
+                            src="https://picsum.photos/id/237/200/300"
                             className="object-none w-8 h-8 rounded-full inline border-2"
                         />
                     </a>
                     <div className="bg-[#1f1f1f] border border-zinc-300  w-36 z-30 absolute top-9 right-5 rounded text-black hidden group-hover:block group-hover:transition">
-                        <div className="hover:bg-[#2c508a] w-full mt-2 text-zinc-300 ps-2">
-                            <a href="#" className="w-full">
+                        <div className="hover:bg-[#2c508a] w-full mt-2 text-zinc-300">
+                            <button
+                                onClick={openMyLayoutModal}
+                                className="w-full text-left ps-2"
+                            >
                                 My Layout
-                            </a>
+                            </button>
                         </div>
-                        <div className="hover:bg-[#2c508a] mt-2 text-zinc-300 ps-2">
-                            <a href="#">Account setting</a>
+                        <div className="hover:bg-[#2c508a] mt-2 text-zinc-300">
+                            <button
+                                onClick={openAccountsettingModal}
+                                className="w-full text-left ps-2"
+                            >
+                                Account setting
+                            </button>
                         </div>
                         <div className="hover:bg-[#2c508a] mt-2 mb-2 text-zinc-300 ps-2">
                             <a href="#">Sign out</a>
@@ -108,7 +147,16 @@ const AuthHeaderTemplate = () => {
                 open={forgotPasswordModalOpen}
                 close={closeForgotPasswordModal}
             >
-                <ModalforgotPassword />
+                <ModalForgotPassword />
+            </ModalLayout>
+            <ModalLayout
+                open={accountSettingModalOpen}
+                close={closeAccountsettingModal}
+            >
+                <ModalAccountSetting />
+            </ModalLayout>
+            <ModalLayout open={myLayoutModalOpen} close={closeMyLayoutModal}>
+                <ModalMyLayout />
             </ModalLayout>
         </>
     );

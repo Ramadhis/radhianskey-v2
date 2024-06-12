@@ -44,10 +44,10 @@ const KeysForm = () => {
                 />
             </div>
             <div className="w-full mt-1">
-                <label className="text-sm">Keycaps color</label>
+                <label className="text-sm">Keycaps theme color</label>
                 <input
                     type="text"
-                    placeholder="Keycaps color"
+                    placeholder="Keycaps theme color"
                     className="w-full h-7 bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
                 />
             </div>

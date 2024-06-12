@@ -19,7 +19,7 @@ const MenuLayout = ({ headerTitle, dragHandle, children }) => {
                         }}
                         className="border border-[#2c508a] bg-gray-700 hover:bg-[#2c508a] px-2 font-bold me-1 text-[13px] rounded-sm cursor-pointer"
                     >
-                        __
+                        <div className="-mt-1">__</div>
                     </div>
                     <div
                         {...dragHandle}
@@ -29,7 +29,7 @@ const MenuLayout = ({ headerTitle, dragHandle, children }) => {
                     </div>
                 </div>
             </div>
-            <div className="accor-body bg-[#1f1f1f] rounded-b-sm h-auto p-1 border-s border-b border-e border-gray-700">
+            <div className="accor-body bg-[#1f1f1f] rounded-b-sm h-auto p-1 border-s border-b border-e border-gray-700 transition-all delay-75">
                 <div className={`h-full ${minimize ? `hidden` : `block`} `}>
                     {children}
                 </div>

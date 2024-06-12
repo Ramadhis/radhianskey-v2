@@ -1,6 +1,6 @@
 import React from "react";
 
-const ModalforgotPassword = ({ closeForgotPassword }) => {
+const ModalForgotPassword = ({ closeForgotPassword }) => {
     return (
         <div className="w-[320px]  text-white">
             <div className="text-center font-semibold text-[20px] mb-6">
@@ -26,4 +26,4 @@ const ModalforgotPassword = ({ closeForgotPassword }) => {
     );
 };
 
-export default ModalforgotPassword;
+export default ModalForgotPassword;

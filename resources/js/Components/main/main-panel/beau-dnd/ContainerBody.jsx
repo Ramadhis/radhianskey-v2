@@ -30,7 +30,7 @@ const ContainerBody = ({ id, index, children }) => {
                                         </div>
                                     );
                                 }}
-                            </Droppable>
+                            </Droppable>{" "}
                         </div>
                     );
                 }}

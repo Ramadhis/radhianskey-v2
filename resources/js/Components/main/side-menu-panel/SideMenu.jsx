@@ -99,6 +99,7 @@ const SideMenu = () => {
                                                                 provided.innerRef
                                                             }
                                                             {...provided.draggableProps}
+                                                            className="my-2"
                                                         >
                                                             <MenuLayout
                                                                 headerTitle={
