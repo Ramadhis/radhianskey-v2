@@ -36,6 +36,9 @@ const selectionKeySlice = createSlice({
                 state.selectedKey.push(action.payload.id);
             }
         },
+        resetSelection: (state, action) => {
+            state.selectedKey = [];
+        },
     },
 });
 
@@ -44,5 +47,6 @@ export const {
     updateSelectionMultipleList,
     updateSelectionSingleList,
     changeSelectionType,
+    resetSelection,
 } = selectionKeySlice.actions;
 export default selectionKeySlice.reducer;

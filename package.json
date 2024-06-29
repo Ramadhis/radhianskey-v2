@@ -29,6 +29,7 @@
         "react-modal": "^3.16.1",
         "react-redux": "^7.2.8",
         "react-resizable-panels": "^2.0.18",
+        "react-select": "^5.8.0",
         "redux": "^5.0.1",
         "uuid": "^9.0.1"
     }

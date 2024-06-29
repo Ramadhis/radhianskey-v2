@@ -18,10 +18,6 @@ const DndMain = () => {
     );
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     console.log(listKeys);
-    // }, []);
-
     const handleDragEnd = (e) => {
         //destination = dropped item
         let destination = e.destination;
@@ -127,8 +123,8 @@ const DndMain = () => {
                                             key={index}
                                         >
                                             <div className="relative">
-                                                <AddKeys />
-                                                <DeleteKeys />
+                                                <AddKeys indexRow={index} />
+                                                <DeleteKeys indexRow={index} />
                                             </div>
 
                                             {row.column.map((col, index2) => {

@@ -93,7 +93,7 @@ const AuthHeaderTemplate = () => {
                         />
                     </a>
                     <div className="bg-[#1f1f1f] border border-zinc-300  w-36 z-30 absolute top-9 right-5 rounded text-black hidden group-hover:block group-hover:transition">
-                        <div className="hover:bg-[#2c508a] w-full mt-2 text-zinc-300">
+                        <div className="hover:bg-[#2c508a] w-full mt-2 py-1 text-zinc-300">
                             <button
                                 onClick={openMyLayoutModal}
                                 className="w-full text-left ps-2"
@@ -101,7 +101,7 @@ const AuthHeaderTemplate = () => {
                                 My Layout
                             </button>
                         </div>
-                        <div className="hover:bg-[#2c508a] mt-2 text-zinc-300">
+                        <div className="hover:bg-[#2c508a] py-1 text-zinc-300">
                             <button
                                 onClick={openAccountsettingModal}
                                 className="w-full text-left ps-2"
@@ -109,7 +109,7 @@ const AuthHeaderTemplate = () => {
                                 Account setting
                             </button>
                         </div>
-                        <div className="hover:bg-[#2c508a] mt-2 mb-2 text-zinc-300 ps-2">
+                        <div className="hover:bg-[#2c508a] mb-2 py-1 text-zinc-300 ps-2">
                             <a href="#">Sign out</a>
                         </div>
                     </div>

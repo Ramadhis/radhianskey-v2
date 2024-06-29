@@ -6,10 +6,18 @@ import AddRowBtn from "./partial-components/AddRowBtn";
 import SaveBtn from "./partial-components/SaveBtn";
 import { useListKeys } from "../../../Context/listKeys";
 import SelectType from "./partial-components/SelectType";
+import DeleteKeysBtn from "./partial-components/DeleteKeysBtn";
+import { useSelector } from "react-redux";
 
 const MainLayout = () => {
     const listKeysContext = useListKeys();
     const { listKeys, updateListKeys } = listKeysContext;
+
+    const selectionKey = useSelector((state) => state.selectionKey);
+
+    useEffect(() => {
+        console.log(selectionKey.selectedKey);
+    }, [selectionKey.selectedKey]);
 
     return (
         <div
@@ -30,12 +38,7 @@ const MainLayout = () => {
                         <i className="bi bi-arrow-left-right"></i> Reverse
                         option position
                     </a>
-                    <a
-                        href="#"
-                        className="bg-red-600 ms-2 p-1 rounded-sm px-4 h-4 text-sm text-white font-medium "
-                    >
-                        <i className="bi bi-trash3"></i> Delete selected keys
-                    </a>
+                    <DeleteKeysBtn />
                 </div>
                 <div className="mt-2"></div>
             </div>
