@@ -20,7 +20,7 @@ const PreviewLayout = () => {
         >
             {" "}
             <div className=" text-sm ps-1 pe-3 pt-3 pb-2 w-full fixed bg-[#181818] z-[5]">
-                <div className="ms-4 mt-2 text-zinc-300 hover:text-white inline">
+                <div className="ms-4 mt-2 text-zinc-300 hover:text-white inline text-[13px]">
                     PREVIEW LAYOUT
                 </div>
             </div>
@@ -43,7 +43,7 @@ const PreviewLayout = () => {
                                             >
                                                 {/* //normal Width keycaps 53x53 */}
                                                 <div className="w-[45px] h-[45px] mt-[3px] ps-[2px] border border-r-stone-500 border-b-stone-500 border-l-stone-200 border-t-stone-200 bg-stone-200 rounded-sm text-[15px]">
-                                                    {col.text}
+                                                    {col.legend}
                                                 </div>
                                                 {col.keyConnect1 ? (
                                                     <>

@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
+import { useSelector } from "react-redux";
 
 const MenuLayout = ({ headerTitle, dragHandle, children }) => {
     const [minimize, setMinimize] = useState(false);
+
+    // const layoutData = useSelector((state) => state.layout);
+
+    // console.log("test",layoutData);
 
     return (
         <div className="menu my-2 text-zinc-300">

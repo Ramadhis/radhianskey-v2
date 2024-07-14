@@ -5,6 +5,9 @@ import LayoutDescForm from "./partial-components/LayoutDescForm";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { v4 } from "uuid";
 import MenuLayout from "./partial-components/MenuLayout";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import "react-perfect-scrollbar/dist/css/styles.css";
+
 const SideMenu = () => {
     const [menuList, setMenuList] = useState([
         {
@@ -65,6 +68,13 @@ const SideMenu = () => {
     };
 
     return (
+        // <PerfectScrollbar
+        //     style={{
+        //         scrollbarWidth: "auto",
+        //         scrollbarColor: "#616161 #66000000",
+        //         overflow: "overlay",
+        //     }}
+        // >
         <div
             className="w-full h-full overflow-hidden hover:overflow-auto"
             style={{
@@ -124,6 +134,7 @@ const SideMenu = () => {
                 </DragDropContext>
             </div>
         </div>
+        // </PerfectScrollbar>
     );
 };
 

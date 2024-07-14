@@ -4,53 +4,53 @@ import { v4 } from "uuid";
 const initialState = {
     keyDownBorder: " 1px solid blue ",
     keyDownBackground: "lightskyblue",
-    fontSize: "13px",
     layoutData: [
         {
             id: v4(),
             column: [
                 {
                     id: v4(),
-                    text: "Num",
+                    legend: "Num", //keyLegend
                     keycapsSizeUnit: "2.25",
-                    keycapsTextStyle: {
-                        fontSize: "12px",
-                        fontFamily: "",
-                    },
+                    onKeypress: "KeyA",
+                    fontSize: "12px",
+                    fontFamily: "",
                     keycapsColor: {
                         theme: "custom",
-                        style: {
-                            backgroundColorLayer1: "",
-                            backgroundColorLayer2: "",
-                            borderLayer1: {
+                        style: [
+                            {
+                                //layer1
+                                background: "",
                                 top: "",
                                 bottom: "",
                                 left: "",
                                 right: "",
                             },
-                            borderLayer2: {
+                            {
+                                //layer2
+                                background: "",
                                 top: "",
                                 bottom: "",
                                 left: "",
                                 right: "",
                             },
-                        },
+                        ],
                     },
                 },
                 {
                     id: v4(),
                     width: "50",
-                    text: "/",
+                    legend: "/",
                 },
                 {
                     id: v4(),
                     width: "50",
-                    text: "*",
+                    legend: "*",
                 },
                 {
                     id: v4(),
                     width: "50",
-                    text: "-",
+                    legend: "-",
                 },
             ],
         },
@@ -60,22 +60,22 @@ const initialState = {
                 {
                     id: v4(),
                     width: "150",
-                    text: "7",
+                    legend: "7",
                 },
                 {
                     id: v4(),
                     width: "100",
-                    text: "8",
+                    legend: "8",
                 },
                 {
                     id: v4(),
                     width: "45",
-                    text: "9",
+                    legend: "9",
                 },
                 {
                     id: v4(),
                     width: "45",
-                    text: "+",
+                    legend: "+",
                 },
             ],
         },
@@ -85,22 +85,22 @@ const initialState = {
                 {
                     id: v4(),
                     width: "150",
-                    text: "4",
+                    legend: "4",
                 },
                 {
                     id: v4(),
                     width: "100",
-                    text: "5",
+                    legend: "5",
                 },
                 {
                     id: v4(),
                     width: "45",
-                    text: "6",
+                    legend: "6",
                 },
                 {
                     id: v4(),
                     width: "45",
-                    text: "+",
+                    legend: "+",
                     keyConnect1: true,
                 },
             ],
@@ -111,22 +111,22 @@ const initialState = {
                 {
                     id: v4(),
                     width: "150",
-                    text: "1",
+                    legend: "1",
                 },
                 {
                     id: v4(),
                     width: "100",
-                    text: "2",
+                    legend: "2",
                 },
                 {
                     id: v4(),
                     width: "45",
-                    text: "3",
+                    legend: "3",
                 },
                 {
                     id: v4(),
                     width: "150",
-                    text: "ent",
+                    legend: "ent",
                 },
             ],
         },
@@ -136,24 +136,24 @@ const initialState = {
                 {
                     id: v4(),
                     width: "150",
-                    text: "0",
+                    legend: "0",
                 },
                 {
                     id: v4(),
                     width: "100",
-                    text: "0",
+                    legend: "0",
                     keyConnect1: false,
                     keyConnect2: true,
                 },
                 {
                     id: v4(),
                     width: "45",
-                    text: ". Del",
+                    legend: ". Del",
                 },
                 {
                     id: v4(),
                     width: "150",
-                    text: "ent",
+                    legend: "ent",
                     keyConnect1: true,
                     keyConnect2: false,
                 },
@@ -174,7 +174,7 @@ const layoutSlice = createSlice({
             state.layoutData[action.payload.indexRow].column.push({
                 id: v4(),
                 width: "150",
-                text: "7",
+                legend: "7",
             });
         },
         addRow: (state, action) => {

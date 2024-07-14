@@ -131,7 +131,7 @@ const DndMain = () => {
                                                 return (
                                                     <ItemColumn
                                                         id={col.id}
-                                                        text={col.text}
+                                                        text={col.legend}
                                                         index={index2}
                                                         key={index2}
                                                     ></ItemColumn>

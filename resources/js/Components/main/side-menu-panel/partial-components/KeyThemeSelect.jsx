@@ -1,9 +1,45 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
+import ModalLayout from "../../../template-layout/ModalLayout";
+import ModalCreateNewTheme from "./ModalCreateNewTheme";
 
 const KeyThemeSelect = () => {
+    const [ModalCreateNewThemeOpen, setModalCreateNewThemeOpen] =
+        useState(true);
+    const [selectedTheme, setSelectedTheme] = useState();
+
+    const CloseModalCreateNewTheme = () => {
+        setModalCreateNewThemeOpen(false);
+    };
+
     const options = [
-        { value: "new", label: "Create new theme" },
+        { value: "newTheme", label: "Create new theme" },
+        {
+            value: "dark-dragon",
+            label: (
+                <div className="flex justify-between">
+                    <div className="text-nowrap">dark dragon</div>
+                    <div>
+                        <button
+                            onClick={() => {
+                                return console.log("edit");
+                            }}
+                            className="me-2 group"
+                        >
+                            <i className="bi bi-pencil-square group-hover:text-green-500"></i>
+                        </button>
+                        <button
+                            onClick={() => {
+                                return console.log("delete");
+                            }}
+                            className="group"
+                        >
+                            <i className="bi bi-trash group-hover:text-red-600"></i>
+                        </button>
+                    </div>
+                </div>
+            ),
+        },
         { value: "matcha", label: "Matcha" },
         { value: "black", label: "Black" },
         { value: "white", label: "White" },
@@ -52,7 +88,35 @@ const KeyThemeSelect = () => {
         }),
     };
 
-    return <Select options={options} styles={customStyle} />;
+    useEffect(() => {
+        console.log(selectedTheme);
+    }, [selectedTheme]);
+
+    const onChangeSelectTheme = (val) => {
+        if (val.value == "newTheme") {
+            return setModalCreateNewThemeOpen(true);
+        } else {
+            return setSelectedTheme(val);
+        }
+    };
+
+    return (
+        <>
+            <Select
+                options={options}
+                styles={customStyle}
+                value={selectedTheme}
+                onChange={onChangeSelectTheme}
+            />
+
+            <ModalLayout
+                open={ModalCreateNewThemeOpen}
+                close={CloseModalCreateNewTheme}
+            >
+                <ModalCreateNewTheme />
+            </ModalLayout>
+        </>
+    );
 };
 
 export default KeyThemeSelect;
