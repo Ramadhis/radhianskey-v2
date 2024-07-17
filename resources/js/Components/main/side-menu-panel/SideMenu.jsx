@@ -12,7 +12,7 @@ const SideMenu = () => {
     const [menuList, setMenuList] = useState([
         {
             id: v4(),
-            title: "keys",
+            title: "Keys",
             layout: <KeysForm />,
         },
         {
@@ -127,6 +127,7 @@ const SideMenu = () => {
                                             </Draggable>
                                         );
                                     })}
+                                    {provided.placeholder}
                                 </div>
                             );
                         }}

@@ -11,46 +11,162 @@ const initialState = {
                 {
                     id: v4(),
                     legend: "Num", //keyLegend
-                    keycapsSizeUnit: "2.25",
-                    onKeypress: "KeyA",
-                    fontSize: "12px",
-                    fontFamily: "",
-                    keycapsColor: {
-                        theme: "custom",
+                    keycapsSize: "1",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: false,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
                         style: [
                             {
-                                //layer1
-                                background: "",
-                                top: "",
-                                bottom: "",
-                                left: "",
-                                right: "",
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
                             },
                             {
-                                //layer2
-                                background: "",
-                                top: "",
-                                bottom: "",
-                                left: "",
-                                right: "",
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
                             },
                         ],
                     },
                 },
                 {
                     id: v4(),
-                    width: "50",
                     legend: "/",
+                    keycapsSize: "2.25",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: false,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
+                        style: [
+                            {
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
+                            },
+                            {
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
+                            },
+                        ],
+                    },
                 },
                 {
                     id: v4(),
-                    width: "50",
                     legend: "*",
+                    keycapsSize: "1",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: false,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
+                        style: [
+                            {
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
+                            },
+                            {
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
+                            },
+                        ],
+                    },
                 },
                 {
                     id: v4(),
-                    width: "50",
                     legend: "-",
+                    keycapsSize: "1",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: false,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
+                        style: [
+                            {
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
+                            },
+                            {
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
+                            },
+                        ],
+                    },
                 },
             ],
         },
@@ -59,23 +175,163 @@ const initialState = {
             column: [
                 {
                     id: v4(),
-                    width: "150",
                     legend: "7",
+                    keycapsSize: "1",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: false,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
+                        style: [
+                            {
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
+                            },
+                            {
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
+                            },
+                        ],
+                    },
                 },
                 {
                     id: v4(),
-                    width: "100",
                     legend: "8",
+                    keycapsSize: "1",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: false,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
+                        style: [
+                            {
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
+                            },
+                            {
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
+                            },
+                        ],
+                    },
                 },
                 {
                     id: v4(),
-                    width: "45",
                     legend: "9",
+                    keycapsSize: "1",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: false,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
+                        style: [
+                            {
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
+                            },
+                            {
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
+                            },
+                        ],
+                    },
                 },
                 {
                     id: v4(),
-                    width: "45",
                     legend: "+",
+                    keycapsSize: "1",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: false,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
+                        style: [
+                            {
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
+                            },
+                            {
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
+                            },
+                        ],
+                    },
                 },
             ],
         },
@@ -84,24 +340,163 @@ const initialState = {
             column: [
                 {
                     id: v4(),
-                    width: "150",
                     legend: "4",
+                    keycapsSize: "1",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: false,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
+                        style: [
+                            {
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
+                            },
+                            {
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
+                            },
+                        ],
+                    },
                 },
                 {
                     id: v4(),
-                    width: "100",
                     legend: "5",
+                    keycapsSize: "1",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: false,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
+                        style: [
+                            {
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
+                            },
+                            {
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
+                            },
+                        ],
+                    },
                 },
                 {
                     id: v4(),
-                    width: "45",
                     legend: "6",
+                    keycapsSize: "1",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: false,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
+                        style: [
+                            {
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
+                            },
+                            {
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
+                            },
+                        ],
+                    },
                 },
                 {
                     id: v4(),
-                    width: "45",
                     legend: "+",
-                    keyConnect1: true,
+                    keycapsSize: "1",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: true,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
+                        style: [
+                            {
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
+                            },
+                            {
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
+                            },
+                        ],
+                    },
                 },
             ],
         },
@@ -110,23 +505,163 @@ const initialState = {
             column: [
                 {
                     id: v4(),
-                    width: "150",
                     legend: "1",
+                    keycapsSize: "1",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: false,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
+                        style: [
+                            {
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
+                            },
+                            {
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
+                            },
+                        ],
+                    },
                 },
                 {
                     id: v4(),
-                    width: "100",
                     legend: "2",
+                    keycapsSize: "1",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: false,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
+                        style: [
+                            {
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
+                            },
+                            {
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
+                            },
+                        ],
+                    },
                 },
                 {
                     id: v4(),
-                    width: "45",
                     legend: "3",
+                    keycapsSize: "1",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: false,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
+                        style: [
+                            {
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
+                            },
+                            {
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
+                            },
+                        ],
+                    },
                 },
                 {
                     id: v4(),
-                    width: "150",
                     legend: "ent",
+                    keycapsSize: "1",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: false,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
+                        style: [
+                            {
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
+                            },
+                            {
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
+                            },
+                        ],
+                    },
                 },
             ],
         },
@@ -135,27 +670,163 @@ const initialState = {
             column: [
                 {
                     id: v4(),
-                    width: "150",
                     legend: "0",
+                    keycapsSize: "1",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: false,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
+                        style: [
+                            {
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
+                            },
+                            {
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
+                            },
+                        ],
+                    },
                 },
                 {
                     id: v4(),
-                    width: "100",
                     legend: "0",
-                    keyConnect1: false,
-                    keyConnect2: true,
+                    keycapsSize: "1",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: false,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
+                        style: [
+                            {
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
+                            },
+                            {
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
+                            },
+                        ],
+                    },
                 },
                 {
                     id: v4(),
-                    width: "45",
                     legend: ". Del",
+                    keycapsSize: "1",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: false,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
+                        style: [
+                            {
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
+                            },
+                            {
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
+                            },
+                        ],
+                    },
                 },
                 {
                     id: v4(),
-                    width: "150",
                     legend: "ent",
-                    keyConnect1: true,
-                    keyConnect2: false,
+                    keycapsSize: "1",
+                    onKeyPress: {
+                        label: "A",
+                        value: "KeyA",
+                    },
+                    KeyConnectTop: true,
+                    KeyConnectLeft: false,
+                    keycapsTheme: {
+                        name: "White",
+                        style: [
+                            {
+                                //layer1 = index 0
+                                fontFamily: "times new roman",
+                                fontSize: "15px",
+                                textPlacement: "top-left",
+                                fontColor: "#000",
+                                fontWeight: "normal",
+                            },
+                            {
+                                //layer2 = index 1
+                                background: "#E7E5E4",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#81716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#81716C",
+                            },
+                            {
+                                //layer3 = index 2
+                                background: "#A8A29E",
+                                top_border: "#E7E5E4",
+                                bottom_border: "#78716C",
+                                left_border: "#E7E5E4",
+                                right_border: "#78716C",
+                            },
+                        ],
+                    },
                 },
             ],
         },
@@ -191,12 +862,28 @@ const layoutSlice = createSlice({
                 );
             });
         },
+        updateSelectedKey: (state, action) => {
+            state.layoutData.map((layoutDatas, index) => {
+                layoutDatas.column.map((columns, index2) => {
+                    if (action.payload.selectedKey.includes(columns.id)) {
+                        state = state.layoutData[index].column[index2][
+                            action.payload.formName
+                        ] = action.payload.formValue;
+                    }
+                });
+            });
+        },
         deleteRow: (state, action) => {
             state.layoutData.splice(action.payload.indexRow, 1);
         },
     },
 });
 
-export const { updateLayoutData, addKeys, deleteRow, deleteKey } =
-    layoutSlice.actions;
+export const {
+    updateLayoutData,
+    addKeys,
+    deleteRow,
+    deleteKey,
+    updateSelectedKey,
+} = layoutSlice.actions;
 export default layoutSlice.reducer;

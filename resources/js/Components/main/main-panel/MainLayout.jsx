@@ -16,8 +16,8 @@ const MainLayout = () => {
     const selectionKey = useSelector((state) => state.selectionKey);
 
     useEffect(() => {
-        console.log(selectionKey.selectedKey);
-    }, [selectionKey.selectedKey]);
+        console.log(selectionKey);
+    }, [selectionKey]);
 
     return (
         <div

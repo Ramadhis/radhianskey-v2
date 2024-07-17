@@ -1,7 +1,10 @@
 import React, { useReducer } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteKey } from "../../../../Store/Slices/main/layoutSlice";
-import { resetSelection } from "../../../../Store/Slices/main/selectionKeySlice";
+import {
+    resetSelection,
+    resetSelectedKeyDetail,
+} from "../../../../Store/Slices/main/selectionKeySlice";
 
 const DeleteKeysBtn = () => {
     const selectedKey = JSON.parse(
@@ -12,6 +15,7 @@ const DeleteKeysBtn = () => {
     const deleteKeyPressed = () => {
         dispatch(deleteKey({ selectedKey: selectedKey.selectedKey }));
         dispatch(resetSelection());
+        dispatch(resetSelectedKeyDetail());
     };
 
     return (

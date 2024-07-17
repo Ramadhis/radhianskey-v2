@@ -6,7 +6,7 @@ import {
     updateSelectionSingleList,
 } from "../../../../Store/Slices/main/selectionKeySlice";
 
-const ItemColumn = ({ id, index, text }) => {
+const ItemColumn = ({ columnDetail, index }) => {
     const dispatch = useDispatch();
 
     const selectionKeyType = JSON.parse(
@@ -16,7 +16,12 @@ const ItemColumn = ({ id, index, text }) => {
     const onClickKey = (e, id) => {
         e.preventDefault();
         if (selectionKeyType.selectionType == "single") {
-            dispatch(updateSelectionSingleList({ id: id }));
+            dispatch(
+                updateSelectionSingleList({
+                    id: id,
+                    selectedKeyDetail: columnDetail,
+                })
+            );
         } else {
             dispatch(updateSelectionMultipleList({ id: id }));
         }
@@ -24,15 +29,21 @@ const ItemColumn = ({ id, index, text }) => {
 
     return (
         <>
-            <Draggable draggableId={id} key={id} index={index}>
+            <Draggable
+                draggableId={columnDetail.id}
+                key={columnDetail.id}
+                index={index}
+            >
                 {(provided) => {
                     return (
                         <div
                             onClick={(e) => {
-                                return onClickKey(e, id);
+                                return onClickKey(e, columnDetail.id);
                             }}
                             className={`border-2 min-w-[60px] ${
-                                selectionKeyType.selectedKey.includes(id)
+                                selectionKeyType.selectedKey.includes(
+                                    columnDetail.id
+                                )
                                     ? `border-white`
                                     : `border-transparent hover:border-white`
                             }  rounded-md mx-[1px]`}
@@ -47,7 +58,7 @@ const ItemColumn = ({ id, index, text }) => {
                             >
                                 {/* //normal Width keycaps 53x53 */}
                                 <div className="w-[45px] h-[45px] mt-[3px] ps-[2px] border border-r-stone-500 border-b-stone-500 border-l-stone-200 border-t-stone-200 bg-stone-200 rounded-sm text-[15px] absolute">
-                                    {text}
+                                    {columnDetail.legend}
                                 </div>
                             </div>
                         </div>

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { changeSelectionType } from "../../../../Store/Slices/main/selectionKeySlice";
+import {
+    changeSelectionType,
+    resetSelectedKeyDetail,
+} from "../../../../Store/Slices/main/selectionKeySlice";
 
 const SelectType = () => {
     const [selectedValue, setSelectedValue] = useState("single");
@@ -10,7 +13,8 @@ const SelectType = () => {
     const dispatch = useDispatch();
 
     const changeSelectType = (e) => {
-        return dispatch(changeSelectionType({ selectionType: e.target.value }));
+        dispatch(changeSelectionType({ selectionType: e.target.value }));
+        dispatch(resetSelectedKeyDetail());
     };
 
     return (

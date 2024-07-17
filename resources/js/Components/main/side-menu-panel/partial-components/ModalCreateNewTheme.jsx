@@ -3,14 +3,17 @@ import { ChromePicker } from "react-color";
 const ModalCreateNewTheme = () => {
     const [selectLayer, setSelectLayer] = useState(2);
     const [radioBtnValue, setRadioBtnValue] = useState("background");
+    // AIzaSyDI1zX6JuqVR3bUB99OmVEnI0KLBB1L4AE  google font api token key
     const [colorthemeData, setColorthemeData] = useState({
         theme: "custom",
         style: [
             {
                 //layer1 = index 0
-                fontFamily: "Arial",
-                fontSize: "12px",
+                fontFamily: "times new roman",
+                fontSize: "15px",
+                textPlacement: "top-left",
                 fontColor: "#000",
+                fontWeight: "normal",
             },
             {
                 //layer2 = index 1
@@ -32,6 +35,24 @@ const ModalCreateNewTheme = () => {
     });
 
     const [sketchPickerColor, setSketchPickerColor] = useState("#A8A29E");
+    const fontList = [
+        "arial",
+        "arial Black",
+        "verdana",
+        "tahoma",
+        "trebuchet MS",
+        "impact",
+        "times new roman",
+        "georgia",
+        "Palatino",
+        "baskerville",
+        "Andalé Mono",
+        "courier",
+        "monaco",
+        "bradley hand",
+        "brush script mt",
+        "comic sans ms",
+    ];
 
     const changeColor = (color, event) => {
         setSketchPickerColor(color.hex);
@@ -55,6 +76,31 @@ const ModalCreateNewTheme = () => {
         }
     };
 
+    const changeTextPlacement = (e) => {
+        setColorthemeData((prev) => {
+            prev.style[0]["textPlacement"] = e.target.value;
+            return { ...prev };
+        });
+    };
+    const changeFontWeight = (e) => {
+        setColorthemeData((prev) => {
+            prev.style[0]["fontWeight"] = e.target.value;
+            return { ...prev };
+        });
+    };
+    const changeFontSize = (e) => {
+        setColorthemeData((prev) => {
+            prev.style[0]["fontSize"] = e.target.value;
+            return { ...prev };
+        });
+    };
+    const changeFontfamily = (e) => {
+        setColorthemeData((prev) => {
+            prev.style[0]["fontFamily"] = e.target.value;
+            return { ...prev };
+        });
+    };
+
     const changeRadioHexColor = (e) => {
         setRadioBtnValue(e.target.value);
         if (selectLayer == "0") {
@@ -65,10 +111,6 @@ const ModalCreateNewTheme = () => {
             );
         }
     };
-
-    useEffect(() => {
-        console.log(colorthemeData.style[0]);
-    }, [sketchPickerColor]);
 
     // const listlayerData = () => {
     //     for (let dat of object.key(colorthemeData.style[0])) {
@@ -82,7 +124,7 @@ const ModalCreateNewTheme = () => {
                 Create new theme
             </div>
 
-            <div className="w-[380px] h-40 mt-2 mb-2 bg-slate-400 flex justify-center items-center rounded-sm">
+            <div className="w-[380px] h-[140px] mt-2 mb-2 bg-slate-400 flex justify-center items-center rounded-sm">
                 <div
                     className="scale-150 w-[58px] h-[58px] ms-[3px] rounded-sm text-black flex justify-center flex-shrink-0 relative z-0"
                     style={{
@@ -95,17 +137,34 @@ const ModalCreateNewTheme = () => {
                 >
                     {/* //normal Width keycaps 53x53 */}
                     <div
-                        className="w-[45px] h-[45px] mt-[3px] ps-[2px] text-[15px]"
+                        className={`w-[45px] h-[45px] mt-[3px] px-1 text-[15px]`}
                         style={{
                             background: colorthemeData.style[1]["background"],
                             borderTop: `1px solid ${colorthemeData.style[1]["top_border"]}`,
                             borderBottom: `1px solid ${colorthemeData.style[1]["bottom_border"]}`,
                             borderLeft: `1px solid ${colorthemeData.style[1]["left_border"]}`,
                             borderRight: `1px solid ${colorthemeData.style[1]["right_border"]}`,
-                            color: colorthemeData.style[0].fontColor,
                         }}
                     >
-                        A
+                        <div
+                            className="w-full"
+                            style={{
+                                color: colorthemeData.style[0].fontColor,
+                                fontFamily: colorthemeData.style[0].fontFamily,
+                                alignSelf:
+                                    colorthemeData.style[0].textPlacement.split(
+                                        "-"
+                                    )[0], //example top-center <-- arr 0 = top
+                                textAlign:
+                                    colorthemeData.style[0].textPlacement.split(
+                                        "-"
+                                    )[1], //example top-center <-- arr 1 = center
+                                fontWeight: colorthemeData.style[0].fontWeight,
+                                fontSize: colorthemeData.style[0].fontSize,
+                            }}
+                        >
+                            Ab?
+                        </div>
                     </div>
                 </div>
             </div>
@@ -125,10 +184,13 @@ const ModalCreateNewTheme = () => {
                         onChange={changeSelectLayer}
                         className="text-black text-[13px]"
                     >
-                        <option value="0">Font Style</option>
+                        <option value="0">Text Style</option>
                         <option value="1">Top color of keycaps</option>
                         <option value="2">Side color of keycaps</option>
                     </select>
+                    <div className="mt-1">
+                        <hr />
+                    </div>
                     {selectLayer == "1" || selectLayer == "2" ? (
                         Object.keys(colorthemeData.style[selectLayer]).map(
                             (key, index) => {
@@ -162,23 +224,96 @@ const ModalCreateNewTheme = () => {
                         )
                     ) : (
                         <>
-                            <div className="mt-1">
-                                <div className="text-[13px]">Font style</div>
-                                <input
-                                    type="text"
-                                    placeholder="Font Style"
-                                    className="h-7 w-[145px] text-[13px] bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
-                                />
+                            <div className="mt-0.5">
+                                <div className="text-[13px]">Font family</div>
+                                <select
+                                    defaultValue={
+                                        colorthemeData.style[0].fontFamily
+                                    }
+                                    onChange={changeFontfamily}
+                                    className="text-black text-[13px] w-full capitalize"
+                                >
+                                    {fontList.map((key, index) => {
+                                        return (
+                                            <option
+                                                key={index}
+                                                value={`${key}`}
+                                            >{`${key}`}</option>
+                                        );
+                                    })}
+                                </select>
                             </div>
-                            <div className="mt-1">
-                                <div className="text-[13px]">Text align</div>
-                                <input
-                                    type="text"
-                                    placeholder="Text align"
-                                    className="h-7 w-[145px] text-[13px] bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
-                                />
+                            <div className="mt-0.5">
+                                <div className="text-[13px]">
+                                    Text Placement
+                                </div>
+                                <select
+                                    defaultValue={
+                                        colorthemeData.style[0].textPlacement
+                                    }
+                                    onChange={changeTextPlacement}
+                                    className="text-black text-[13px] w-full"
+                                >
+                                    <option value="start-left">Top-Left</option>
+                                    <option value="start-center">
+                                        Top-Center
+                                    </option>
+                                    <option value="start-right">
+                                        Top-Right
+                                    </option>
+                                    <option value="center-left">
+                                        Center-Left
+                                    </option>
+                                    <option value="center-center">
+                                        Center-Center
+                                    </option>
+                                    <option value="center-right">
+                                        Center-Right
+                                    </option>
+                                    <option value="end-left">
+                                        Bottom-Left
+                                    </option>
+                                    <option value="end-center">
+                                        Bottom-Center
+                                    </option>
+                                    <option value="end-right">
+                                        Bottom-Right
+                                    </option>
+                                </select>
                             </div>
-                            <div className="group mt-1">
+                            <div className="mt-0.5">
+                                <div className="text-[13px]">Font weight</div>
+                                <select
+                                    defaultValue={
+                                        colorthemeData.style[0].fontStyle
+                                    }
+                                    onChange={changeFontWeight}
+                                    className="text-black text-[13px] w-full"
+                                >
+                                    <option value="normal">Normal</option>
+                                    <option value="bold">Bold</option>
+                                </select>
+                            </div>
+                            <div className="mt-0.5">
+                                <div className="text-[13px]">Font size</div>
+                                <select
+                                    defaultValue={
+                                        colorthemeData.style[0].fontSize
+                                    }
+                                    onChange={changeFontSize}
+                                    className="text-black text-[13px] w-full"
+                                >
+                                    {[...Array(25)].map((key, index) => {
+                                        return (
+                                            <option
+                                                key={index}
+                                                value={`${index + 1}px`}
+                                            >{`${index + 1}px`}</option>
+                                        );
+                                    })}
+                                </select>
+                            </div>
+                            <div className="group mt-0.5">
                                 <div className="text-sm">Text color</div>
                                 <input
                                     type="radio"

@@ -45,7 +45,7 @@ const PreviewLayout = () => {
                                                 <div className="w-[45px] h-[45px] mt-[3px] ps-[2px] border border-r-stone-500 border-b-stone-500 border-l-stone-200 border-t-stone-200 bg-stone-200 rounded-sm text-[15px]">
                                                     {col.legend}
                                                 </div>
-                                                {col.keyConnect1 ? (
+                                                {col.KeyConnectTop ? (
                                                     <>
                                                         <div
                                                             className={`w-[58px] h-[22px] z-[5] bg-stone-400 border border-y-0 border-l-stone-200 border-r-stone-500 absolute top-[-15px]`}
@@ -58,7 +58,7 @@ const PreviewLayout = () => {
                                                     false
                                                 )}
 
-                                                {col.keyConnect2 ? (
+                                                {col.KeyConnectLeft ? (
                                                     <>
                                                         <>
                                                             <div
