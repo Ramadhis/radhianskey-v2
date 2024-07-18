@@ -4,15 +4,11 @@ import DragAndDrop from "./dnd-kit/DragAndDrop";
 import DndMain from "./beau-dnd/DndMain";
 import AddRowBtn from "./partial-components/AddRowBtn";
 import SaveBtn from "./partial-components/SaveBtn";
-import { useListKeys } from "../../../Context/listKeys";
 import SelectType from "./partial-components/SelectType";
 import DeleteKeysBtn from "./partial-components/DeleteKeysBtn";
 import { useSelector } from "react-redux";
 
 const MainLayout = () => {
-    const listKeysContext = useListKeys();
-    const { listKeys, updateListKeys } = listKeysContext;
-
     const selectionKey = useSelector((state) => state.selectionKey);
 
     useEffect(() => {
@@ -30,14 +26,15 @@ const MainLayout = () => {
             <div className="mt-1 divide-y divide-gradient-to-r from-indigo-500">
                 <div>
                     <AddRowBtn />
-                    <SaveBtn />
-                    <a
+                    <SaveBtn saveType={"save"} />
+                    <SaveBtn saveType={"save-as"} />
+                    {/* <a
                         href="#"
                         className="bg-[#2c508a] ms-2 p-1 rounded-sm px-4 h-4 text-sm text-white font-medium "
                     >
                         <i className="bi bi-arrow-left-right"></i> Reverse
                         option position
-                    </a>
+                    </a> */}
                     <DeleteKeysBtn />
                 </div>
                 <div className="mt-2"></div>

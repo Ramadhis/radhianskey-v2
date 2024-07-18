@@ -717,7 +717,7 @@ const initialState = {
                         value: "KeyA",
                     },
                     KeyConnectTop: false,
-                    KeyConnectLeft: false,
+                    KeyConnectLeft: true,
                     keycapsTheme: {
                         name: "White",
                         style: [
@@ -844,12 +844,47 @@ const layoutSlice = createSlice({
         addKeys: (state, action) => {
             state.layoutData[action.payload.indexRow].column.push({
                 id: v4(),
-                width: "150",
-                legend: "7",
+                legend: "A", //keyLegend
+                keycapsSize: 1,
+                onKeyPress: {
+                    label: "",
+                    value: "",
+                },
+                KeyConnectTop: false,
+                KeyConnectLeft: false,
+                keycapsTheme: {
+                    name: "White",
+                    style: [
+                        {
+                            //layer1 = index 0
+                            fontFamily: "times new roman",
+                            fontSize: "15px",
+                            textPlacement: "top-left",
+                            fontColor: "#000",
+                            fontWeight: "normal",
+                        },
+                        {
+                            //layer2 = index 1
+                            background: "#E7E5E4",
+                            top_border: "#E7E5E4",
+                            bottom_border: "#81716C",
+                            left_border: "#E7E5E4",
+                            right_border: "#81716C",
+                        },
+                        {
+                            //layer3 = index 2
+                            background: "#A8A29E",
+                            top_border: "#E7E5E4",
+                            bottom_border: "#78716C",
+                            left_border: "#E7E5E4",
+                            right_border: "#78716C",
+                        },
+                    ],
+                },
             });
         },
         addRow: (state, action) => {
-            state.layoutData.push({
+            state.layoutData.unshift({
                 id: v4(),
                 column: [],
             });
@@ -866,7 +901,7 @@ const layoutSlice = createSlice({
             state.layoutData.map((layoutDatas, index) => {
                 layoutDatas.column.map((columns, index2) => {
                     if (action.payload.selectedKey.includes(columns.id)) {
-                        state = state.layoutData[index].column[index2][
+                        state.layoutData[index].column[index2][
                             action.payload.formName
                         ] = action.payload.formValue;
                     }
@@ -882,6 +917,7 @@ const layoutSlice = createSlice({
 export const {
     updateLayoutData,
     addKeys,
+    addRow,
     deleteRow,
     deleteKey,
     updateSelectedKey,

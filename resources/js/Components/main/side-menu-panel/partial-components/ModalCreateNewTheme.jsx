@@ -137,7 +137,7 @@ const ModalCreateNewTheme = () => {
                 >
                     {/* //normal Width keycaps 53x53 */}
                     <div
-                        className={`w-[45px] h-[45px] mt-[3px] px-1 text-[15px]`}
+                        className={`w-[45px] h-[45px] mt-[3px] px-1 text-[15px] flex`}
                         style={{
                             background: colorthemeData.style[1]["background"],
                             borderTop: `1px solid ${colorthemeData.style[1]["top_border"]}`,

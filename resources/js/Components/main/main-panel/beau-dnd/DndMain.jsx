@@ -130,7 +130,7 @@ const DndMain = () => {
                                             {row.column.map((col, index2) => {
                                                 return (
                                                     <ItemColumn
-                                                        columnDetail={col}
+                                                        keysData={col}
                                                         index={index2}
                                                         key={index2}
                                                     ></ItemColumn>

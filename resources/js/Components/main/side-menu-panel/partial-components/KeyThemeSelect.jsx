@@ -133,7 +133,7 @@ const KeyThemeSelect = ({ selectedTheme, onChangeFormData, selectedKey }) => {
                     //layer1 = index 0
                     fontFamily: "times new roman",
                     fontSize: "15px",
-                    textPlacement: "top-left",
+                    textPlacement: "end-right",
                     fontColor: "#000",
                     fontWeight: "normal",
                 },

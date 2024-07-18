@@ -99,12 +99,12 @@ const KeysForm = () => {
                             values.floatValue
                         );
                     }}
-                    isAllowed={({ floatValue }) => {
-                        if (floatValue <= 30) {
-                            return true;
-                        }
-                        return false;
-                    }}
+                    // isAllowed={({ floatValue }) => {
+                    //     if (floatValue <= 30) {
+                    //         return true;
+                    //     }
+                    //     return false;
+                    // }}
                     allowLeadingZeros
                     readOnly={
                         selectionKey.selectedKey.length < 1 ? true : false

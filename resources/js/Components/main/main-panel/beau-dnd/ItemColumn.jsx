@@ -5,21 +5,23 @@ import {
     updateSelectionMultipleList,
     updateSelectionSingleList,
 } from "../../../../Store/Slices/main/selectionKeySlice";
+import Keys from "../../../global-components/Keys";
 
-const ItemColumn = ({ columnDetail, index }) => {
+const ItemColumn = ({ keysData, index }) => {
     const dispatch = useDispatch();
 
     const selectionKeyType = JSON.parse(
         JSON.stringify(useSelector((state) => state.selectionKey))
     );
 
+    //jika key di klik masukan id yang di klik ke global state
     const onClickKey = (e, id) => {
         e.preventDefault();
         if (selectionKeyType.selectionType == "single") {
             dispatch(
                 updateSelectionSingleList({
                     id: id,
-                    selectedKeyDetail: columnDetail,
+                    selectedKeyDetail: keysData,
                 })
             );
         } else {
@@ -30,19 +32,19 @@ const ItemColumn = ({ columnDetail, index }) => {
     return (
         <>
             <Draggable
-                draggableId={columnDetail.id}
-                key={columnDetail.id}
+                draggableId={keysData.id}
+                key={keysData.id}
                 index={index}
             >
                 {(provided) => {
                     return (
                         <div
                             onClick={(e) => {
-                                return onClickKey(e, columnDetail.id);
+                                return onClickKey(e, keysData.id);
                             }}
                             className={`border-2 min-w-[60px] ${
                                 selectionKeyType.selectedKey.includes(
-                                    columnDetail.id
+                                    keysData.id
                                 )
                                     ? `border-white`
                                     : `border-transparent hover:border-white`
@@ -51,16 +53,7 @@ const ItemColumn = ({ columnDetail, index }) => {
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
                         >
-                            <div
-                                className="w-[58px] h-[58px] m-[2px] bg-stone-400 border border-r-stone-500 border-b-stone-500 border-l-stone-200 border-t-stone-200 text-black rounded-sm flex justify-center relative"
-                                //normal Width keycaps 68x68
-                                //untuk simulasi di kurang 10px = 58px
-                            >
-                                {/* //normal Width keycaps 53x53 */}
-                                <div className="w-[45px] h-[45px] mt-[3px] ps-[2px] border border-r-stone-500 border-b-stone-500 border-l-stone-200 border-t-stone-200 bg-stone-200 rounded-sm text-[15px] absolute">
-                                    {columnDetail.legend}
-                                </div>
-                            </div>
+                            <Keys keysData={keysData} />
                         </div>
                     );
                 }}
