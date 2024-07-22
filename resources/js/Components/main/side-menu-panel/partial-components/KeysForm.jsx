@@ -24,10 +24,6 @@ const KeysForm = () => {
         { value: false, label: "False" },
     ];
 
-    useEffect(() => {
-        console.log(layout);
-    }, [layout]);
-
     const onChangeFormData = (formName, formValue) => {
         dispatch(
             updateSelectedKey({

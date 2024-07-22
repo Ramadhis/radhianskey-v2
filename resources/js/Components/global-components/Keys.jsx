@@ -6,7 +6,7 @@ const Keys = ({ keysData, previewMode }) => {
     return (
         <div
             //default 58x58
-            className={`m-[2px] rounded-sm text-black relative z-0`}
+            className={`m-[2px] rounded-sm text-black relative z-0 inline-block`}
             style={{
                 width: `${58 * keysData.keycapsSize}px`,
                 height: "58px",
@@ -20,7 +20,7 @@ const Keys = ({ keysData, previewMode }) => {
             {/* //normal Width keycaps 53x53 */}
             <div
                 //default 45x45
-                className={`mt-[3px] mx-auto px-1 text-[15px]`}
+                className={`mt-[3px] mx-auto px-1 text-[15px] flex`}
                 style={{
                     width: `${58 * keysData.keycapsSize - 13}px`,
                     height: "45px",
@@ -31,14 +31,17 @@ const Keys = ({ keysData, previewMode }) => {
                     borderRight: `1px solid ${keysData.keycapsTheme.style[1]["right_border"]}`,
                 }}
             >
+                {/* {keysData.keycapsTheme.style[0].textPlacement.split("-")[0]} */}
                 <div
+                    className="w-full"
                     style={{
                         color: keysData.keycapsTheme.style[0].fontColor,
                         fontFamily: keysData.keycapsTheme.style[0].fontFamily,
                         alignSelf:
                             keysData.keycapsTheme.style[0].textPlacement.split(
                                 "-"
-                            )[0], //example top-center <-- arr 0 = top
+                            )[0],
+                        //example top-center <-- arr 0 = top
                         textAlign:
                             keysData.keycapsTheme.style[0].textPlacement.split(
                                 "-"

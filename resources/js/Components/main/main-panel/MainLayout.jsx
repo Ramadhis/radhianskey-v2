@@ -8,6 +8,9 @@ import SelectType from "./partial-components/SelectType";
 import DeleteKeysBtn from "./partial-components/DeleteKeysBtn";
 import { useSelector } from "react-redux";
 
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
+
 const MainLayout = () => {
     const selectionKey = useSelector((state) => state.selectionKey);
 
@@ -16,38 +19,39 @@ const MainLayout = () => {
     }, [selectionKey]);
 
     return (
-        <div
-            className="overflow-auto h-full p-2 text-[#678f9c] pb-11"
-            style={{
-                scrollbarWidth: "thin",
-                scrollbarColor: "#616161 #66000000",
-            }}
-        >
-            <div className="mt-1 divide-y divide-gradient-to-r from-indigo-500">
-                <div>
-                    <AddRowBtn />
-                    <SaveBtn saveType={"save"} />
-                    <SaveBtn saveType={"save-as"} />
-                    {/* <a
-                        href="#"
-                        className="bg-[#2c508a] ms-2 p-1 rounded-sm px-4 h-4 text-sm text-white font-medium "
-                    >
-                        <i className="bi bi-arrow-left-right"></i> Reverse
-                        option position
-                    </a> */}
-                    <DeleteKeysBtn />
+        <>
+            {/* <div
+                className="overflow-auto h-full relative p-2 text-[#678f9c] pb-11"
+                style={{
+                    scrollbarWidth: "thin",
+                    scrollbarColor: "#616161 #66000000",
+                }}
+            > */}
+            <SimpleBar className="h-full z-10">
+                <div className="mt-1 ps-1 pt-1 pb-1 pe-2 fixed w-full z-[5] bg-[#1f1f1f] ">
+                    <div className="">
+                        <AddRowBtn />
+                        <SaveBtn saveType={"save"} />
+                        <SaveBtn saveType={"save-as"} />
+                        {/* <a
+                    href="#"
+                    className="bg-[#2c508a] ms-2 p-1 rounded-sm px-4 h-4 text-sm text-white font-medium "
+                >
+                    <i className="bi bi-arrow-left-right"></i> Reverse
+                    option position
+                </a> */}
+                        <DeleteKeysBtn />
+                    </div>
+                    <hr className="mt-2 mb-1"></hr>
+                    <SelectType />
                 </div>
-                <div className="mt-2"></div>
-            </div>
-            <div className="text-sm mt-1 text-zinc-300 pb-1">
-                {/* Right click to delete items/keys */}
-                <SelectType />
-            </div>
-            <div>
-                {/* <DragAndDrop /> */}
-                <DndMain></DndMain>
-            </div>
-        </div>
+                <div className="mt-[80px] ps-2">
+                    {/* <DragAndDrop /> */}
+                    <DndMain></DndMain>
+                </div>
+            </SimpleBar>
+            {/* </div> */}
+        </>
     );
 };
 

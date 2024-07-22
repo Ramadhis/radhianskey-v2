@@ -2,6 +2,8 @@ import React from "react";
 // import { useListKeys } from "../../../Context/listKeys";
 import { useSelector, useDispatch } from "react-redux";
 import Keys from "../../global-components/Keys";
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 
 const PreviewLayout = () => {
     // const listKeysContext = useListKeys();
@@ -12,13 +14,7 @@ const PreviewLayout = () => {
     );
 
     return (
-        <div
-            className=" h-full text-[#678f9c] overflow-hidden hover:overflow-auto "
-            style={{
-                scrollbarWidth: "thin",
-                scrollbarColor: "#616161 #66000000",
-            }}
-        >
+        <SimpleBar className="h-full z-10">
             {" "}
             <div className=" text-sm ps-1 pe-3 pt-3 pb-2 w-full fixed bg-[#181818] z-[5]">
                 <div className="ms-4 mt-2 text-zinc-300 hover:text-white inline text-[13px]">
@@ -26,16 +22,18 @@ const PreviewLayout = () => {
                 </div>
             </div>
             <div className="case flex flex-shrink-0">
-                <div className="bg-[#e8c4b8] border rounded-[4px] ms-4 me-11 mt-12 mb-11 p-2 whitespace-nowrap">
+                <div className="bg-[#e8c4b8] border-[#706662] border rounded-[4px] ms-4 me-11 mt-12 mb-11 p-2 whitespace-nowrap">
                     <div className=" bg-[#332b29] border border-[#706662] rounded-[9px] p-3 whitespace-nowrap">
                         {listKeys.layoutData.map((row, index) => {
                             return (
-                                <div className="whitespace-nowrap">
+                                <div
+                                    className="flex flex-shrink-0 whitespace-nowrap"
+                                    key={index}
+                                >
                                     {row.column.map((col, index2) => {
                                         return (
-                                            <div className="inline-block nowrap">
+                                            <div key={index2}>
                                                 <Keys
-                                                    key={index2}
                                                     keysData={col}
                                                     previewMode={true}
                                                 />
@@ -50,7 +48,7 @@ const PreviewLayout = () => {
                 <div className="w-10 text-[#181818]">End layout</div>
                 {/* end layout */}
             </div>
-        </div>
+        </SimpleBar>
     );
 };
 

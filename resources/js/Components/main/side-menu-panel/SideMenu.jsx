@@ -6,19 +6,22 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { v4 } from "uuid";
 import MenuLayout from "./partial-components/MenuLayout";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import "react-perfect-scrollbar/dist/css/styles.css";
+// import "react-perfect-scrollbar/dist/css/styles.css";
+
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 
 const SideMenu = () => {
     const [menuList, setMenuList] = useState([
         {
             id: v4(),
-            title: "Keys",
-            layout: <KeysForm />,
+            title: "Case",
+            layout: <CaseForm />,
         },
         {
             id: v4(),
-            title: "Case",
-            layout: <CaseForm />,
+            title: "Keys",
+            layout: <KeysForm />,
         },
         {
             id: v4(),
@@ -75,14 +78,22 @@ const SideMenu = () => {
         //         overflow: "overlay",
         //     }}
         // >
-        <div
-            className="w-full h-full overflow-hidden hover:overflow-auto"
-            style={{
-                scrollbarWidth: "thin",
-                scrollbarColor: "#616161 #66000000",
-            }}
-        >
-            <div className="h-full p-1">
+        // <div
+        //     className="w-full h-full overflow-hidden hover:overflow-auto"
+        //     style={{
+        //         scrollbarWidth: "thin",
+        //         scrollbarColor: "#616161 #66000000",
+        //     }}
+        // >
+        // <div
+        //     className="h-full p-1"
+        //     style={{
+        //         scrollbarWidth: "thin",
+        //         scrollbarColor: "#616161 #66000000",
+        //     }}
+        // >
+        <SimpleBar className="h-full z-20">
+            <div className="p-1">
                 <DragDropContext onDragEnd={handleDragEnd}>
                     <Droppable
                         droppableId="all-columns"
@@ -134,7 +145,9 @@ const SideMenu = () => {
                     </Droppable>
                 </DragDropContext>
             </div>
-        </div>
+        </SimpleBar>
+        // </div>
+        // </div>
         // </PerfectScrollbar>
     );
 };

@@ -5,7 +5,7 @@ import ModalCreateNewTheme from "./ModalCreateNewTheme";
 import { customStyleSelect } from "../../../../Styles/customStyleReactSelect";
 
 const KeyThemeSelect = ({ selectedTheme, onChangeFormData, selectedKey }) => {
-    const [ModalCreateNewThemeOpen, setModalCreateNewThemeOpen] =
+    const [modalCreateNewThemeOpen, setModalCreateNewThemeOpen] =
         useState(false);
 
     const CloseModalCreateNewTheme = () => {
@@ -75,7 +75,7 @@ const KeyThemeSelect = ({ selectedTheme, onChangeFormData, selectedKey }) => {
                     //layer1 = index 0
                     fontFamily: "times new roman",
                     fontSize: "15px",
-                    textPlacement: "top-left",
+                    textPlacement: "start-left",
                     fontColor: "#000",
                     fontWeight: "normal",
                 },
@@ -104,7 +104,7 @@ const KeyThemeSelect = ({ selectedTheme, onChangeFormData, selectedKey }) => {
                     //layer1 = index 0
                     fontFamily: "times new roman",
                     fontSize: "15px",
-                    textPlacement: "top-left",
+                    textPlacement: "start-left",
                     fontColor: "#000",
                     fontWeight: "normal",
                 },
@@ -134,7 +134,7 @@ const KeyThemeSelect = ({ selectedTheme, onChangeFormData, selectedKey }) => {
                     fontFamily: "times new roman",
                     fontSize: "15px",
                     textPlacement: "end-right",
-                    fontColor: "#000",
+                    fontColor: "#fff",
                     fontWeight: "normal",
                 },
                 {
@@ -162,7 +162,7 @@ const KeyThemeSelect = ({ selectedTheme, onChangeFormData, selectedKey }) => {
                     //layer1 = index 0
                     fontFamily: "times new roman",
                     fontSize: "15px",
-                    textPlacement: "top-left",
+                    textPlacement: "start-left",
                     fontColor: "#000",
                     fontWeight: "normal",
                 },
@@ -215,7 +215,7 @@ const KeyThemeSelect = ({ selectedTheme, onChangeFormData, selectedKey }) => {
             />
 
             <ModalLayout
-                open={ModalCreateNewThemeOpen}
+                open={modalCreateNewThemeOpen}
                 close={CloseModalCreateNewTheme}
             >
                 <ModalCreateNewTheme />

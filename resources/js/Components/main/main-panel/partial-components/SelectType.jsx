@@ -18,7 +18,7 @@ const SelectType = () => {
     };
 
     return (
-        <div className="ms-1">
+        <div className="ms-1 text-sm text-slate-300">
             <label className="me-2">
                 <input
                     type="radio"
