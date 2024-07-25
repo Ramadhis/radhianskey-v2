@@ -14,7 +14,8 @@ const initialState = {
         KeyConnectTop: false,
         KeyConnectLeft: false,
         keycapsTheme: {
-            name: "White",
+            label: "White",
+            value: "white",
             style: [
                 {
                     //layer1 = index 0
@@ -142,7 +143,8 @@ const selectionKeySlice = createSlice({
                 KeyConnectTop: false,
                 KeyConnectLeft: false,
                 keycapsTheme: {
-                    name: "",
+                    label: "",
+                    value: "",
                     style: [
                         {
                             //layer1 = index 0

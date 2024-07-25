@@ -22,8 +22,26 @@ const PreviewLayout = () => {
                 </div>
             </div>
             <div className="case flex flex-shrink-0">
-                <div className="bg-[#e8c4b8] border-[#706662] border rounded-[4px] ms-4 me-11 mt-12 mb-11 p-2 whitespace-nowrap">
-                    <div className=" bg-[#332b29] border border-[#706662] rounded-[9px] p-3 whitespace-nowrap">
+                <div
+                    className="rounded-[4px] ms-4 me-11 mt-12 mb-11 p-2 whitespace-nowrap"
+                    style={{
+                        background:
+                            listKeys.caseData.caseTheme.style[
+                                "outer_background"
+                            ],
+                        border: `1px solid ${listKeys.caseData.caseTheme.style["outer_border"]}`,
+                    }}
+                >
+                    <div
+                        className="rounded-[9px] p-3 whitespace-nowrap"
+                        style={{
+                            background:
+                                listKeys.caseData.caseTheme.style[
+                                    "inner_background"
+                                ],
+                            border: `1px solid ${listKeys.caseData.caseTheme.style["inner_border"]}`,
+                        }}
+                    >
                         {listKeys.layoutData.map((row, index) => {
                             return (
                                 <div

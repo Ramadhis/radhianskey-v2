@@ -43,7 +43,7 @@ const Main = () => {
                             </Panel>
                             <PanelResizeHandle
                                 onDragging={setIsDraggingPortrait}
-                                className="relative z-10"
+                                className="relative z-30"
                             >
                                 <div className="absolute w-2 h-full bg-transparent group">
                                     <div
@@ -62,7 +62,7 @@ const Main = () => {
                                     </Panel>
                                     <PanelResizeHandle
                                         onDragging={setIsDragging}
-                                        className="relative z-10"
+                                        className="relative z-40"
                                         //w-screen border-b-2 hover:border-b-4 hover:border-orange-700 focus:border-orange-700  border-transparent
                                     >
                                         <div className="absolute w-full h-2 bg-transparent group">

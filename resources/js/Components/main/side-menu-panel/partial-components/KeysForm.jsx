@@ -112,6 +112,7 @@ const KeysForm = () => {
                 <KeyThemeSelect
                     selectedTheme={selectionKey.selectedKeyDetail.keycapsTheme}
                     selectedKey={selectionKey.selectedKey}
+                    selectedKeyDetail={selectionKey.selectedKeyDetail}
                     onChangeFormData={onChangeFormData}
                 />
             </div>

@@ -15,18 +15,18 @@ const SideMenu = () => {
     const [menuList, setMenuList] = useState([
         {
             id: v4(),
-            title: "Case",
+            title: "Layout Explanation",
+            layout: <LayoutDescForm />,
+        },
+        {
+            id: v4(),
+            title: "Case Settings",
             layout: <CaseForm />,
         },
         {
             id: v4(),
-            title: "Keys",
+            title: "Keys Settings",
             layout: <KeysForm />,
-        },
-        {
-            id: v4(),
-            title: "Layout desciption",
-            layout: <LayoutDescForm />,
         },
     ]);
 

@@ -3,8 +3,14 @@ import Select from "react-select";
 import ModalLayout from "../../../template-layout/ModalLayout";
 import ModalCreateNewTheme from "./ModalCreateNewTheme";
 import { customStyleSelect } from "../../../../Styles/customStyleReactSelect";
+import { useSelector, useDispatch } from "react-redux";
 
-const KeyThemeSelect = ({ selectedTheme, onChangeFormData, selectedKey }) => {
+const KeyThemeSelect = ({
+    selectedTheme,
+    onChangeFormData,
+    selectedKey,
+    selectedKeyDetail,
+}) => {
     const [modalCreateNewThemeOpen, setModalCreateNewThemeOpen] =
         useState(false);
 
@@ -14,7 +20,9 @@ const KeyThemeSelect = ({ selectedTheme, onChangeFormData, selectedKey }) => {
 
     const options = [
         {
-            value: [
+            label: "Create new theme",
+            value: "create-new",
+            style: [
                 {
                     //layer1 = index 0
                     fontFamily: "times new roman",
@@ -40,7 +48,6 @@ const KeyThemeSelect = ({ selectedTheme, onChangeFormData, selectedKey }) => {
                     right_border: "#78716C",
                 },
             ],
-            label: "Create new theme",
         },
         // {
         //     value: "dark-dragon",
@@ -70,7 +77,8 @@ const KeyThemeSelect = ({ selectedTheme, onChangeFormData, selectedKey }) => {
         // },
         {
             label: "Dark dragon",
-            value: [
+            value: "dark-dragon",
+            style: [
                 {
                     //layer1 = index 0
                     fontFamily: "times new roman",
@@ -98,8 +106,39 @@ const KeyThemeSelect = ({ selectedTheme, onChangeFormData, selectedKey }) => {
             ],
         },
         {
+            label: "Transparent",
+            value: "transparent",
+            style: [
+                {
+                    //layer1 = index 0
+                    fontFamily: "times new roman",
+                    fontSize: "15px",
+                    textPlacement: "start-left",
+                    fontColor: "#000",
+                    fontWeight: "normal",
+                },
+                {
+                    //layer2 = index 1
+                    background: "transparent",
+                    top_border: "transparent",
+                    bottom_border: "transparent",
+                    left_border: "transparent",
+                    right_border: "transparent",
+                },
+                {
+                    //layer3 = index 2
+                    background: "transparent",
+                    top_border: "transparent",
+                    bottom_border: "transparent",
+                    left_border: "transparent",
+                    right_border: "transparent",
+                },
+            ],
+        },
+        {
             label: "Matcha",
-            value: [
+            value: "matcha",
+            style: [
                 {
                     //layer1 = index 0
                     fontFamily: "times new roman",
@@ -128,7 +167,8 @@ const KeyThemeSelect = ({ selectedTheme, onChangeFormData, selectedKey }) => {
         },
         {
             label: "Black",
-            value: [
+            value: "black",
+            style: [
                 {
                     //layer1 = index 0
                     fontFamily: "times new roman",
@@ -157,7 +197,8 @@ const KeyThemeSelect = ({ selectedTheme, onChangeFormData, selectedKey }) => {
         },
         {
             label: "White",
-            value: [
+            value: "white",
+            style: [
                 {
                     //layer1 = index 0
                     fontFamily: "times new roman",
@@ -194,10 +235,7 @@ const KeyThemeSelect = ({ selectedTheme, onChangeFormData, selectedKey }) => {
         if (val.label == "Create new theme") {
             return setModalCreateNewThemeOpen(true);
         } else {
-            return onChangeFormData("keycapsTheme", {
-                name: val.label,
-                style: val.value,
-            });
+            return onChangeFormData("keycapsTheme", val);
         }
     };
 
@@ -206,10 +244,7 @@ const KeyThemeSelect = ({ selectedTheme, onChangeFormData, selectedKey }) => {
             <Select
                 options={options}
                 styles={customStyleSelect}
-                value={{
-                    value: selectedTheme.style,
-                    label: selectedTheme.name,
-                }}
+                value={selectedKeyDetail.keycapsTheme}
                 onChange={onChangeSelectTheme}
                 isDisabled={selectedKey.length < 1 ? true : false}
             />

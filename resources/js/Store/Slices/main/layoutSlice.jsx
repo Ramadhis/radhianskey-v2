@@ -8,15 +8,13 @@ const initialState = {
     },
     caseData: {
         caseTheme: {
-            padding: "",
-            styleColor: {
-                name: "",
-                style: {
-                    outer_border: "",
-                    inner_border: "",
-                    outer_background: "",
-                    inner_background: "",
-                },
+            label: "Pink Theme",
+            value: "pink",
+            style: {
+                outer_border: "#706662",
+                inner_border: "#fff",
+                outer_background: "#e8c4b8",
+                inner_background: "#fff",
             },
         },
     },
@@ -35,7 +33,8 @@ const initialState = {
                     KeyConnectTop: false,
                     KeyConnectLeft: false,
                     keycapsTheme: {
-                        name: "White",
+                        label: "White",
+                        value: "white",
                         style: [
                             {
                                 //layer1 = index 0
@@ -125,7 +124,8 @@ const layoutSlice = createSlice({
                 KeyConnectTop: false,
                 KeyConnectLeft: false,
                 keycapsTheme: {
-                    name: "White",
+                    label: "White",
+                    value: "white",
                     style: [
                         {
                             //layer1 = index 0
@@ -180,6 +180,9 @@ const layoutSlice = createSlice({
                 });
             });
         },
+        updateCaseTheme: (state, action) => {
+            state.caseData.caseTheme = action.payload.caseTheme;
+        },
         deleteRow: (state, action) => {
             state.layoutData.splice(action.payload.indexRow, 1);
         },
@@ -193,5 +196,6 @@ export const {
     deleteRow,
     deleteKey,
     updateSelectedKey,
+    updateCaseTheme,
 } = layoutSlice.actions;
 export default layoutSlice.reducer;

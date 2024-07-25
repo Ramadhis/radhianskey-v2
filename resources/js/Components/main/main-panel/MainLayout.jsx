@@ -28,7 +28,7 @@ const MainLayout = () => {
                 }}
             > */}
             <SimpleBar className="h-full z-10">
-                <div className="mt-1 ps-1 pt-1 pb-1 pe-2 fixed w-full z-[5] bg-[#1f1f1f] ">
+                <div className="ps-1 pt-2 pb-1 pe-2 fixed w-full z-[5] bg-[#1f1f1f] ">
                     <div className="">
                         <AddRowBtn />
                         <SaveBtn saveType={"save"} />
