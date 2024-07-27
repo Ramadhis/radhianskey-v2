@@ -37,7 +37,7 @@ const LayoutDescForm = () => {
                             return { ...prev, layoutDesc: e.target.value };
                         });
                     }}
-                    className="w-full bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
+                    className="w-full min-h-16 bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
                 />
             </div>
             {/* <div className="w-full mt-3 mb-3 text-right">

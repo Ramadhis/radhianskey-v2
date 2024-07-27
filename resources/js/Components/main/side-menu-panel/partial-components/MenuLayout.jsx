@@ -12,7 +12,9 @@ const MenuLayout = ({ headerTitle, dragHandle, children }) => {
     return (
         <div className="menu my-2 text-zinc-300">
             <div className="bg-gray-700 w-full p-1 rounded-t-sm relative">
-                <div>{headerTitle}</div>
+                <div className="flex flex-shrink-0 whitespace-nowrap overflow-hidden">
+                    {headerTitle}
+                </div>
                 <div className="absolute right-0 top-0 me-1 mt-1 flex">
                     <div
                         onClick={() => {

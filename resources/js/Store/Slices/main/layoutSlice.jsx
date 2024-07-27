@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { v4 } from "uuid";
 
 const initialState = {
@@ -14,7 +14,7 @@ const initialState = {
                 outer_border: "#706662",
                 inner_border: "#fff",
                 outer_background: "#e8c4b8",
-                inner_background: "#fff",
+                inner_background: "#282828",
             },
         },
     },
@@ -187,6 +187,7 @@ const layoutSlice = createSlice({
             state.layoutData.splice(action.payload.indexRow, 1);
         },
     },
+    extraReducers: (builder) => {},
 });
 
 export const {
