@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('layouts_keys', function (Blueprint $table) {
             $table->id();
-            $table->int('id_user');
+            $table->integer('id_user');
             $table->string('name');
             $table->string('name_slug');
             $table->string('description');

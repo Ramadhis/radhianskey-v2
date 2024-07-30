@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\KeyboardTestController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,3 +23,6 @@ Route::get('/', function () {
 
 Route::get('/home', [MainController::class, 'index'])->name('home');
 Route::get('/keyboard-test', [KeyboardTestController::class, 'index'])->name('home');
+
+Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');

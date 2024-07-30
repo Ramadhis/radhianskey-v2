@@ -1,13 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ModalSignIn from "./ModalSignIn";
 import ModalSignUp from "./ModalSignUp";
 import ModalForgotPassword from "./ModalForgotPassword";
 import ModalLayout from "../template-layout/ModalLayout";
 import ModalAccountSetting from "./ModalAccountSetting";
 import ModalMyLayout from "./ModalMyLayout";
+import { usePage } from "@inertiajs/inertia-react";
+import { Inertia } from "@inertiajs/inertia";
 
 const AuthHeaderTemplate = () => {
-    const loginStatus = true;
+    const loginStatus = false;
+    const { auth, errors, session } = usePage().props;
     const [signInModalOpen, setSignInModalOpen] = useState(false);
     const [signUpModalOpen, setSignUpModalOpen] = useState(false);
     const [forgotPasswordModalOpen, setForgotPasswordModalOpen] =
@@ -78,9 +81,18 @@ const AuthHeaderTemplate = () => {
         return setAccountsettingModalOpen(false);
     };
 
+    const signOut = (e) => {
+        e.preventDefault();
+        Inertia.post("/logout");
+    };
+
+    useEffect(() => {
+        console.log(auth);
+    }, [auth]);
+
     return (
         <>
-            {loginStatus ? (
+            {auth.user ? (
                 <div className="h-full flex items-center group">
                     <div className="me-2 text-sm font-semibold cursor-pointer text-white">
                         Ramadhiansyah
@@ -110,7 +122,7 @@ const AuthHeaderTemplate = () => {
                             </button>
                         </div>
                         <div className="hover:bg-[#2c508a] mb-2 py-1 text-zinc-300 ps-2">
-                            <a href="#">Sign out</a>
+                            <button onClick={signOut}>Sign out</button>
                         </div>
                     </div>
                 </div>

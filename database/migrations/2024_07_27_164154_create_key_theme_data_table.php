@@ -15,6 +15,8 @@ return new class extends Migration
     {
         Schema::create('key_theme_data', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_user');
+            $table->json('key_theme_data');
             $table->timestamps();
         });
     }

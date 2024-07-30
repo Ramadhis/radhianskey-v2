@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class KeyThemeData extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'id_user',
+        'key_theme_data',
+    ];
 }

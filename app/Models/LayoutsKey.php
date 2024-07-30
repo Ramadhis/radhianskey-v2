@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class LayoutsKey extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'id_user',
+        'name',
+        'name_slug',
+        'description',
+        'preview_image',
+        'layout_data'
+    ];
 }
