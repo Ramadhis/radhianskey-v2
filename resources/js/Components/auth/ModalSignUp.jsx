@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
+import { usePage } from "@inertiajs/inertia-react";
 
 const ModalSignUp = ({ openSignIn, openForgotPassword }) => {
+    const { errors } = usePage().props;
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -38,6 +40,11 @@ const ModalSignUp = ({ openSignIn, openForgotPassword }) => {
                         }}
                         required
                     />
+                    {errors.name ? (
+                        <div className="text-red-600 text-sm">
+                            {errors.name}
+                        </div>
+                    ) : null}
                 </div>
                 <div className="w-full mt-1">
                     <label className="text-md">Email address</label>
@@ -55,8 +62,13 @@ const ModalSignUp = ({ openSignIn, openForgotPassword }) => {
                         }}
                         required
                     />
+                    {errors.email ? (
+                        <div className="text-red-600 text-sm">
+                            {errors.email}
+                        </div>
+                    ) : null}
                 </div>
-                <div className="w-full mt-3">
+                <div className="w-full mt-2">
                     <label className="text-md">Password</label>
                     <input
                         type="password"
@@ -72,8 +84,13 @@ const ModalSignUp = ({ openSignIn, openForgotPassword }) => {
                         }}
                         required
                     />
+                    {errors.password ? (
+                        <div className="text-red-600 text-sm">
+                            {errors.password}
+                        </div>
+                    ) : null}
                 </div>
-                <div className="w-full mt-3">
+                <div className="w-full mt-1">
                     <label className="text-md">Confirm password</label>
                     <input
                         type="password"
@@ -89,6 +106,11 @@ const ModalSignUp = ({ openSignIn, openForgotPassword }) => {
                         }}
                         required
                     />
+                    {errors.confirm_password ? (
+                        <div className="text-red-600 text-sm">
+                            {errors.confirm_password}
+                        </div>
+                    ) : null}
                 </div>
                 <div className="w-full mt-5 mb-3">
                     <button

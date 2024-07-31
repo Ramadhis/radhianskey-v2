@@ -5,6 +5,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\KeyboardTestController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\EditAccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +22,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', [MainController::class, 'index'])->name('home');
+Route::get('/create-layout', [MainController::class, 'index'])->name('home');
 Route::get('/keyboard-test', [KeyboardTestController::class, 'index'])->name('home');
 
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
+Route::post('/update-account', [EditAccountController::class, 'update'])->name('account.update')->middleware('auth');

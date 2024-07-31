@@ -19,7 +19,7 @@ const ModalForgotPassword = ({ closeForgotPassword }) => {
                     href="#"
                     className="bg-[#2c508a] w-full rounded-sm px-6 py-2 font-semibold text-md "
                 >
-                    Send password reset Link to your email
+                    Send password reset Link <br /> to your email
                 </button>
             </div>
         </div>

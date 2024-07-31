@@ -33,7 +33,7 @@ class RegisterController extends Controller
 
         }else {
             return back()->withErrors([
-                'email' => 'email telah terpakai',
+                'email' => 'email has been used, try another email',
             ]);
         }
 
@@ -46,7 +46,7 @@ class RegisterController extends Controller
 
                 //redirect route dashboard
                 // return to_route('creative');
-                return back()->with(['success' => 'Success create Account & Login !']);
+                return back()->with(['status' => "success",'message'=>'Success create account & sign-in !']);
             }
 
             //if login fails

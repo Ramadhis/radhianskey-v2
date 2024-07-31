@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import ModalSignIn from "../../auth/ModalSignIn";
 import ModalSignUp from "../../auth/ModalSignUp";
 import ModalLayout from "../../template-layout/ModalLayout";
-import ModalforgotPassword from "../../auth/ModalforgotPassword";
+import ModalforgotPassword from "../../auth/ModalForgotPassword";
 import { Link } from "@inertiajs/inertia-react";
 import AuthHeaderTemplate from "../../auth/AuthHeaderTemplate";
 

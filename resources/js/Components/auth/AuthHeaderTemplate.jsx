@@ -7,6 +7,7 @@ import ModalAccountSetting from "./ModalAccountSetting";
 import ModalMyLayout from "./ModalMyLayout";
 import { usePage } from "@inertiajs/inertia-react";
 import { Inertia } from "@inertiajs/inertia";
+import { toastFire } from "../utils/Toast";
 
 const AuthHeaderTemplate = () => {
     const loginStatus = false;
@@ -24,6 +25,7 @@ const AuthHeaderTemplate = () => {
         setSignInModalOpen(false);
         setForgotPasswordModalOpen(false);
         setMyLayoutModalOpen(false);
+        setAccountsettingModalOpen(false);
     };
 
     const openSignInModal = (e) => {
@@ -87,24 +89,31 @@ const AuthHeaderTemplate = () => {
     };
 
     useEffect(() => {
-        console.log(auth);
-    }, [auth]);
+        if (session.status == "success") {
+            toastFire(session.message);
+            closeAllModal();
+        }
+        // console.log(session);
+    }, [session]);
 
     return (
         <>
             {auth.user ? (
                 <div className="h-full flex items-center group">
-                    <div className="me-2 text-sm font-semibold cursor-pointer text-white">
-                        Ramadhiansyah
+                    <div className="me-2 text-[15px] font-semibold cursor-pointer text-white">
+                        {auth.user ? auth.user.name : null}
                     </div>
                     <a href="#" className="">
                         <img
                             alt="name"
-                            src="https://picsum.photos/id/237/200/300"
-                            className="object-none w-8 h-8 rounded-full inline border-2"
+                            src={
+                                "/profile_picture/" +
+                                (auth.user ? auth.user.profile_picture : null)
+                            }
+                            className="w-8 h-8 rounded-full inline border-2 object-cover"
                         />
                     </a>
-                    <div className="bg-[#1f1f1f] border border-zinc-300  w-36 z-30 absolute top-9 right-5 rounded text-black hidden group-hover:block group-hover:transition">
+                    <div className="bg-[#1f1f1f] border border-zinc-300  w-36 z-50 absolute top-9 right-5 rounded text-black hidden group-hover:block group-hover:transition">
                         <div className="hover:bg-[#2c508a] w-full mt-2 py-1 text-zinc-300">
                             <button
                                 onClick={openMyLayoutModal}
