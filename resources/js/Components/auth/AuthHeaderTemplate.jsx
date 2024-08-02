@@ -8,6 +8,7 @@ import ModalMyLayout from "./ModalMyLayout";
 import { usePage } from "@inertiajs/inertia-react";
 import { Inertia } from "@inertiajs/inertia";
 import { toastFire } from "../utils/Toast";
+import checkImageExists from "../helpers/checkImageExists";
 
 const AuthHeaderTemplate = () => {
     const loginStatus = false;
@@ -107,8 +108,14 @@ const AuthHeaderTemplate = () => {
                         <img
                             alt="name"
                             src={
-                                "/profile_picture/" +
-                                (auth.user ? auth.user.profile_picture : null)
+                                auth.user &&
+                                checkImageExists(
+                                    "/images/profile_picture/" +
+                                        auth.user.profile_picture
+                                )
+                                    ? "/images/profile_picture/" +
+                                      auth.user.profile_picture
+                                    : "/images/profile_picture/default.png"
                             }
                             className="w-8 h-8 rounded-full inline border-2 object-cover"
                         />

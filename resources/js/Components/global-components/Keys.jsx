@@ -3,12 +3,14 @@ import React from "react";
 const Keys = ({ keysData, previewMode }) => {
     const preview = previewMode || false;
 
+    const keySize = 58 * keysData.keycapsSize;
+
     return (
         <div
             //default 58x58
-            className={`m-[2px] rounded-sm text-black relative z-0 inline-block`}
+            className={`m-[2px] rounded-sm text-black relative inline-block`}
             style={{
-                width: `${58 * keysData.keycapsSize}px`,
+                width: `${keySize}px`,
                 height: "58px",
                 background: keysData.keycapsTheme.style[2]["background"],
                 borderTop: `1px solid ${keysData.keycapsTheme.style[2]["top_border"]}`,
@@ -22,7 +24,10 @@ const Keys = ({ keysData, previewMode }) => {
                 //default 45x45
                 className={`mt-[3px] mx-auto px-1 text-[15px] flex`}
                 style={{
-                    width: `${58 * keysData.keycapsSize - 13}px`,
+                    width:
+                        (keysData.keycapsSize >= 1
+                            ? keySize - 13
+                            : keySize - 3.3) + `px`,
                     height: "45px",
                     background: keysData.keycapsTheme.style[1]["background"],
                     borderTop: `1px solid ${keysData.keycapsTheme.style[1]["top_border"]}`,
@@ -33,7 +38,7 @@ const Keys = ({ keysData, previewMode }) => {
             >
                 {/* {keysData.keycapsTheme.style[0].textPlacement.split("-")[0]} */}
                 <div
-                    className="w-full"
+                    className="w-full overflow-hidden"
                     style={{
                         color: keysData.keycapsTheme.style[0].fontColor,
                         fontFamily: keysData.keycapsTheme.style[0].fontFamily,
@@ -57,7 +62,7 @@ const Keys = ({ keysData, previewMode }) => {
             {keysData.KeyConnectTop && preview ? (
                 <div className="flex justify-center">
                     <div
-                        className={`h-[22px] z-[5] border absolute top-[-15px]`}
+                        className={`h-[22px]  border absolute top-[-15px]`}
                         style={{
                             //default 58x22
                             width: `${58 * keysData.keycapsSize}px`,
@@ -70,7 +75,7 @@ const Keys = ({ keysData, previewMode }) => {
                         }}
                     ></div>
                     <div
-                        className={`h-[22px] z-[5] absolute top-[-15px]`}
+                        className={`h-[22px]  absolute top-[-15px]`}
                         style={{
                             //default 45x22
                             width: `${58 * keysData.keycapsSize - 13}px`,
@@ -90,7 +95,7 @@ const Keys = ({ keysData, previewMode }) => {
             {keysData.KeyConnectLeft && preview ? (
                 <div className="absolute -top-0">
                     <div
-                        className={`w-[22px] h-[58px] mt-[-1px] z-[5] absolute left-[-15px]`}
+                        className={`w-[22px] h-[58px] mt-[-1px]  absolute left-[-15px]`}
                         style={{
                             background:
                                 keysData.keycapsTheme.style[2]["background"],
@@ -101,7 +106,7 @@ const Keys = ({ keysData, previewMode }) => {
                         }}
                     ></div>
                     <div
-                        className={`w-[22px] h-[45px] mt-[3px] z-[5] absolute -top-15 left-[-15px]`}
+                        className={`w-[22px] h-[45px] mt-[3px]  absolute -top-15 left-[-15px]`}
                         style={{
                             background:
                                 keysData.keycapsTheme.style[1]["background"],

@@ -1,6 +1,7 @@
 import { Inertia } from "@inertiajs/inertia";
 import { usePage } from "@inertiajs/inertia-react";
 import React, { useRef, useState, useEffect } from "react";
+import checkImageExists from "../helpers/checkImageExists";
 
 const ModalAccountSetting = () => {
     const { auth, errors } = usePage().props;
@@ -11,7 +12,7 @@ const ModalAccountSetting = () => {
         profile_picture: null,
     });
     const [imageUpload, setImageUpload] = useState({
-        default: "",
+        default: "default.png",
         uploaded: null,
     });
     const submit = (e) => {
@@ -82,7 +83,13 @@ const ModalAccountSetting = () => {
                             src={
                                 imageUpload.uploaded
                                     ? imageUpload.uploaded
-                                    : "/profile_picture/" + imageUpload.default
+                                    : checkImageExists(
+                                          "/images/profile_picture/" +
+                                              imageUpload.default
+                                      )
+                                    ? "/images/profile_picture/" +
+                                      imageUpload.default
+                                    : "/images/profile_picture/default.png"
                             }
                             className="w-32 h-32 rounded-full inline border-4 border-white object-cover"
                             accept="image/*"

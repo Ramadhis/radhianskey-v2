@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import SideMenu from "../Components/main/side-menu-panel/SideMenu";
 import Header from "../Components/main/header-panel/Header";
@@ -9,6 +9,7 @@ import Footer from "../Components/main/footer-panel/Footer";
 const Main = () => {
     const [isDraggingPortrait, setIsDraggingPortrait] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
+    const layoutScreenhotRef = useRef(null);
 
     return (
         <PanelGroup direction="horizontal" className="w-full h-screen">
@@ -43,7 +44,7 @@ const Main = () => {
                             </Panel>
                             <PanelResizeHandle
                                 onDragging={setIsDraggingPortrait}
-                                className="relative z-30"
+                                className="relative z-[14]"
                             >
                                 <div className="absolute w-2 h-full bg-transparent group">
                                     <div
@@ -58,11 +59,15 @@ const Main = () => {
                                         className="bg-[#1f1f1f] w-full mx-auto ps-2 pb-1"
                                         defaultSize={70}
                                     >
-                                        <MainLayout />
+                                        <MainLayout
+                                            layoutScreenhotRef={
+                                                layoutScreenhotRef
+                                            }
+                                        />
                                     </Panel>
                                     <PanelResizeHandle
                                         onDragging={setIsDragging}
-                                        className="relative z-40"
+                                        className="relative z-[14]"
                                         //w-screen border-b-2 hover:border-b-4 hover:border-orange-700 focus:border-orange-700  border-transparent
                                     >
                                         <div className="absolute w-full h-2 bg-transparent group">
@@ -78,7 +83,11 @@ const Main = () => {
                                         maxSize={90}
                                         defaultSize={30}
                                     >
-                                        <PreviewLayout />
+                                        <PreviewLayout
+                                            layoutScreenhotRef={
+                                                layoutScreenhotRef
+                                            }
+                                        />
                                     </Panel>
                                 </PanelGroup>
                             </Panel>

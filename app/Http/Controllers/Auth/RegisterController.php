@@ -27,7 +27,7 @@ class RegisterController extends Controller
                 'name' => $req->name,
                 'email' => $req->email,
                 'password' => Hash::make($req->password),
-                'profile_picture' => 'default.jpg',
+                'profile_picture' => 'default.png',
                 'roles' => 'member'
             ]);
 

@@ -34,3 +34,7 @@ body {
 .simplebar-track.simplebar-horizontal .simplebar-scrollbar:before {
     background-color: rgb(196, 196, 196);
 }
+
+.swal2-popup {
+    border: 1px solid white;
+}

@@ -42,13 +42,13 @@ const ItemColumn = ({ keysData, index }) => {
                             onClick={(e) => {
                                 return onClickKey(e, keysData.id);
                             }}
-                            className={`border-2 min-w-[60px] ${
+                            className={`border-2 min-w-[10px] ${
                                 selectionKeyType.selectedKey.includes(
                                     keysData.id
                                 )
                                     ? `border-white`
                                     : `border-transparent hover:border-white`
-                            }  rounded-md mx-[1px]`}
+                            }  rounded-md mx-[1px] flex flex-shrink-0`}
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}

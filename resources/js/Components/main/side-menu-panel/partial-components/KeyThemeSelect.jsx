@@ -227,10 +227,6 @@ const KeyThemeSelect = ({
         },
     ];
 
-    useEffect(() => {
-        console.log(selectedTheme);
-    }, [selectedTheme]);
-
     const onChangeSelectTheme = (val) => {
         if (val.label == "Create new theme") {
             return setModalCreateNewThemeOpen(true);

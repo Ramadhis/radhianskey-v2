@@ -92,7 +92,7 @@ const SideMenu = () => {
         //         scrollbarColor: "#616161 #66000000",
         //     }}
         // >
-        <SimpleBar className="h-full z-20">
+        <SimpleBar className="h-full z-[15]">
             <div className="p-1">
                 <DragDropContext onDragEnd={handleDragEnd}>
                     <Droppable

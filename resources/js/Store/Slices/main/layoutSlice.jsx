@@ -77,30 +77,6 @@ const initialState = {
             id: v4(),
             column: [],
         },
-        {
-            id: v4(),
-            column: [],
-        },
-        {
-            id: v4(),
-            column: [],
-        },
-        {
-            id: v4(),
-            column: [],
-        },
-        {
-            id: v4(),
-            column: [],
-        },
-        {
-            id: v4(),
-            column: [],
-        },
-        {
-            id: v4(),
-            column: [],
-        },
     ],
 };
 

@@ -7,16 +7,26 @@ import SaveBtn from "./partial-components/SaveBtn";
 import SelectType from "./partial-components/SelectType";
 import DeleteKeysBtn from "./partial-components/DeleteKeysBtn";
 import { useSelector } from "react-redux";
+import { toPng } from "html-to-image";
 
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 
-const MainLayout = () => {
+const MainLayout = ({ layoutScreenhotRef }) => {
     const selectionKey = useSelector((state) => state.selectionKey);
 
-    useEffect(() => {
-        console.log(selectionKey);
-    }, [selectionKey]);
+    const toImage = () => {
+        toPng(layoutScreenhotRef.current, {
+            skipFonts: true,
+            preferredFontFormat: "woff2",
+            backgroundColor: "transparent",
+        }).then(function (dataUrl) {
+            var link = document.createElement("a");
+            link.download = "my-image-name.jpeg";
+            link.href = dataUrl;
+            link.click();
+        });
+    };
 
     return (
         <>
@@ -27,12 +37,18 @@ const MainLayout = () => {
                     scrollbarColor: "#616161 #66000000",
                 }}
             > */}
-            <SimpleBar className="h-full z-10">
-                <div className="ps-1 pt-2 pb-1 pe-2 fixed w-full z-[5] bg-[#1f1f1f] ">
+            <SimpleBar className="h-full">
+                <div className="ps-1 pt-2 pb-1 pe-2 fixed w-full z-[1] bg-[#1f1f1f] ">
                     <div className="">
                         <AddRowBtn />
                         <SaveBtn saveType={"save"} />
                         <SaveBtn saveType={"save-as"} />
+                        <button
+                            onClick={toImage}
+                            className="bg-slate-500 ms-2 px-3"
+                        >
+                            to image
+                        </button>
                         {/* <a
                     href="#"
                     className="bg-[#2c508a] ms-2 p-1 rounded-sm px-4 h-4 text-sm text-white font-medium "

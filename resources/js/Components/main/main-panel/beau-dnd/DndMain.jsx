@@ -4,7 +4,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import ContainerBody from "./ContainerBody";
 import ItemColumn from "./ItemColumn";
 import AddKeys from "./AddKeys";
-import DeleteKeys from "./DeleteKeys";
+import DeleteRow from "./DeleteRow";
 import { useListKeys } from "../../../../Context/listKeys";
 import { useSelector, useDispatch } from "react-redux";
 import { updateLayoutData } from "../../../../Store/Slices/main/layoutSlice";
@@ -124,7 +124,7 @@ const DndMain = () => {
                                         >
                                             <div className="relative">
                                                 <AddKeys indexRow={index} />
-                                                <DeleteKeys indexRow={index} />
+                                                <DeleteRow indexRow={index} />
                                             </div>
 
                                             {row.column.map((col, index2) => {

@@ -2,13 +2,24 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteRow } from "../../../../Store/Slices/main/layoutSlice";
 import { resetSelection } from "../../../../Store/Slices/main/selectionKeySlice";
+import confirmButtonFire from "../../../utils/ConfirmDialog";
 
-const DeleteKeys = ({ indexRow }) => {
+const DeleteRow = ({ indexRow }) => {
     const dispatch = useDispatch();
 
     const updateDeleteRow = () => {
-        dispatch(deleteRow({ indexRow: indexRow }));
-        return dispatch(resetSelection());
+        confirmButtonFire(
+            `Are you sure want to delete row ${indexRow + 1} ?`,
+            () => {
+                //confirmed
+                dispatch(deleteRow({ indexRow: indexRow }));
+                return dispatch(resetSelection());
+            },
+            () => {
+                //denied
+                return;
+            }
+        );
     };
 
     return (
@@ -26,4 +37,4 @@ const DeleteKeys = ({ indexRow }) => {
     );
 };
 
-export default DeleteKeys;
+export default DeleteRow;

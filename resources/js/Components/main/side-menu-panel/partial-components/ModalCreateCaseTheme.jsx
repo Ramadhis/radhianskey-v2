@@ -23,10 +23,6 @@ const ModalCreateCaseTheme = () => {
         });
     };
 
-    useEffect(() => {
-        console.log(radioBtnValue);
-    }, [radioBtnValue]);
-
     return (
         <div>
             <div className="semibold text-[20px] text-white">

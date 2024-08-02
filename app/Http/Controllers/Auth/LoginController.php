@@ -26,7 +26,7 @@ class LoginController extends Controller
 
         //if login fails
         return back()->withErrors([
-            'email' => 'Terjadi kesalahan, silahkan cek email atau password.',
+            'email' => 'Sign-in failed, please check your email or password.',
         ]);
     }
 

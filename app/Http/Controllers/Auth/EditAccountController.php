@@ -27,17 +27,19 @@ class EditAccountController extends Controller
         $fileName = time().'.'.$req->profile_picture->extension();
 
         //check for directory/folder
-        $directoryPath = public_path().'/profile_picture';
+        $directoryPath = public_path().'/images/profile_picture';
         File::isDirectory($directoryPath) or File::makeDirectory($directoryPath, 0777, true, true);
 
         //delete old image
-        $file_old = $directoryPath.'/'.Auth::user()->profile_picture;
-        if(file_exists($file_old)){
-            unlink($file_old);
+        if(Auth::user()->profile_picture != "default.png") {
+            $file_old = $directoryPath.'/'.Auth::user()->profile_picture;
+            if(file_exists($file_old)){
+                unlink($file_old);
+            }
         }
 
         //upload new image
-        $req->profile_picture->move(public_path('profile_picture'), $fileName);
+        $req->profile_picture->move(public_path('/images/profile_picture'), $fileName);
 
         //update profile picture
         User::where('id', Auth::user()->id)->update(['profile_picture'=> $fileName, 'name' => $req->name]);
