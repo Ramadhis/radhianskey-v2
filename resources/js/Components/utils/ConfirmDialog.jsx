@@ -3,12 +3,13 @@ import "animate.css";
 
 const confirmButton = Swal.mixin({
     customClass: {
-        title: "text-[20px] text-white",
+        title: "text-[17px] text-white w-full text-left",
         confirmButton:
-            "bg-green-600 p-1 text-white font-semibold rounded-sm px-6 me-2",
-        denyButton: "bg-red-600 p-1 text-white font-semibold rounded-sm px-6",
-        actions: "w-[150px]",
-        popup: "bg-[#374151]",
+            "bg-green-600 p-1 text-white font-semibold rounded-sm px-8 me-2 border border-green-600 text-sm hover:border-white",
+        denyButton:
+            "bg-red-600 border border-red-600 hover:border-white p-1 text-white font-semibold rounded-sm px-8 text-sm",
+        actions: "w-full flex justify-end pe-4 pb-1",
+        popup: "bg-[#374151] w-[430px] pt-1",
     },
     buttonsStyling: false,
 });
@@ -20,8 +21,9 @@ const confirmButtonFire = (titleText, confirmed, denied) => {
             // background: "#374151 border border-white",
             // border: "1px solid white",
             showDenyButton: true,
-            confirmButtonText: "Yes",
-            denyButtonText: "No",
+            confirmButtonText:
+                "<i class='bi bi-check-circle me-1 text-md'></i>Yes",
+            denyButtonText: "<i class='bi bi-x-circle me-1 text-md'></i>No",
             showClass: {
                 popup: "animate__animated animate__fadeIn animate__faster",
             },

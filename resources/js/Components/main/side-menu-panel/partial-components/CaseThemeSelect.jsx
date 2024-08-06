@@ -64,7 +64,7 @@ const CaseThemeSelect = () => {
             <Select
                 options={options}
                 styles={customStyleSelect}
-                value={layout.caseData.caseTheme}
+                value={layout.layout_data.caseData.caseTheme}
                 onChange={onChangeSelectTheme}
             />
             <ModalLayout

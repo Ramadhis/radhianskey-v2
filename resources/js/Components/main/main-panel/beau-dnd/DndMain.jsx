@@ -7,14 +7,17 @@ import AddKeys from "./AddKeys";
 import DeleteRow from "./DeleteRow";
 import { useListKeys } from "../../../../Context/listKeys";
 import { useSelector, useDispatch } from "react-redux";
-import { updateLayoutData } from "../../../../Store/Slices/main/layoutSlice";
+import {
+    updateLayoutData,
+    updateLayoutKey,
+} from "../../../../Store/Slices/main/layoutSlice";
 
 const DndMain = () => {
     const listKeysContext = useListKeys();
     // const { listKeys, updateListKeys } = listKeysContext;
 
     const listKeys = JSON.parse(
-        JSON.stringify(useSelector((state) => state.layout))
+        JSON.stringify(useSelector((state) => state.layout.layout_data))
     );
     const dispatch = useDispatch();
 
@@ -55,7 +58,7 @@ const DndMain = () => {
             );
             // updateListKeys({ layoutData: arrKeys });
 
-            dispatch(updateLayoutData({ layoutData: arrKeys }));
+            dispatch(updateLayoutKey(arrKeys));
             //End swap array in row object
 
             // console.log(keys);
@@ -79,9 +82,9 @@ const DndMain = () => {
                 ...layout[findIndexSource].column[source.index],
             };
 
-            console.log(
-                `source: ${source.index} , destination: ${destination.index}`
-            );
+            // console.log(
+            //     `source: ${source.index} , destination: ${destination.index}`
+            // );
 
             layout[findIndexSource].column.splice(source.index, 1);
             layout[findIndexDestination].column.splice(
@@ -95,7 +98,7 @@ const DndMain = () => {
             // });
             // updateLayout({ layoutData: layout });
 
-            dispatch(updateLayoutData({ layoutData: layout }));
+            dispatch(updateLayoutKey(layout));
         } else {
             return;
         }

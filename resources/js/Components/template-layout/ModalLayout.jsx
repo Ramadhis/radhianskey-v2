@@ -4,7 +4,7 @@ const ModalLayout = ({ open, close, children }) => {
     return (
         <div
             // onClick={close}
-            className={`fixed inset-0 flex justify-center items-center transition-colors  z-[1000000] ${
+            className={`fixed inset-0 flex justify-center items-center transition-colors  z-[18] ${
                 open ? "visible bg-black/50" : "invisible"
             }`}
         >

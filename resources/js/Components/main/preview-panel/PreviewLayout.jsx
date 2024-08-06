@@ -49,44 +49,45 @@ const PreviewLayout = ({ layoutScreenhotRef }) => {
                         className="rounded-[4px] ms-4 me-4 mt-12 mb-11 p-2 whitespace-nowrap"
                         style={{
                             background:
-                                listKeys.caseData.caseTheme.style[
+                                listKeys.layout_data.caseData.caseTheme.style[
                                     "outer_background"
                                 ],
-                            border: `1px solid ${listKeys.caseData.caseTheme.style["outer_border"]}`,
+                            border: `1px solid ${listKeys.layout_data.caseData.caseTheme.style["outer_border"]}`,
                         }}
                     >
                         <div
                             className="rounded-[9px] p-3 whitespace-nowrap"
                             style={{
                                 background:
-                                    listKeys.caseData.caseTheme.style[
-                                        "inner_background"
-                                    ],
-                                border: `1px solid ${listKeys.caseData.caseTheme.style["inner_border"]}`,
+                                    listKeys.layout_data.caseData.caseTheme
+                                        .style["inner_background"],
+                                border: `1px solid ${listKeys.layout_data.caseData.caseTheme.style["inner_border"]}`,
                             }}
                         >
-                            {listKeys.layoutData.map((row, index) => {
-                                return (
-                                    <div
-                                        className="flex flex-shrink-0 whitespace-nowrap min-h-[57px]"
-                                        key={index}
-                                    >
-                                        {row.column.map((col, index2) => {
-                                            return (
-                                                <div
-                                                    key={index2}
-                                                    className="flex flex-shrink-0"
-                                                >
-                                                    <Keys
-                                                        keysData={col}
-                                                        previewMode={true}
-                                                    />
-                                                </div>
-                                            );
-                                        })}
-                                    </div>
-                                );
-                            })}
+                            {listKeys.layout_data.layoutData.map(
+                                (row, index) => {
+                                    return (
+                                        <div
+                                            className="flex flex-shrink-0 whitespace-nowrap min-h-[57px]"
+                                            key={index}
+                                        >
+                                            {row.column.map((col, index2) => {
+                                                return (
+                                                    <div
+                                                        key={index2}
+                                                        className="flex flex-shrink-0"
+                                                    >
+                                                        <Keys
+                                                            keysData={col}
+                                                            previewMode={true}
+                                                        />
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    );
+                                }
+                            )}
                         </div>
                     </div>
                 </div>

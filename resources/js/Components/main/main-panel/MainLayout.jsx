@@ -15,19 +15,6 @@ import "simplebar-react/dist/simplebar.min.css";
 const MainLayout = ({ layoutScreenhotRef }) => {
     const selectionKey = useSelector((state) => state.selectionKey);
 
-    const toImage = () => {
-        toPng(layoutScreenhotRef.current, {
-            skipFonts: true,
-            preferredFontFormat: "woff2",
-            backgroundColor: "transparent",
-        }).then(function (dataUrl) {
-            var link = document.createElement("a");
-            link.download = "my-image-name.jpeg";
-            link.href = dataUrl;
-            link.click();
-        });
-    };
-
     return (
         <>
             {/* <div
@@ -41,14 +28,14 @@ const MainLayout = ({ layoutScreenhotRef }) => {
                 <div className="ps-1 pt-2 pb-1 pe-2 fixed w-full z-[1] bg-[#1f1f1f] ">
                     <div className="">
                         <AddRowBtn />
-                        <SaveBtn saveType={"save"} />
-                        <SaveBtn saveType={"save-as"} />
-                        <button
-                            onClick={toImage}
-                            className="bg-slate-500 ms-2 px-3"
-                        >
-                            to image
-                        </button>
+                        <SaveBtn
+                            saveType={"save"}
+                            layoutScreenhotRef={layoutScreenhotRef}
+                        />
+                        <SaveBtn
+                            saveType={"save-as"}
+                            layoutScreenhotRef={layoutScreenhotRef}
+                        />
                         {/* <a
                     href="#"
                     className="bg-[#2c508a] ms-2 p-1 rounded-sm px-4 h-4 text-sm text-white font-medium "

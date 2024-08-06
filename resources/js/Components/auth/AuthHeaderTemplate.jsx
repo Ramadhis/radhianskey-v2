@@ -91,7 +91,6 @@ const AuthHeaderTemplate = () => {
 
     useEffect(() => {
         if (session.status == "success") {
-            toastFire(session.message);
             closeAllModal();
         }
         // console.log(session);

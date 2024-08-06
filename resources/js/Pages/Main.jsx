@@ -1,111 +1,177 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Panel, PanelGroup, PanelResizeHandle } from "react-resizable-panels";
 import SideMenu from "../Components/main/side-menu-panel/SideMenu";
 import Header from "../Components/main/header-panel/Header";
 import MainLayout from "../Components/main/main-panel/MainLayout";
 import PreviewLayout from "../Components/main/preview-panel/PreviewLayout";
 import Footer from "../Components/main/footer-panel/Footer";
+import { useSelector, useDispatch } from "react-redux";
+import { modalSaveAsOpen, closeModal } from "../Store/Slices/modalSlice";
+import ModalLayout from "../Components/template-layout/ModalLayout";
+import ModalMyLayout from "../Components/auth/ModalMyLayout";
+import { usePage } from "@inertiajs/inertia-react";
+import { toastFire } from "../Components/utils/Toast";
+import { updateLayoutData } from "../Store/Slices/main/layoutSlice";
 
-const Main = () => {
+const Main = ({ data }) => {
+    const dispatch = useDispatch();
+    const { auth, errors, session } = usePage().props;
+    const modalState = useSelector((state) => state.modal);
     const [isDraggingPortrait, setIsDraggingPortrait] = useState(false);
     const [isDragging, setIsDragging] = useState(false);
     const layoutScreenhotRef = useRef(null);
 
+    useEffect(() => {
+        if (session.status == "success") {
+            toastFire(session.message);
+            if (session.data && session.data.hasOwnProperty("uid")) {
+                dispatch(
+                    updateLayoutData({
+                        uid: session.data.uid,
+                    })
+                );
+
+                // var url = window.location.toString();
+                // window.location = url.replace(
+                //     "/create-layout",
+                //     `/create-layout/${session.data.uid}`
+                // );
+                window.history.pushState(
+                    "",
+                    "",
+                    `/create-layout/${session.data.uid}`
+                );
+            }
+        }
+    }, [session]);
+
+    useEffect(() => {
+        if (data) {
+            dispatch(
+                updateLayoutData({
+                    uid: data.uid,
+                    name: data.name,
+                    description: data.description,
+                    preview_image: data.preview_image,
+                    layout_data: JSON.parse(data.layout_data),
+                })
+            );
+        }
+    }, []);
+
     return (
-        <PanelGroup direction="horizontal" className="w-full h-screen">
-            <Panel className="h-screen" minSize={20} defaultSize={40}>
-                <PanelGroup direction="vertical">
-                    <Panel
-                        className="bg-[#1f1f1f] w-full mx-auto "
-                        defaultSize={6}
-                        minSize={6}
-                    >
-                        <Header />
-                    </Panel>
-                    <PanelResizeHandle disabled={true}>
-                        <div className="w-full h-px bg-[#313131]"></div>
-                    </PanelResizeHandle>
-                    <Panel
-                        className="bg-cyan-300"
-                        defaultSize={93}
-                        minSize={93}
-                    >
-                        <PanelGroup
-                            direction="horizontal"
-                            className="w-full h-full"
+        <>
+            <PanelGroup direction="horizontal" className="w-full h-screen">
+                <Panel className="h-screen" minSize={20} defaultSize={40}>
+                    <PanelGroup direction="vertical">
+                        <Panel
+                            className="bg-[#1f1f1f] w-full mx-auto "
+                            defaultSize={6}
+                            minSize={6}
                         >
-                            <Panel
-                                className="bg-[#181818]"
-                                minSize={10}
-                                maxSize={30}
-                                defaultSize={15}
+                            <Header />
+                        </Panel>
+                        <PanelResizeHandle disabled={true}>
+                            <div className="w-full h-px bg-[#313131]"></div>
+                        </PanelResizeHandle>
+                        <Panel
+                            className="bg-cyan-300"
+                            defaultSize={93}
+                            minSize={93}
+                        >
+                            <PanelGroup
+                                direction="horizontal"
+                                className="w-full h-full"
                             >
-                                <SideMenu />
-                            </Panel>
-                            <PanelResizeHandle
-                                onDragging={setIsDraggingPortrait}
-                                className="relative z-[14]"
-                            >
-                                <div className="absolute w-2 h-full bg-transparent group">
-                                    <div
-                                        className="w-px h-full bg-[#313131] group-hover:bg-[#0078d4] group-hover:w-1 data-[is-dragging='true']:bg-[#0078d4] data-[is-dragging='true']:w-1 transition-all"
-                                        data-is-dragging={isDraggingPortrait}
-                                    ></div>
-                                </div>
-                            </PanelResizeHandle>
-                            <Panel defaultSize={85} className="w-max-full">
-                                <PanelGroup direction="vertical">
-                                    <Panel
-                                        className="bg-[#1f1f1f] w-full mx-auto ps-2 pb-1"
-                                        defaultSize={70}
-                                    >
-                                        <MainLayout
-                                            layoutScreenhotRef={
-                                                layoutScreenhotRef
+                                <Panel
+                                    className="bg-[#181818]"
+                                    minSize={10}
+                                    maxSize={30}
+                                    defaultSize={15}
+                                >
+                                    <SideMenu />
+                                </Panel>
+                                <PanelResizeHandle
+                                    onDragging={setIsDraggingPortrait}
+                                    className="relative z-[14]"
+                                >
+                                    <div className="absolute w-2 h-full bg-transparent group">
+                                        <div
+                                            className="w-px h-full bg-[#313131] group-hover:bg-[#0078d4] group-hover:w-1 data-[is-dragging='true']:bg-[#0078d4] data-[is-dragging='true']:w-1 transition-all"
+                                            data-is-dragging={
+                                                isDraggingPortrait
                                             }
-                                        />
-                                    </Panel>
-                                    <PanelResizeHandle
-                                        onDragging={setIsDragging}
-                                        className="relative z-[14]"
-                                        //w-screen border-b-2 hover:border-b-4 hover:border-orange-700 focus:border-orange-700  border-transparent
-                                    >
-                                        <div className="absolute w-full h-2 bg-transparent group">
-                                            <div
-                                                className="w-full h-px bg-[#313131] group-hover:bg-[#0078d4] group-hover:h-1 data-[is-dragging='true']:bg-[#0078d4] data-[is-dragging='true']:h-1 transition-all"
-                                                data-is-dragging={isDragging}
-                                            ></div>
-                                        </div>
-                                    </PanelResizeHandle>
-                                    <Panel
-                                        className="bg-[#181818] w-full mx-auto pb-1"
-                                        minSize={10}
-                                        maxSize={90}
-                                        defaultSize={30}
-                                    >
-                                        <PreviewLayout
-                                            layoutScreenhotRef={
-                                                layoutScreenhotRef
-                                            }
-                                        />
-                                    </Panel>
-                                </PanelGroup>
-                            </Panel>
-                        </PanelGroup>
-                    </Panel>
-                    <PanelResizeHandle disabled={true}>
-                        <div className="w-full h-px bg-[#313131]"></div>
-                    </PanelResizeHandle>
-                    <Panel
-                        className="bg-[#1f1f1f] w-full mx-auto"
-                        defaultSize={3}
-                        minSize={3}
-                    >
-                        <Footer />
-                    </Panel>
-                </PanelGroup>
-            </Panel>
-        </PanelGroup>
+                                        ></div>
+                                    </div>
+                                </PanelResizeHandle>
+                                <Panel defaultSize={85} className="w-max-full">
+                                    <PanelGroup direction="vertical">
+                                        <Panel
+                                            className="bg-[#1f1f1f] w-full mx-auto ps-2 pb-1"
+                                            defaultSize={70}
+                                        >
+                                            <MainLayout
+                                                layoutScreenhotRef={
+                                                    layoutScreenhotRef
+                                                }
+                                            />
+                                        </Panel>
+                                        <PanelResizeHandle
+                                            onDragging={setIsDragging}
+                                            className="relative z-[14]"
+                                            //w-screen border-b-2 hover:border-b-4 hover:border-orange-700 focus:border-orange-700  border-transparent
+                                        >
+                                            <div className="absolute w-full h-2 bg-transparent group">
+                                                <div
+                                                    className="w-full h-px bg-[#313131] group-hover:bg-[#0078d4] group-hover:h-1 data-[is-dragging='true']:bg-[#0078d4] data-[is-dragging='true']:h-1 transition-all"
+                                                    data-is-dragging={
+                                                        isDragging
+                                                    }
+                                                ></div>
+                                            </div>
+                                        </PanelResizeHandle>
+                                        <Panel
+                                            className="bg-[#181818] w-full mx-auto pb-1"
+                                            minSize={10}
+                                            maxSize={90}
+                                            defaultSize={30}
+                                        >
+                                            <PreviewLayout
+                                                layoutScreenhotRef={
+                                                    layoutScreenhotRef
+                                                }
+                                            />
+                                        </Panel>
+                                    </PanelGroup>
+                                </Panel>
+                            </PanelGroup>
+                        </Panel>
+                        <PanelResizeHandle disabled={true}>
+                            <div className="w-full h-px bg-[#313131]"></div>
+                        </PanelResizeHandle>
+                        <Panel
+                            className="bg-[#1f1f1f] w-full mx-auto"
+                            defaultSize={3}
+                            minSize={3}
+                        >
+                            <Footer />
+                        </Panel>
+                    </PanelGroup>
+                </Panel>
+            </PanelGroup>
+
+            <>
+                {/* modal */}
+                <ModalLayout
+                    open={modalState.saveAsModal}
+                    close={() => {
+                        dispatch(closeModal());
+                    }}
+                >
+                    <ModalMyLayout />
+                </ModalLayout>
+            </>
+        </>
     );
 };
 

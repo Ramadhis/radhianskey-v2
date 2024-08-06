@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateLayoutData } from "../../../../Store/Slices/main/layoutSlice";
 
 const LayoutDescForm = () => {
+    const dispatch = useDispatch();
+    const layout = useSelector((state) => state.layout);
     const [layoutExp, setLayoutExp] = useState({
         layoutName: "",
         layoutDesc: "",
@@ -15,11 +19,9 @@ const LayoutDescForm = () => {
                 <input
                     type="text"
                     placeholder="Layout name"
-                    value={layoutExp.layoutName}
+                    value={layout.name}
                     onChange={(e) => {
-                        return setLayoutExp((prev) => {
-                            return { ...prev, layoutName: e.target.value };
-                        });
+                        dispatch(updateLayoutData({ name: e.target.value }));
                     }}
                     className="w-full h-7 bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
                 />
@@ -31,11 +33,11 @@ const LayoutDescForm = () => {
                 <textarea
                     type="text"
                     placeholder="Layout name"
-                    value={layoutExp.layoutDesc}
+                    value={layout.description}
                     onChange={(e) => {
-                        return setLayoutExp((prev) => {
-                            return { ...prev, layoutDesc: e.target.value };
-                        });
+                        dispatch(
+                            updateLayoutData({ description: e.target.value })
+                        );
                     }}
                     className="w-full min-h-16 bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
                 />

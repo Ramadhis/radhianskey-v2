@@ -9,6 +9,7 @@ class LayoutsKey extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'uid',
         'id_user',
         'name',
         'name_slug',

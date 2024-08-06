@@ -23,10 +23,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/create-layout', [LayoutKeyController::class, 'index'])->name('home');
+Route::get('/create-layout', [LayoutKeyController::class, 'index'])->name('create.layout');
+Route::get('/create-layout/{uid}', [LayoutKeyController::class, 'edit'])->name('edit.layout');
 Route::get('/keyboard-test', [KeyboardTestController::class, 'index'])->name('home');
 
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 Route::post('/update-account', [EditAccountController::class, 'update'])->name('account.update')->middleware('auth');
+
+Route::post('/save-as', [LayoutKeyController::class, 'store'])->name('save-as')->middleware('auth');
+Route::post('/save', [LayoutKeyController::class, 'update'])->name('save')->middleware('auth');
