@@ -12,6 +12,7 @@ import ModalMyLayout from "../Components/auth/ModalMyLayout";
 import { usePage } from "@inertiajs/inertia-react";
 import { toastFire } from "../Components/utils/Toast";
 import { updateLayoutData } from "../Store/Slices/main/layoutSlice";
+import startingLayout from "../Store/Slices/format-data/starting-layout";
 
 const Main = ({ data }) => {
     const dispatch = useDispatch();
@@ -24,29 +25,24 @@ const Main = ({ data }) => {
     useEffect(() => {
         if (session.status == "success") {
             toastFire(session.message);
-            if (session.data && session.data.hasOwnProperty("uid")) {
+            if (modalState.saveAsModal == true) {
                 dispatch(
                     updateLayoutData({
-                        uid: session.data.uid,
+                        uid: session.data.uid, //set uid to global state
                     })
                 );
-
-                // var url = window.location.toString();
-                // window.location = url.replace(
-                //     "/create-layout",
-                //     `/create-layout/${session.data.uid}`
-                // );
-                window.history.pushState(
-                    "",
-                    "",
-                    `/create-layout/${session.data.uid}`
-                );
+                dispatch(closeModal());
             }
+        }
+        if (auth.user == null) {
+            dispatch(updateLayoutData({ ...startingLayout }));
+            dispatch(closeModal());
         }
     }, [session]);
 
     useEffect(() => {
-        if (data) {
+        console.log(auth.user);
+        if (data != null && auth.user != null) {
             dispatch(
                 updateLayoutData({
                     uid: data.uid,
@@ -56,6 +52,7 @@ const Main = ({ data }) => {
                     layout_data: JSON.parse(data.layout_data),
                 })
             );
+            dispatch(closeModal());
         }
     }, []);
 

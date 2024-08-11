@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
     saveAsModal: false,
+    myLayoutModal: false,
 };
 
 const modalSlice = createSlice({
@@ -11,11 +12,16 @@ const modalSlice = createSlice({
         modalSaveAsOpen: (state, action) => {
             state.saveAsModal = true;
         },
+        modalMyLayoutOpen: (state, action) => {
+            state.myLayoutModal = true;
+        },
         closeModal: (state, action) => {
             state.saveAsModal = false;
+            state.myLayoutModal = false;
         },
     },
 });
 
-export const { modalSaveAsOpen, closeModal } = modalSlice.actions;
+export const { modalSaveAsOpen, modalMyLayoutOpen, closeModal } =
+    modalSlice.actions;
 export default modalSlice.reducer;

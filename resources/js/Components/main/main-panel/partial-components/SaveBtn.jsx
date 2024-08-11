@@ -10,7 +10,6 @@ import { Inertia } from "@inertiajs/inertia";
 const SaveBtn = ({ saveType, layoutScreenhotRef }) => {
     const dispatch = useDispatch();
     const layout = useSelector((state) => state.layout);
-    const [saveAsModalOpen, setSaveAsModalOpen] = useState(false);
 
     const openSaveAsModal = (e) => {
         e.preventDefault();
@@ -48,10 +47,6 @@ const SaveBtn = ({ saveType, layoutScreenhotRef }) => {
                 return console.error("oops, something went wrong!", error);
             });
     };
-
-    // useEffect(() => {
-    //     console.log(layout);
-    // }, [layout]);
 
     return (
         <>

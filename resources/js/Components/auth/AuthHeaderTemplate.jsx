@@ -9,15 +9,19 @@ import { usePage } from "@inertiajs/inertia-react";
 import { Inertia } from "@inertiajs/inertia";
 import { toastFire } from "../utils/Toast";
 import checkImageExists from "../helpers/checkImageExists";
+import { useDispatch, useSelector } from "react-redux";
+import { closeModal, modalMyLayoutOpen } from "../../Store/Slices/modalSlice";
 
 const AuthHeaderTemplate = () => {
     const loginStatus = false;
+    const dispatch = useDispatch();
+    const modalState = useSelector((state) => state.modal);
     const { auth, errors, session } = usePage().props;
     const [signInModalOpen, setSignInModalOpen] = useState(false);
     const [signUpModalOpen, setSignUpModalOpen] = useState(false);
     const [forgotPasswordModalOpen, setForgotPasswordModalOpen] =
         useState(false);
-    const [myLayoutModalOpen, setMyLayoutModalOpen] = useState(false);
+    // const [myLayoutModalOpen, setMyLayoutModalOpen] = useState(true);
     const [accountSettingModalOpen, setAccountsettingModalOpen] =
         useState(false);
 
@@ -25,7 +29,6 @@ const AuthHeaderTemplate = () => {
         setSignUpModalOpen(false);
         setSignInModalOpen(false);
         setForgotPasswordModalOpen(false);
-        setMyLayoutModalOpen(false);
         setAccountsettingModalOpen(false);
     };
 
@@ -65,12 +68,11 @@ const AuthHeaderTemplate = () => {
     const openMyLayoutModal = (e) => {
         e.preventDefault();
         closeAllModal();
-        return setMyLayoutModalOpen(true);
+        return dispatch(modalMyLayoutOpen(true));
     };
 
     const closeMyLayoutModal = (e) => {
-        e.preventDefault();
-        return setMyLayoutModalOpen(false);
+        return dispatch(closeModal());
     };
 
     const openAccountsettingModal = (e) => {
@@ -116,7 +118,7 @@ const AuthHeaderTemplate = () => {
                                       auth.user.profile_picture
                                     : "/images/profile_picture/default.png"
                             }
-                            className="w-8 h-8 rounded-full inline border-2 object-cover"
+                            className="w-9 h-9 rounded-full inline border-2 object-cover"
                         />
                     </a>
                     <div className="bg-[#1f1f1f] border border-zinc-300  w-36 z-50 absolute top-9 right-5 rounded text-black hidden group-hover:block group-hover:transition">
@@ -182,7 +184,10 @@ const AuthHeaderTemplate = () => {
             >
                 <ModalAccountSetting />
             </ModalLayout>
-            <ModalLayout open={myLayoutModalOpen} close={closeMyLayoutModal}>
+            <ModalLayout
+                open={modalState.myLayoutModal}
+                close={closeMyLayoutModal}
+            >
                 <ModalMyLayout />
             </ModalLayout>
         </>

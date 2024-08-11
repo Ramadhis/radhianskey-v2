@@ -91,7 +91,7 @@ const ModalAccountSetting = () => {
                                       imageUpload.default
                                     : "/images/profile_picture/default.png"
                             }
-                            className="w-32 h-32 rounded-full inline border-4 border-white object-cover"
+                            className="w-40 h-40 rounded-full inline border-4 border-white object-cover"
                             accept="image/*"
                         />
                     ) : null}
@@ -100,7 +100,7 @@ const ModalAccountSetting = () => {
                         onClick={() => {
                             return inputImage.current.click();
                         }}
-                        className="w-32 h-32 absolute overflow-hidden flex items-center justify-center group"
+                        className="w-40 h-40 absolute overflow-hidden flex items-center justify-center group"
                     >
                         <div className="w-full h-full bg-slate-500 rounded-full opacity-0 group-hover:opacity-50 "></div>
                         <div className="opacity-100 absolute font-bold hidden group-hover:block">

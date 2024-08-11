@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Auth;
 use File;
+use DB;
 
 class LayoutKeyController extends Controller
 {
@@ -20,6 +21,20 @@ class LayoutKeyController extends Controller
         $layoutData = LayoutsKey::where('uid',htmlspecialchars($uid))->first();
 
         return inertia('Main',['data' => $layoutData]);
+    }
+
+    public function getListLayout(){
+        try {
+            $list_layout = LayoutsKey::select('uid','name','name_slug',"preview_image",DB::raw("date(updated_at) as updated_date"))
+            ->where('id_user', Auth::user()->id)
+            ->get();
+
+            return response()->json($list_layout);
+        } catch (Throwable $th) {
+            return response()->json([
+                'message' => "error",
+            ],404);
+        }
     }
 
     public function store(Request $req){
@@ -63,9 +78,16 @@ class LayoutKeyController extends Controller
         ]);
 
         if($create){
-            return back()->with(['status' => "success",'message'=>'Save-as success', 'data' => [
-                'uid' => $create->uid
-            ]]);
+            // return back()->with(['status' => "success",'message'=>'Save-as success', 'data' => [
+            //     'uid' => $create->uid
+            // ]]);
+
+            return redirect('/create-layout/'.$create->uid)
+            ->with([
+                'status' => "success",
+                'message'=>'Save-as success',
+                'data' => ['uid' => $create->uid]]
+            );
         }
     }
 
@@ -82,6 +104,7 @@ class LayoutKeyController extends Controller
 
         if($findData){
             $fileName = "";
+            $newFileName = "";
             if ($req->preview_image) {
                 $folderPath = "images/preview_layout/";
                 $folderPathOld = public_path()."/images/preview_layout/";
@@ -98,9 +121,11 @@ class LayoutKeyController extends Controller
                 $imageType = $explodeImage[1];
                 $image_base64 = base64_decode($base64Image[1]);
 
-                $oldFileName = explode(".",$findData->preview_image);
-                $fileName = $oldFileName[0] . '.'.$imageType;
-                $saveFileTo = $folderPath . $fileName;
+
+                // $oldFileName = explode(".",$findData->preview_image);
+                $newFileName = uniqid() . '.'.$imageType;
+                // $fileName = $oldFileName[0] . '.'.$imageType;
+                $saveFileTo = $folderPath . $newFileName;
 
                 //check for directory/folder
                 $directoryPath = public_path().'/images/preview_layout';
@@ -117,7 +142,7 @@ class LayoutKeyController extends Controller
                 'name' => htmlspecialchars($req->name),
                 'name_slug' => Str::slug(htmlspecialchars($req->name)),
                 'description' => htmlspecialchars($req->description),
-                'preview_image' => $fileName,
+                'preview_image' => $newFileName,
                 'layout_data' => json_encode($req->layout_data),
             ]);
 
@@ -129,5 +154,14 @@ class LayoutKeyController extends Controller
                 'message' => 'Update failed',
             ]);
         }
+    }
+
+    public function open(Request $req) {
+        return redirect('create-layout/'.$req->uid)
+            ->with([
+                'status' => "success",
+                'message'=>'Success open layout',
+                'data' => ['uid' => $req->uid]]
+            );
     }
 }
