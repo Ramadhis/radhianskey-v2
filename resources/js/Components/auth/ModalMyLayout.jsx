@@ -7,26 +7,34 @@ import { useDispatch, useSelector } from "react-redux";
 import { Inertia } from "@inertiajs/inertia";
 import axios from "axios";
 import checkImageExists from "../helpers/checkImageExists";
-import { getListLayout } from "../../Store/Slices/main/listLayoutSlice";
+import {
+    deleteLayout,
+    getListLayout,
+} from "../../Store/Slices/main/listLayoutSlice";
 import { closeModal } from "../../Store/Slices/modalSlice";
-import { Link } from "@inertiajs/inertia-react";
+import { Link, usePage } from "@inertiajs/inertia-react";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import SubmitBtnWithLoading from "../utils/SubmitBtnWithLoading";
 
 const ModalMyLayout = () => {
     const dispatch = useDispatch();
+    const { session, errors } = usePage().props;
+    const [buttonSave, setButtonSave] = useState(false);
     const list = useSelector((state) => state.listLayout);
     const layout = useSelector((state) => state.layout);
     const modal = useSelector((state) => state.modal);
+    const [selectedRadioBtn, setSelectedRadioBtn] = useState(0);
 
-    const deleteLayout = () => {
+    const deleteMyLayout = (nameLayout, uid) => {
         return confirmButtonFire(
-            "are you sure want to delete this layout ?",
+            `are you sure want to delete "${nameLayout}" layout ?`,
             () => {
-                console.log("yes");
+                dispatch(deleteLayout(uid));
+                setSelectedRadioBtn(0);
             },
             () => {
-                return console.log("no");
+                return;
             }
         );
     };
@@ -41,15 +49,19 @@ const ModalMyLayout = () => {
     };
     const saveAs = (e) => {
         e.preventDefault();
+        setButtonSave(true);
         Inertia.post("/save-as", layout);
     };
-    const [selectedRadioBtn, setSelectedRadioBtn] = useState(0);
 
     useEffect(() => {
         if (modal.saveAsModal || modal.myLayoutModal) {
             dispatch(getListLayout());
         }
     }, [modal.saveAsModal, modal.myLayoutModal]);
+
+    useEffect(() => {
+        setButtonSave(false);
+    }, [session, errors]);
 
     return (
         <div className="lg:w-[768px] md:w-[768px] w-[320px] text-white z-50">
@@ -121,18 +133,17 @@ const ModalMyLayout = () => {
                                               />
                                               <img
                                                   className="object-contain w-full h-full hover:scale-125 hover:transition-all hover:animate-none hover:duration-150 hover:delay-100"
-                                                  src={
-                                                      checkImageExists(
-                                                          `/images/preview_layout/${val.preview_image}`
-                                                      )
-                                                          ? `/images/preview_layout/${val.preview_image}`
-                                                          : `/images/profile_picture/default.png}`
-                                                  }
+                                                  src={`/images/preview_layout/${val.preview_image}`}
                                               />
                                               <div className="absolute top-0 right-1 invisible group-hover:visible">
                                                   <button
                                                       className="hover:text-red-500 text-[20px]"
-                                                      onClick={deleteLayout}
+                                                      onClick={() => {
+                                                          deleteMyLayout(
+                                                              val.name,
+                                                              val.uid
+                                                          );
+                                                      }}
                                                   >
                                                       <i className="bi bi-trash-fill"></i>
                                                   </button>
@@ -156,31 +167,49 @@ const ModalMyLayout = () => {
             </div>
             <form onSubmit={modal.saveAsModal ? saveAs : open}>
                 {modal.saveAsModal && (
-                    <div className="relative text-md ring-1 rounded-sm focus:outline-none focus:ring-slate-500 focus:ring-1 mt-4">
-                        <label className="inline-block text-[13px] absolute top-[-11px] left-2 bg-[#1f1f1f]">
-                            Layout name
-                        </label>
-                        <input
-                            type="text"
-                            className=" w-full h-9 mt-1 bg-transparent text-sm ring-1 rounded-sm focus:outline-none focus:ring-transparent focus:ring-1 ring-transparent p-0.5 ps-2"
-                            value={layout.name}
-                            onChange={(e) => {
-                                dispatch(
-                                    updateLayoutData({ name: e.target.value })
-                                );
-                            }}
-                            required
-                        />
-                    </div>
+                    <>
+                        <div className="relative text-md ring-1 rounded-sm focus:outline-none focus:ring-slate-500 focus:ring-1 mt-4">
+                            <label className="inline-block text-[13px] absolute top-[-11px] left-2 bg-[#1f1f1f]">
+                                Layout name
+                            </label>
+                            <input
+                                type="text"
+                                className=" w-full h-9 mt-1 bg-transparent text-sm ring-1 rounded-sm focus:outline-none focus:ring-transparent focus:ring-1 ring-transparent p-0.5 ps-2"
+                                value={layout.name}
+                                onChange={(e) => {
+                                    dispatch(
+                                        updateLayoutData({
+                                            name: e.target.value,
+                                        })
+                                    );
+                                }}
+                                max={30}
+                                min={3}
+                                required
+                            />
+                        </div>
+                        {errors.name ? (
+                            <div className="text-red-600 text-sm">
+                                {errors.name}
+                            </div>
+                        ) : null}
+                    </>
                 )}
                 <div className="flex justify-end mt-2">
                     {modal.saveAsModal && (
-                        <button
-                            type="submit"
-                            className="bg-[#2c508a] rounded-sm px-6 py-1 font-semibold text-sm "
-                        >
-                            Save layout
-                        </button>
+                        // <button
+                        //     type="submit"
+                        //     className="bg-[#2c508a] rounded-sm px-6 py-1 font-semibold text-sm "
+                        // >
+                        //     Save layout
+                        // </button>
+                        <SubmitBtnWithLoading
+                            classData={
+                                "bg-[#2c508a] rounded-sm px-6 py-1 font-semibold text-sm "
+                            }
+                            buttonText={"Save layout"}
+                            isLoading={buttonSave}
+                        />
                     )}
                     {modal.myLayoutModal &&
                         !modal.saveAsModal &&

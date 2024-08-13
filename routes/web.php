@@ -35,4 +35,5 @@ Route::post('/update-account', [EditAccountController::class, 'update'])->name('
 Route::post('/save-as', [LayoutKeyController::class, 'store'])->name('save-as')->middleware('auth');
 Route::post('/open-layout', [LayoutKeyController::class, 'open'])->name('open-layout')->middleware('auth');
 Route::post('/save', [LayoutKeyController::class, 'update'])->name('save')->middleware('auth');
-Route::get('/list-layout', [LayoutKeyController::class,'getListLayout'])->name('list.layout')->middleware('auth');
+Route::get('/list-layout', [LayoutKeyController::class,'getListLayout'])->name('layout.list')->middleware('auth');
+Route::delete('/delete-layout/{id}', [LayoutKeyController::class,'deleteLayout'])->name('layout.delete')->middleware('auth');

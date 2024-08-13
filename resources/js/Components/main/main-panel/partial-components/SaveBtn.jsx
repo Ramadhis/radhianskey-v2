@@ -6,13 +6,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { toPng } from "html-to-image";
 import { updateLayoutData } from "../../../../Store/Slices/main/layoutSlice";
 import { Inertia } from "@inertiajs/inertia";
+import { usePage } from "@inertiajs/inertia-react";
+import { toastFireFailed } from "../../../utils/Toast";
 
 const SaveBtn = ({ saveType, layoutScreenhotRef }) => {
+    const { auth, session, errors } = usePage().props;
     const dispatch = useDispatch();
     const layout = useSelector((state) => state.layout);
+    const [buttonSave, setButtonSave] = useState(false);
 
     const openSaveAsModal = (e) => {
         e.preventDefault();
+        if (!auth.user) {
+            return toastFireFailed("failed to save, please sign-in first");
+        }
+
         toPng(layoutScreenhotRef.current, {
             skipFonts: true,
             preferredFontFormat: "woff2",
@@ -30,6 +38,10 @@ const SaveBtn = ({ saveType, layoutScreenhotRef }) => {
 
     const save = (e) => {
         e.preventDefault();
+        if (!auth.user) {
+            return toastFireFailed("failed to save, please sign-in first");
+        }
+        setButtonSave(true);
         toPng(layoutScreenhotRef.current, {
             skipFonts: true,
             preferredFontFormat: "woff2",
@@ -48,6 +60,10 @@ const SaveBtn = ({ saveType, layoutScreenhotRef }) => {
             });
     };
 
+    useEffect(() => {
+        setButtonSave(false);
+    }, [session, errors]);
+
     return (
         <>
             <button
@@ -56,10 +72,22 @@ const SaveBtn = ({ saveType, layoutScreenhotRef }) => {
                         ? save
                         : openSaveAsModal
                 }
-                className="bg-[#2c508a] ms-2 p-1 rounded-sm px-4 text-sm text-white font-medium inline"
+                className={`bg-[#2c508a] ms-2 py-1 rounded-sm px-4 text-sm text-white font-medium inline ${
+                    buttonSave == true ? `bg-blue-300 cursor-not-allowed ` : ``
+                }`}
+                disabled={buttonSave}
             >
-                <i className="bi bi-cloud-check text-[18px] me-1"></i>{" "}
-                {saveType == "save" ? "Save" : "Save as"}
+                {buttonSave ? (
+                    <div className="flex content-center justify-center">
+                        <div className="me-1 w-[15px] h-[15px] border-[4px] border-blue-200 border-t-[4px] border-t-blue-500 rounded-[50%] animate-spin inline-block"></div>
+                        Please wait...{" "}
+                    </div>
+                ) : (
+                    <>
+                        <i className="bi bi-cloud-check text-[14px] me-1"></i>{" "}
+                        {saveType == "save" ? "Save" : "Save as"}
+                    </>
+                )}
             </button>
         </>
     );

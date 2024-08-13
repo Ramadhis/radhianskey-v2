@@ -7,6 +7,7 @@ export const getListLayout = createAsyncThunk(
         const data = await axios
             .get("/list-layout")
             .then((res) => {
+                console.log(res);
                 return res.data;
             })
             .catch((err) => {
@@ -14,6 +15,23 @@ export const getListLayout = createAsyncThunk(
                 return rejectWithValue(err.message);
             });
         return data;
+    }
+);
+
+export const deleteLayout = createAsyncThunk(
+    "layout/deleteLayout",
+    async (uid, { rejectWithValue }) => {
+        const delLayout = await axios
+            .delete(`/delete-layout/${uid}`)
+            .then((res) => {
+                // console.log(res, "ini tes");
+                return { uid: uid };
+            })
+            .catch((err) => {
+                console.log(err.message);
+                return rejectWithValue(err.message);
+            });
+        return delLayout;
     }
 );
 
@@ -27,17 +45,36 @@ const listLayoutSlice = createSlice({
     },
     reducers: {},
     extraReducers: (builder) => {
-        builder.addCase(getListLayout.pending, (state, action) => {
-            state.isLoading = true;
-        }),
-            builder.addCase(getListLayout.fulfilled, (state, action) => {
+        builder
+            .addCase(getListLayout.pending, (state, action) => {
+                state.isLoading = true;
+            })
+            .addCase(getListLayout.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.data = action.payload;
-            }),
-            builder.addCase(getListLayout.rejected, (state, action) => {
+            })
+            .addCase(getListLayout.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isErrors = true;
                 state.message = action.payload;
+            });
+        builder
+            .addCase(deleteLayout.pending, (state, action) => {
+                state.isLoading = true;
+            })
+            .addCase(deleteLayout.fulfilled, (state, action) => {
+                const stateData = [...state.data];
+                const findData = stateData.findIndex((states) => {
+                    return states.uid === action.payload.uid;
+                });
+
+                stateData.splice(findData, 1);
+                state.data = stateData;
+                state.isLoading = false;
+            })
+            .addCase(deleteLayout.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isErrors = true;
             });
     },
 });

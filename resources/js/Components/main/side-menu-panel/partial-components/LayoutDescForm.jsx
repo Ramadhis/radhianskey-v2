@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateLayoutData } from "../../../../Store/Slices/main/layoutSlice";
+import { usePage } from "@inertiajs/inertia-react";
 
 const LayoutDescForm = () => {
     const dispatch = useDispatch();
+    const { errors } = usePage().props;
     const layout = useSelector((state) => state.layout);
     const [layoutExp, setLayoutExp] = useState({
         layoutName: "",
@@ -25,6 +27,9 @@ const LayoutDescForm = () => {
                     }}
                     className="w-full h-7 bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
                 />
+                {errors.name ? (
+                    <div className="text-red-600 text-sm">{errors.name}</div>
+                ) : null}
             </div>
             <div className="w-full mt-1  ">
                 <label className="text-sm whitespace-nowrap text-ellipsis overflow-hidden">

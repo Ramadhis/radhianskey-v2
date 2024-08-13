@@ -2,10 +2,12 @@ import { Inertia } from "@inertiajs/inertia";
 import { usePage } from "@inertiajs/inertia-react";
 import React, { useRef, useState, useEffect } from "react";
 import checkImageExists from "../helpers/checkImageExists";
+import SubmitBtnWithLoading from "../utils/SubmitBtnWithLoading";
 
 const ModalAccountSetting = () => {
-    const { auth, errors } = usePage().props;
+    const { auth, session, errors } = usePage().props;
     const inputImage = useRef(null);
+    const [buttonSubmit, setButtonSubmit] = useState(false);
     const [form, setForm] = useState({
         email: "",
         name: "",
@@ -17,6 +19,7 @@ const ModalAccountSetting = () => {
     });
     const submit = (e) => {
         e.preventDefault();
+        setButtonSubmit(true);
         Inertia.post("/update-account", form, {
             forceFormData: true,
         });
@@ -25,6 +28,10 @@ const ModalAccountSetting = () => {
             return { ...prev };
         });
     };
+
+    useEffect(() => {
+        setButtonSubmit(false);
+    }, [session, errors]);
 
     useEffect(() => {
         if (auth.user) {
@@ -157,12 +164,13 @@ const ModalAccountSetting = () => {
                         ) : null}
                     </div>
                     <div className="w-full mt-5 mb-3">
-                        <button
-                            href="#"
-                            className="bg-[#2c508a] w-full rounded-sm px-6 py-2 font-semibold text-md "
-                        >
-                            Submit change
-                        </button>
+                        <SubmitBtnWithLoading
+                            classData={
+                                "bg-[#2c508a] w-full rounded-sm px-6 py-2 font-semibold text-md "
+                            }
+                            buttonText={"Submit change"}
+                            isLoading={buttonSubmit}
+                        />
                     </div>
                 </div>
             </form>

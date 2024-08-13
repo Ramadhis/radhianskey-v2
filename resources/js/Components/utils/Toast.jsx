@@ -21,3 +21,12 @@ export const toastFire = (title) => {
         color: "#fff",
     });
 };
+
+export const toastFireFailed = (title) => {
+    toast.fire({
+        icon: "error",
+        title: title,
+        background: "#374151",
+        color: "#fff",
+    });
+};

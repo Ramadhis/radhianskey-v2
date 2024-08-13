@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import { usePage } from "@inertiajs/inertia-react";
+import SubmitBtnWithLoading from "../utils/SubmitBtnWithLoading";
 
 const ModalSignUp = ({ openSignIn, openForgotPassword }) => {
-    const { errors } = usePage().props;
+    const { session, errors } = usePage().props;
+    const [buttonSubmit, setButtonSubmit] = useState(false);
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -13,8 +15,13 @@ const ModalSignUp = ({ openSignIn, openForgotPassword }) => {
 
     const submit = (e) => {
         e.preventDefault();
+        setButtonSubmit(true);
         Inertia.post("/register", form);
     };
+
+    useEffect(() => {
+        setButtonSubmit(false);
+    }, [session, errors]);
 
     return (
         <div className="w-[320px] text-white">
@@ -113,12 +120,21 @@ const ModalSignUp = ({ openSignIn, openForgotPassword }) => {
                     ) : null}
                 </div>
                 <div className="w-full mt-5 mb-3">
-                    <button
+                    {/* <button
                         type="submit"
+                        ref={submitBtn}
                         className="bg-[#2c508a] w-full rounded-sm px-6 py-2 font-semibold text-md "
                     >
                         Sign up
-                    </button>
+                    </button> */}
+
+                    <SubmitBtnWithLoading
+                        classData={
+                            "bg-[#2c508a] w-full rounded-sm px-6 py-2 font-semibold text-md"
+                        }
+                        buttonText={"Sign up"}
+                        isLoading={buttonSubmit}
+                    />
                 </div>
                 <a
                     href="#"

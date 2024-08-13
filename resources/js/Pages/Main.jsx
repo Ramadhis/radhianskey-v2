@@ -41,7 +41,7 @@ const Main = ({ data }) => {
     }, [session]);
 
     useEffect(() => {
-        console.log(auth.user);
+        // console.log(auth.user);
         if (data != null && auth.user != null) {
             dispatch(
                 updateLayoutData({

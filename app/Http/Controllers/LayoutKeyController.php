@@ -37,6 +37,28 @@ class LayoutKeyController extends Controller
         }
     }
 
+    public function deleteLayout($id){
+        try {
+            $find = LayoutsKey::where(["uid"=> $id])->first();
+            if($find) {
+                //delete image
+                $folderPath = "images/preview_layout/";
+                $folderPathOld = public_path()."/images/preview_layout/";
+                $file = $folderPathOld.$find->preview_image;
+
+                if(file_exists($file)){
+                    unlink($file);
+                }
+            }
+            $delete = LayoutsKey::where(["uid"=> $id, "id_user" => Auth::user()->id])->delete();
+            return response()->json($delete);
+        } catch (Throwable $th) {
+            return response()->json([
+                'message' => "error",
+            ],404);
+        }
+    }
+
     public function store(Request $req){
         $this->validate($req,[
             'name' => 'required|min:3|max:60',
@@ -44,6 +66,15 @@ class LayoutKeyController extends Controller
             'layout_data'  => 'required',
             'preview_image'  => 'required',
         ]);
+
+        $slug_name = Str::slug(htmlspecialchars(strtolower($req->name)));
+        $find_duplicate_name = LayoutsKey::where(["name_slug"=> $slug_name, "id_user" => Auth::user()->id])->first();
+
+        if($find_duplicate_name){
+            return back()->withErrors([
+                'name' => 'layout name is already in use, try another name',
+            ]);
+        }
 
         $fileName="default.png";
         if ($req->preview_image) {
@@ -71,7 +102,7 @@ class LayoutKeyController extends Controller
             'uid' => Str::random(16),
             'id_user' => Auth::user()->id,
             'name' => htmlspecialchars($req->name),
-            'name_slug' => Str::slug(htmlspecialchars($req->name)),
+            'name_slug' => $slug_name,
             'description' => htmlspecialchars($req->description),
             'preview_image' => $fileName,
             'layout_data' => json_encode($req->layout_data),
@@ -99,6 +130,17 @@ class LayoutKeyController extends Controller
             'layout_data'  => 'required',
             'preview_image'  => 'required',
         ]);
+
+        $slug_name = Str::slug(htmlspecialchars(strtolower($req->name)));
+        $find_duplicate_name = LayoutsKey::where(function($query) use ($slug_name) {
+            $query->where("name_slug",$slug_name)->where("id_user",Auth::user()->id);
+        })->where("uid","!=",$req->uid)->first();
+
+        if($find_duplicate_name){
+            return back()->withErrors([
+                'name' => 'layout name is already in use, try another name',
+            ]);
+        }
 
         $findData = LayoutsKey::where('uid', $req->uid)->first();
 
