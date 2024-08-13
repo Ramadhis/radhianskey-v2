@@ -18,8 +18,7 @@ class LayoutKeyController extends Controller
     }
 
     public function edit($uid) {
-        $layoutData = LayoutsKey::where('uid',htmlspecialchars($uid))->first();
-
+        $layoutData = LayoutsKey::where('uid',htmlspecialchars($uid))->where("id_user",Auth::user()->id)->first();
         return inertia('Main',['data' => $layoutData]);
     }
 
@@ -142,7 +141,7 @@ class LayoutKeyController extends Controller
             ]);
         }
 
-        $findData = LayoutsKey::where('uid', $req->uid)->first();
+        $findData = LayoutsKey::where('uid', $req->uid)->where("id_user",Auth::user()->id)->first();
 
         if($findData){
             $fileName = "";
@@ -194,6 +193,10 @@ class LayoutKeyController extends Controller
 
             return back()->withErrors([
                 'message' => 'Update failed',
+            ]);
+        }else{
+            return back()->withErrors([
+                'message' => 'please use your own layout',
             ]);
         }
     }

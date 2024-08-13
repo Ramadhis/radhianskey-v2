@@ -90,11 +90,19 @@ const KeysForm = () => {
                     className="w-full h-7 bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
                     value={selectionKey.selectedKeyDetail.keycapsSize}
                     onValueChange={(values, sourceInfo) => {
-                        return onChangeFormData(
-                            "keycapsSize",
-                            values.floatValue
-                        );
+                        if (values.floatValue) {
+                            return onChangeFormData(
+                                "keycapsSize",
+                                values.floatValue
+                            );
+                        }
+                        return false;
                     }}
+                    isAllowed={(values) => {
+                        const { floatValue } = values;
+                        return floatValue === undefined || floatValue <= 20;
+                    }}
+                    maxLength={4}
                     // isAllowed={({ floatValue }) => {
                     //     if (floatValue <= 30) {
                     //         return true;

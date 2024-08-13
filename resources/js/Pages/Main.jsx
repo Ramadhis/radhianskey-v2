@@ -10,7 +10,7 @@ import { modalSaveAsOpen, closeModal } from "../Store/Slices/modalSlice";
 import ModalLayout from "../Components/template-layout/ModalLayout";
 import ModalMyLayout from "../Components/auth/ModalMyLayout";
 import { usePage } from "@inertiajs/inertia-react";
-import { toastFire } from "../Components/utils/Toast";
+import { toastFire, toastFireFailed } from "../Components/utils/Toast";
 import { updateLayoutData } from "../Store/Slices/main/layoutSlice";
 import startingLayout from "../Store/Slices/format-data/starting-layout";
 
@@ -39,6 +39,12 @@ const Main = ({ data }) => {
             dispatch(closeModal());
         }
     }, [session]);
+
+    useEffect(() => {
+        if (errors.message) {
+            return toastFireFailed(errors.message);
+        }
+    }, [errors]);
 
     useEffect(() => {
         // console.log(auth.user);
