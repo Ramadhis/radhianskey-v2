@@ -1,12 +1,22 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { addKeys } from "../../../../Store/Slices/main/layoutSlice";
+import { toastFireFailed } from "../../../utils/Toast";
 
 const AddKeys = ({ indexRow }) => {
     const dispatch = useDispatch();
+    const layout = useSelector((state) => state.layout);
 
     const updateAddKeys = () => {
-        return dispatch(addKeys({ indexRow: indexRow }));
+        if (layout.layout_data.layoutData[indexRow].column.length >= 30) {
+            return toastFireFailed(
+                `you have reached the maximum number of key creations on line ${
+                    indexRow + 1
+                }`
+            );
+        } else {
+            return dispatch(addKeys({ indexRow: indexRow }));
+        }
     };
 
     return (

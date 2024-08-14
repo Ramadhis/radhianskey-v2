@@ -50,7 +50,7 @@ const ModalAccountSetting = () => {
     }, [auth]);
 
     return (
-        <div className="lg:w-[320px] md:w-[320px] w-[320px]">
+        <div className="lg:w-[320px] md:w-[320px] w-[320px] text-white">
             <form onSubmit={submit}>
                 <div className="mb-6 semibold text-[20px]">
                     <div>Account setting</div>

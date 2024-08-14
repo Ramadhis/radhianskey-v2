@@ -103,12 +103,6 @@ const KeysForm = () => {
                         return floatValue === undefined || floatValue <= 20;
                     }}
                     maxLength={4}
-                    // isAllowed={({ floatValue }) => {
-                    //     if (floatValue <= 30) {
-                    //         return true;
-                    //     }
-                    //     return false;
-                    // }}
                     allowLeadingZeros
                     readOnly={
                         selectionKey.selectedKey.length < 1 ? true : false

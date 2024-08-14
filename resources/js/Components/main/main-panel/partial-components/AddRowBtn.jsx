@@ -1,14 +1,22 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addRow } from "../../../../Store/Slices/main/layoutSlice";
+import { toastFireFailed } from "../../../utils/Toast";
 
 const AddRowBtn = () => {
     const dispatch = useDispatch();
-    // const layout = useSelector((state) => state.layout);
+    const layout = useSelector((state) => state.layout);
 
     const add = (e) => {
         e.preventDefault();
-        dispatch(addRow());
+
+        if (layout.layout_data.layoutData.length > 20) {
+            return toastFireFailed(
+                "you have reached the maximum number of rows created"
+            );
+        } else {
+            dispatch(addRow());
+        }
     };
 
     return (

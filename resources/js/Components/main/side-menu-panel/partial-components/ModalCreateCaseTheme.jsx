@@ -5,7 +5,8 @@ const ModalCreateCaseTheme = () => {
     const [sketchPickerColor, setSketchPickerColor] = useState("#A8A29E");
     const [radioBtnValue, setRadioBtnValue] = useState("outer_border");
     const [caseThemeData, setCaseThemeData] = useState({
-        name: "",
+        label: "",
+        value: "",
         style: {
             outer_border: "#706662",
             inner_border: "#706662",
@@ -51,10 +52,10 @@ const ModalCreateCaseTheme = () => {
             <div className="w-full mb-2">
                 <input
                     type="text"
-                    value={caseThemeData.name}
+                    value={caseThemeData.label}
                     onChange={(e) => {
                         setCaseThemeData((prev) => {
-                            return { ...prev, name: e.target.value };
+                            return { ...prev, label: e.target.value };
                         });
                     }}
                     placeholder="Theme name...."

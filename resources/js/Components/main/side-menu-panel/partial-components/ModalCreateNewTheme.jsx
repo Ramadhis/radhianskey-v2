@@ -5,7 +5,8 @@ const ModalCreateNewTheme = () => {
     const [radioBtnValue, setRadioBtnValue] = useState("background");
     // AIzaSyDI1zX6JuqVR3bUB99OmVEnI0KLBB1L4AE  google font api token key
     const [colorthemeData, setColorthemeData] = useState({
-        theme: "custom",
+        label: "custom",
+        value: "",
         style: [
             {
                 //layer1 = index 0
@@ -118,8 +119,13 @@ const ModalCreateNewTheme = () => {
     //     }
     // };
 
+    const submitForm = (e) => {
+        e.preventDefault();
+        console.log(colorthemeData);
+    };
+
     return (
-        <>
+        <form onSubmit={submitForm}>
             <div className="semibold text-[20px] text-white">
                 Create new theme
             </div>
@@ -172,7 +178,14 @@ const ModalCreateNewTheme = () => {
                 <input
                     type="text"
                     placeholder="Theme name...."
+                    value={setColorthemeData.label}
+                    onChange={(e) => {
+                        setColorthemeData((prev) => {
+                            return { ...prev, label: e.target.value };
+                        });
+                    }}
                     className="text-center w-full h-7 bg-[#1f1f1f] text-sm ring-1 rounded-sm focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
+                    required
                 />
             </div>
             <div className="flex justify-between mt-3">
@@ -349,14 +362,14 @@ const ModalCreateNewTheme = () => {
                 <hr />
             </div>
             <div className="w-full mt-3 text-right ">
-                <a
-                    href="#"
-                    className="bg-[#2c508a] p-1 rounded-sm px-2 h-4 text-sm font-medium "
+                <button
+                    type="submit"
+                    className="bg-[#2c508a] p-1 rounded-sm px-2 text-sm font-medium "
                 >
                     Save theme
-                </a>
+                </button>
             </div>
-        </>
+        </form>
     );
 };
 

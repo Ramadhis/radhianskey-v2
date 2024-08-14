@@ -3,6 +3,8 @@ import layoutReducer from "./Slices/main/layoutSlice";
 import selectionKeyReducer from "./Slices/main/selectionKeySlice";
 import modalReducer from "./Slices/modalSlice";
 import listLayoutReducer from "./Slices/main/listLayoutSlice";
+import keyThemeReducer from "./Slices/main/keyThemeSlice";
+import caseThemeReducer from "./Slices/main/caseThemeSlice";
 
 export const store = configureStore({
     reducer: {
@@ -10,5 +12,7 @@ export const store = configureStore({
         listLayout: listLayoutReducer,
         selectionKey: selectionKeyReducer,
         modal: modalReducer,
+        keyTheme: keyThemeReducer,
+        caseTheme: caseThemeReducer,
     },
 });
