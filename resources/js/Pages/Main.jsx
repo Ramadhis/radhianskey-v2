@@ -13,8 +13,9 @@ import { usePage } from "@inertiajs/inertia-react";
 import { toastFire, toastFireFailed } from "../Components/utils/Toast";
 import { updateLayoutData } from "../Store/Slices/main/layoutSlice";
 import startingLayout from "../Store/Slices/format-data/starting-layout";
+import { addMultipleKeyTheme } from "../Store/Slices/main/keyThemeSlice";
 
-const Main = ({ data }) => {
+const Main = ({ data, globalKeyTheme }) => {
     const dispatch = useDispatch();
     const { auth, errors, session } = usePage().props;
     const modalState = useSelector((state) => state.modal);
@@ -59,6 +60,11 @@ const Main = ({ data }) => {
                 })
             );
             dispatch(closeModal());
+        }
+        if (globalKeyTheme) {
+            let globalKeyThemes = JSON.parse(globalKeyTheme);
+            console.log(globalKeyThemes);
+            dispatch(addMultipleKeyTheme(globalKeyThemes));
         }
     }, []);
 

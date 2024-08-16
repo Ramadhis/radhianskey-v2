@@ -1,10 +1,22 @@
+import { usePage } from "@inertiajs/inertia-react";
 import React, { useState, useEffect } from "react";
 import { ChromePicker } from "react-color";
-const ModalCreateNewTheme = () => {
+import { v4 } from "uuid";
+import { toastFireFailed } from "../../../utils/Toast";
+import SubmitBtnWithLoading from "../../../utils/SubmitBtnWithLoading";
+import axios from "axios";
+import { Inertia } from "@inertiajs/inertia";
+import { addKeyTheme } from "../../../../Store/Slices/main/keyThemeSlice";
+import { useDispatch } from "react-redux";
+
+const ModalCreateNewTheme = ({ modalCreateNewThemeOpen }) => {
+    const { session, auth, errors } = usePage().props;
+    const dispatch = useDispatch();
     const [selectLayer, setSelectLayer] = useState(2);
     const [radioBtnValue, setRadioBtnValue] = useState("background");
-    // AIzaSyDI1zX6JuqVR3bUB99OmVEnI0KLBB1L4AE  google font api token key
-    const [colorthemeData, setColorthemeData] = useState({
+    const [buttonSubmit, setButtonSubmit] = useState(false);
+    let template = {
+        id: "",
         label: "custom",
         value: "",
         style: [
@@ -33,9 +45,12 @@ const ModalCreateNewTheme = () => {
                 right_border: "#78716C",
             },
         ],
-    });
+    };
+    // AIzaSyDI1zX6JuqVR3bUB99OmVEnI0KLBB1L4AE  google font api token key
+    const [colorthemeData, setColorthemeData] = useState({ ...template });
 
     const [sketchPickerColor, setSketchPickerColor] = useState("#A8A29E");
+
     const fontList = [
         "arial",
         "arial Black",
@@ -58,10 +73,11 @@ const ModalCreateNewTheme = () => {
     const changeColor = (color, event) => {
         setSketchPickerColor(color.hex);
 
-        setColorthemeData((prev) => {
-            prev.style[selectLayer][radioBtnValue] = color.hex;
-            return { ...prev };
-        });
+        const newColorthemeData = JSON.parse(
+            JSON.stringify({ ...colorthemeData })
+        );
+        newColorthemeData.style[selectLayer][radioBtnValue] = color.hex;
+        setColorthemeData(newColorthemeData);
     };
 
     const changeSelectLayer = (e) => {
@@ -77,29 +93,13 @@ const ModalCreateNewTheme = () => {
         }
     };
 
-    const changeTextPlacement = (e) => {
-        setColorthemeData((prev) => {
-            prev.style[0]["textPlacement"] = e.target.value;
-            return { ...prev };
-        });
-    };
-    const changeFontWeight = (e) => {
-        setColorthemeData((prev) => {
-            prev.style[0]["fontWeight"] = e.target.value;
-            return { ...prev };
-        });
-    };
-    const changeFontSize = (e) => {
-        setColorthemeData((prev) => {
-            prev.style[0]["fontSize"] = e.target.value;
-            return { ...prev };
-        });
-    };
-    const changeFontfamily = (e) => {
-        setColorthemeData((prev) => {
-            prev.style[0]["fontFamily"] = e.target.value;
-            return { ...prev };
-        });
+    const changeFont = (columnName, value) => {
+        //change font style and placement
+        const newColorthemeData = JSON.parse(
+            JSON.stringify({ ...colorthemeData })
+        );
+        newColorthemeData.style[0][columnName] = value;
+        setColorthemeData(newColorthemeData);
     };
 
     const changeRadioHexColor = (e) => {
@@ -113,16 +113,51 @@ const ModalCreateNewTheme = () => {
         }
     };
 
-    // const listlayerData = () => {
-    //     for (let dat of object.key(colorthemeData.style[0])) {
-    //         console.log("data", dat);
-    //     }
-    // };
-
-    const submitForm = (e) => {
+    const submitForm = async (e) => {
         e.preventDefault();
-        console.log(colorthemeData);
+        if (!auth.user) {
+            return toastFireFailed("failed to save, please sign-in first");
+        }
+        setButtonSubmit(true);
+
+        let data = await axios
+            .get("/key-theme/")
+            .then((res) => {
+                return JSON.parse(res.data.key_theme_data);
+            })
+            .catch((err) => {
+                console.log(err.message);
+
+                setButtonSubmit(false);
+                toastFireFailed(
+                    `failed to save, try again later, ${err.message}`
+                );
+                return false;
+            });
+
+        if (data) {
+            const keyThemeArr = [...data];
+            let colorThemeDatas = { ...colorthemeData, id: v4() }; //set ID
+            dispatch(addKeyTheme({ themes: colorThemeDatas }));
+            keyThemeArr.push(colorThemeDatas);
+            Inertia.post("key-theme/update", {
+                keyThemeData: keyThemeArr,
+            });
+        }
+        // else {
+        //     toastFireFailed(`failed to save, try again laters`);
+        // }
     };
+
+    useEffect(() => {
+        setButtonSubmit(false);
+    }, [session, errors]);
+
+    useEffect(() => {
+        if (modalCreateNewThemeOpen == true) {
+            setColorthemeData(template);
+        }
+    }, [modalCreateNewThemeOpen]);
 
     return (
         <form onSubmit={submitForm}>
@@ -178,10 +213,17 @@ const ModalCreateNewTheme = () => {
                 <input
                     type="text"
                     placeholder="Theme name...."
-                    value={setColorthemeData.label}
+                    value={colorthemeData.label}
                     onChange={(e) => {
                         setColorthemeData((prev) => {
-                            return { ...prev, label: e.target.value };
+                            return {
+                                ...prev,
+                                label: e.target.value,
+                                value: e.target.value
+                                    .toLowerCase()
+                                    .replace(/ /g, "-")
+                                    .replace(/[^\w-]+/g, ""),
+                            };
                         });
                     }}
                     className="text-center w-full h-7 bg-[#1f1f1f] text-sm ring-1 rounded-sm focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
@@ -243,7 +285,12 @@ const ModalCreateNewTheme = () => {
                                     defaultValue={
                                         colorthemeData.style[0].fontFamily
                                     }
-                                    onChange={changeFontfamily}
+                                    onChange={(e) => {
+                                        changeFont(
+                                            "fontFamily",
+                                            e.target.value
+                                        );
+                                    }}
                                     className="text-black text-[13px] w-full capitalize"
                                 >
                                     {fontList.map((key, index) => {
@@ -264,7 +311,12 @@ const ModalCreateNewTheme = () => {
                                     defaultValue={
                                         colorthemeData.style[0].textPlacement
                                     }
-                                    onChange={changeTextPlacement}
+                                    onChange={(e) => {
+                                        return changeFont(
+                                            "textPlacement",
+                                            e.target.value
+                                        );
+                                    }}
                                     className="text-black text-[13px] w-full"
                                 >
                                     <option value="start-left">Top-Left</option>
@@ -298,9 +350,14 @@ const ModalCreateNewTheme = () => {
                                 <div className="text-[13px]">Font weight</div>
                                 <select
                                     defaultValue={
-                                        colorthemeData.style[0].fontStyle
+                                        colorthemeData.style[0].fontWeight
                                     }
-                                    onChange={changeFontWeight}
+                                    onChange={(e) => {
+                                        return changeFont(
+                                            "fontWeight",
+                                            e.target.value
+                                        );
+                                    }}
                                     className="text-black text-[13px] w-full"
                                 >
                                     <option value="normal">Normal</option>
@@ -313,7 +370,9 @@ const ModalCreateNewTheme = () => {
                                     defaultValue={
                                         colorthemeData.style[0].fontSize
                                     }
-                                    onChange={changeFontSize}
+                                    onChange={(e) => {
+                                        changeFont("fontSize", e.target.value);
+                                    }}
                                     className="text-black text-[13px] w-full"
                                 >
                                     {[...Array(25)].map((key, index) => {
@@ -362,12 +421,13 @@ const ModalCreateNewTheme = () => {
                 <hr />
             </div>
             <div className="w-full mt-3 text-right ">
-                <button
-                    type="submit"
-                    className="bg-[#2c508a] p-1 rounded-sm px-2 text-sm font-medium "
-                >
-                    Save theme
-                </button>
+                <SubmitBtnWithLoading
+                    classData={
+                        "bg-[#2c508a] p-1 rounded-sm px-2 text-sm font-medium "
+                    }
+                    buttonText={"Save theme"}
+                    isLoading={buttonSubmit}
+                />
             </div>
         </form>
     );

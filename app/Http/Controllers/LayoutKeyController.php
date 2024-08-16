@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\LayoutsKey;
+use App\Models\KeyThemeData;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Auth;
@@ -11,15 +12,28 @@ use DB;
 
 class LayoutKeyController extends Controller
 {
+    public function globalKeyTheme(){
+        $get_id_admin = User::select("id")->where('roles', 'admin')->first();
+        if($get_id_admin){
+            return $get_key_theme_global = KeyThemeData::where('id_user',$get_id_admin->id)->first();
+        }
+        return false;
+    }
+
     public function index()
     {
+        $global_key_theme = $this->globalKeyTheme();
         //return view
-        return inertia('Main');
+        return inertia('Main',['globalKeyTheme' => $global_key_theme->key_theme_data]);
     }
 
     public function edit($uid) {
         $layoutData = LayoutsKey::where('uid',htmlspecialchars($uid))->where("id_user",Auth::user()->id)->first();
-        return inertia('Main',['data' => $layoutData]);
+        $global_key_theme = $this->globalKeyTheme();
+        return inertia('Main',[
+            'data' => $layoutData,
+            'globalKeyTheme' => $global_key_theme->key_theme_data
+        ]);
     }
 
     public function getListLayout(){

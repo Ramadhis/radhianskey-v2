@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 use App\Http\Controllers\LayoutKeyController;
 use App\Http\Controllers\KeyboardTestController;
+use App\Http\Controllers\KeyThemeController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\EditAccountController;
@@ -37,3 +38,9 @@ Route::post('/open-layout', [LayoutKeyController::class, 'open'])->name('open-la
 Route::post('/save', [LayoutKeyController::class, 'update'])->name('save')->middleware('auth');
 Route::get('/list-layout', [LayoutKeyController::class,'getListLayout'])->name('layout.list')->middleware('auth');
 Route::delete('/delete-layout/{id}', [LayoutKeyController::class,'deleteLayout'])->name('layout.delete')->middleware('auth');
+
+//keyTheme
+Route::prefix('key-theme')->name('key-theme.')->middleware(['auth'])->group(function(){
+    Route::get('/', [KeyThemeController::class, 'index'])->name('index');
+    Route::post('/update', [KeyThemeController::class, 'update'])->name('index');
+});

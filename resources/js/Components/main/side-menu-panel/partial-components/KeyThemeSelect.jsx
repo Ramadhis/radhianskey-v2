@@ -13,7 +13,7 @@ const KeyThemeSelect = ({
 }) => {
     const [modalCreateNewThemeOpen, setModalCreateNewThemeOpen] =
         useState(false);
-
+    const keyThemeList = useSelector((state) => state.keyTheme);
     const CloseModalCreateNewTheme = () => {
         setModalCreateNewThemeOpen(false);
     };
@@ -238,7 +238,7 @@ const KeyThemeSelect = ({
     return (
         <>
             <Select
-                options={options}
+                options={keyThemeList}
                 styles={customStyleSelect}
                 value={selectedKeyDetail.keycapsTheme}
                 onChange={onChangeSelectTheme}
@@ -249,7 +249,9 @@ const KeyThemeSelect = ({
                 open={modalCreateNewThemeOpen}
                 close={CloseModalCreateNewTheme}
             >
-                <ModalCreateNewTheme />
+                <ModalCreateNewTheme
+                    modalCreateNewThemeOpen={modalCreateNewThemeOpen}
+                />
             </ModalLayout>
         </>
     );

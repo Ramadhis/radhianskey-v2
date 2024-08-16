@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 } from "uuid";
 
 const initialState = [
     {
+        id: v4(),
         label: "Create new theme",
         value: "create-new",
         style: [
@@ -36,8 +38,15 @@ const initialState = [
 const keyThemeSlice = createSlice({
     name: "keyTheme",
     initialState,
-    reducers: {},
+    reducers: {
+        addKeyTheme: (state, action) => {
+            state.push(action.payload.themes);
+        },
+        addMultipleKeyTheme: (state, action) => {
+            state.push(...action.payload);
+        },
+    },
 });
 
-export const {} = keyThemeSlice.actions;
+export const { addKeyTheme, addMultipleKeyTheme } = keyThemeSlice.actions;
 export default keyThemeSlice.reducer;
