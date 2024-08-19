@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from "react";
-import Select from "react-select";
+import AsyncSelect from "react-select";
 import ModalLayout from "../../../template-layout/ModalLayout";
 import ModalCreateNewTheme from "./ModalCreateNewTheme";
 import { customStyleSelect } from "../../../../Styles/customStyleReactSelect";
 import { useSelector, useDispatch } from "react-redux";
+import { usePage } from "@inertiajs/inertia-react";
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
+import CustomOptionKeyTheme from "./partial-components/CustomOptionKeyTheme";
+import axios from "axios";
+import {
+    closeModal,
+    modaCreateNewThemeOpen,
+} from "../../../../Store/Slices/modalSlice";
 
 const KeyThemeSelect = ({
     selectedTheme,
@@ -11,17 +20,21 @@ const KeyThemeSelect = ({
     selectedKey,
     selectedKeyDetail,
 }) => {
+    const dispatch = useDispatch();
     const [modalCreateNewThemeOpen, setModalCreateNewThemeOpen] =
         useState(false);
     const keyThemeList = useSelector((state) => state.keyTheme);
     const CloseModalCreateNewTheme = () => {
         setModalCreateNewThemeOpen(false);
     };
+    const [defaultOption, setDefaultOption] = useState([]);
+    const { auth } = usePage().props;
 
     const options = [
         {
             label: "Create new theme",
             value: "create-new",
+            createdBy: 12,
             style: [
                 {
                     //layer1 = index 0
@@ -49,65 +62,10 @@ const KeyThemeSelect = ({
                 },
             ],
         },
-        // {
-        //     value: "dark-dragon",
-        //     label: (
-        //         <div className="flex justify-between">
-        //             <div className="text-nowrap">dark dragon</div>
-        //             <div>
-        //                 <button
-        //                     onClick={() => {
-        //                         return console.log("edit");
-        //                     }}
-        //                     className="me-2 group"
-        //                 >
-        //                     <i className="bi bi-pencil-square group-hover:text-green-500"></i>
-        //                 </button>
-        //                 <button
-        //                     onClick={() => {
-        //                         return console.log("delete");
-        //                     }}
-        //                     className="group"
-        //                 >
-        //                     <i className="bi bi-trash group-hover:text-red-600"></i>
-        //                 </button>
-        //             </div>
-        //         </div>
-        //     ),
-        // },
-        {
-            label: "Dark dragon",
-            value: "dark-dragon",
-            style: [
-                {
-                    //layer1 = index 0
-                    fontFamily: "times new roman",
-                    fontSize: "15px",
-                    textPlacement: "start-left",
-                    fontColor: "#000",
-                    fontWeight: "normal",
-                },
-                {
-                    //layer2 = index 1
-                    background: "#E7E5E4",
-                    top_border: "#E7E5E4",
-                    bottom_border: "#81716C",
-                    left_border: "#E7E5E4",
-                    right_border: "#81716C",
-                },
-                {
-                    //layer3 = index 2
-                    background: "#A8A29E",
-                    top_border: "#E7E5E4",
-                    bottom_border: "#78716C",
-                    left_border: "#E7E5E4",
-                    right_border: "#78716C",
-                },
-            ],
-        },
         {
             label: "Transparent",
             value: "transparent",
+            createdBy: 13,
             style: [
                 {
                     //layer1 = index 0
@@ -132,42 +90,13 @@ const KeyThemeSelect = ({
                     bottom_border: "transparent",
                     left_border: "transparent",
                     right_border: "transparent",
-                },
-            ],
-        },
-        {
-            label: "Matcha",
-            value: "matcha",
-            style: [
-                {
-                    //layer1 = index 0
-                    fontFamily: "times new roman",
-                    fontSize: "15px",
-                    textPlacement: "start-left",
-                    fontColor: "#000",
-                    fontWeight: "normal",
-                },
-                {
-                    //layer2 = index 1
-                    background: "#E7E5E4",
-                    top_border: "#E7E5E4",
-                    bottom_border: "#81716C",
-                    left_border: "#E7E5E4",
-                    right_border: "#81716C",
-                },
-                {
-                    //layer3 = index 2
-                    background: "#A8A29E",
-                    top_border: "#E7E5E4",
-                    bottom_border: "#78716C",
-                    left_border: "#E7E5E4",
-                    right_border: "#78716C",
                 },
             ],
         },
         {
             label: "Black",
             value: "black",
+            createdBy: 13,
             style: [
                 {
                     //layer1 = index 0
@@ -198,6 +127,7 @@ const KeyThemeSelect = ({
         {
             label: "White",
             value: "white",
+            createdBy: 13,
             style: [
                 {
                     //layer1 = index 0
@@ -229,30 +159,77 @@ const KeyThemeSelect = ({
 
     const onChangeSelectTheme = (val) => {
         if (val.label == "Create new theme") {
-            return setModalCreateNewThemeOpen(true);
+            dispatch(modaCreateNewThemeOpen());
+            // return setModalCreateNewThemeOpen(true);
         } else {
             return onChangeFormData("keycapsTheme", val);
         }
     };
 
+    const loadDefaultKeyTheme = async () => {
+        return await axios
+            .get("/key-theme/get-default-key-theme")
+            .then((res) => {
+                return setDefaultOption(JSON.parse(res.data.key_theme_data));
+            })
+            .catch((err) => {
+                return console.log(err.message);
+            });
+    };
+
+    useEffect(() => {
+        let loadDefault = false;
+        if (auth.user) {
+            if (auth.user.roles != "admin") {
+                loadDefault = true;
+            } else {
+                loadDefault = false;
+            }
+        } else {
+            loadDefault = true;
+        }
+
+        if (loadDefault) {
+            return loadDefaultKeyTheme();
+        }
+    }, [auth.user]);
+
+    const CustomMenu = ({ innerRef, innerProps, isDisabled, children }) => {
+        return (
+            <div
+                {...innerProps}
+                style={{ maxHeight: "200px" }}
+                className="border overflow-auto"
+            >
+                <button
+                    className="bg-[#2c508a] w-full font-semibold text-sm py-1 text-white hover:text-zinc-300"
+                    onClick={() => {
+                        setModalCreateNewThemeOpen(true);
+                    }}
+                >
+                    + Create theme
+                </button>
+                {children}
+            </div>
+        );
+    };
+
     return (
         <>
-            <Select
-                options={keyThemeList}
+            <AsyncSelect
+                // options={defaultOption}
+                // options={keyThemeList}
+                // defaultOptions={defaultOption}
+                options={[...defaultOption, ...keyThemeList]}
                 styles={customStyleSelect}
                 value={selectedKeyDetail.keycapsTheme}
                 onChange={onChangeSelectTheme}
                 isDisabled={selectedKey.length < 1 ? true : false}
+                components={{
+                    Option: CustomOptionKeyTheme,
+                    MenuList: CustomMenu,
+                }}
             />
-
-            <ModalLayout
-                open={modalCreateNewThemeOpen}
-                close={CloseModalCreateNewTheme}
-            >
-                <ModalCreateNewTheme
-                    modalCreateNewThemeOpen={modalCreateNewThemeOpen}
-                />
-            </ModalLayout>
         </>
     );
 };

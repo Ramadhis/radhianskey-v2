@@ -17,12 +17,16 @@ export const customStyleSelect = {
                 : "#1f1f1f",
             backgroundColor: "#1f1f1f",
             color: "white",
-            borderLeft: "1px solid white",
-            borderRight: "1px solid white",
+            // borderLeft: "1px solid white",
+            // borderRight: "1px solid white",
             cursor: isDisabled ? "not-allowed" : "default",
             fontSize: "0.875rem",
         };
     },
+    valueContainer: (provided, state) => ({
+        ...provided,
+        height: "30px",
+    }),
     input: (styles) => ({
         ...styles,
         paddingTop: "1px",
@@ -38,5 +42,24 @@ export const customStyleSelect = {
         ...styles,
         color: "#d4d4d8",
         backgroundColor: "#1f1f1f",
+    }),
+    menuList: (base) => ({
+        ...base,
+        background: "#1f1f1f",
+        border: "solid 1px white",
+        height: "200px",
+
+        // "::-webkit-scrollbar": {
+        //     width: "9px",
+        // },
+        // "::-webkit-scrollbar-track": {
+        //     background: "red",
+        // },
+        // "::-webkit-scrollbar-thumb": {
+        //     background: "#888",
+        // },
+        // "::-webkit-scrollbar-thumb:hover": {
+        //     background: "#555",
+        // },
     }),
 };

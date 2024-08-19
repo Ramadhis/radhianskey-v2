@@ -42,5 +42,7 @@ Route::delete('/delete-layout/{id}', [LayoutKeyController::class,'deleteLayout']
 //keyTheme
 Route::prefix('key-theme')->name('key-theme.')->middleware(['auth'])->group(function(){
     Route::get('/', [KeyThemeController::class, 'index'])->name('index');
-    Route::post('/update', [KeyThemeController::class, 'update'])->name('index');
+    Route::post('/update', [KeyThemeController::class, 'update'])->name('update');
+    Route::get('/key-theme_byId', [KeyThemeController::class, 'getKeyThemeById'])->name('getKeyThemeById');
 });
+Route::get('key-theme/get-default-key-theme', [KeyThemeController::class, 'getDefaultKeyTheme'])->name('getDefaultKeyTheme');

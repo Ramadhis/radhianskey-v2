@@ -1,39 +1,25 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 import { v4 } from "uuid";
 
-const initialState = [
-    {
-        id: v4(),
-        label: "Create new theme",
-        value: "create-new",
-        style: [
-            {
-                //layer1 = index 0
-                fontFamily: "times new roman",
-                fontSize: "15px",
-                textPlacement: "top-left",
-                fontColor: "#000",
-                fontWeight: "normal",
-            },
-            {
-                //layer2 = index 1
-                background: "#E7E5E4",
-                top_border: "#E7E5E4",
-                bottom_border: "#81716C",
-                left_border: "#E7E5E4",
-                right_border: "#81716C",
-            },
-            {
-                //layer3 = index 2
-                background: "#A8A29E",
-                top_border: "#E7E5E4",
-                bottom_border: "#78716C",
-                left_border: "#E7E5E4",
-                right_border: "#78716C",
-            },
-        ],
-    },
-];
+const initialState = [];
+
+export const getListKeyTheme = createAsyncThunk(
+    "key-theme/getListKeyTheme",
+    async (arg, { rejectWithValue }) => {
+        //load private theme
+        const data = await axios
+            .get("/key-theme/key-theme_byId")
+            .then((res) => {
+                return JSON.parse(res.data);
+            })
+            .catch((err) => {
+                console.log(err.message);
+                return rejectWithValue(err.message);
+            });
+        return data;
+    }
+);
 
 const keyThemeSlice = createSlice({
     name: "keyTheme",
@@ -45,8 +31,40 @@ const keyThemeSlice = createSlice({
         addMultipleKeyTheme: (state, action) => {
             state.push(...action.payload);
         },
+        deleteAllTheme: (state, action) => {
+            state.splice(0, state.length);
+        },
+        deleteThemeById: (state, action) => {
+            // const states = [...state];
+            const findState = state.findIndex((val) => {
+                val.id === action.payload.id;
+            });
+            state.splice(findState, 1);
+            // console.log("after update", states);
+            // state = states;
+        },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getListKeyTheme.pending, (state, action) => {
+                // state.isLoading = true;
+            })
+            .addCase(getListKeyTheme.fulfilled, (state, action) => {
+                // state.isLoading = false;
+                state.push(...action.payload);
+            })
+            .addCase(getListKeyTheme.rejected, (state, action) => {
+                // state.isLoading = false;
+                // state.isErrors = true;
+                // state.message = action.payload;
+            });
     },
 });
 
-export const { addKeyTheme, addMultipleKeyTheme } = keyThemeSlice.actions;
+export const {
+    addKeyTheme,
+    addMultipleKeyTheme,
+    deleteAllTheme,
+    deleteThemeById,
+} = keyThemeSlice.actions;
 export default keyThemeSlice.reducer;

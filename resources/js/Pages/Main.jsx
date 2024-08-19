@@ -6,16 +6,25 @@ import MainLayout from "../Components/main/main-panel/MainLayout";
 import PreviewLayout from "../Components/main/preview-panel/PreviewLayout";
 import Footer from "../Components/main/footer-panel/Footer";
 import { useSelector, useDispatch } from "react-redux";
-import { modalSaveAsOpen, closeModal } from "../Store/Slices/modalSlice";
+import {
+    modalSaveAsOpen,
+    modalCreateNewThemeOpen,
+    closeModal,
+} from "../Store/Slices/modalSlice";
 import ModalLayout from "../Components/template-layout/ModalLayout";
 import ModalMyLayout from "../Components/auth/ModalMyLayout";
 import { usePage } from "@inertiajs/inertia-react";
 import { toastFire, toastFireFailed } from "../Components/utils/Toast";
 import { updateLayoutData } from "../Store/Slices/main/layoutSlice";
 import startingLayout from "../Store/Slices/format-data/starting-layout";
-import { addMultipleKeyTheme } from "../Store/Slices/main/keyThemeSlice";
+import {
+    addMultipleKeyTheme,
+    getListKeyTheme,
+    deleteAllTheme,
+} from "../Store/Slices/main/keyThemeSlice";
+import ModalCreateNewTheme from "../Components/main/side-menu-panel/partial-components/ModalCreateNewTheme";
 
-const Main = ({ data, globalKeyTheme }) => {
+const Main = ({ data, globalKeyTheme, privateKeyTheme }) => {
     const dispatch = useDispatch();
     const { auth, errors, session } = usePage().props;
     const modalState = useSelector((state) => state.modal);
@@ -61,12 +70,35 @@ const Main = ({ data, globalKeyTheme }) => {
             );
             dispatch(closeModal());
         }
-        if (globalKeyTheme) {
-            let globalKeyThemes = JSON.parse(globalKeyTheme);
-            console.log(globalKeyThemes);
-            dispatch(addMultipleKeyTheme(globalKeyThemes));
-        }
+
+        // if (globalKeyTheme) {
+        //     let globalKeyThemes = JSON.parse(globalKeyTheme);
+        //     dispatch(addMultipleKeyTheme(globalKeyThemes));
+        //     if (auth.user && auth.user.roles != "admin") {
+        //         dispatch(getListKeyTheme());
+        //     }
+        // }
+
+        // if (privateKeyTheme && auth.user != null) {
+        //     let privateKeyThemes = JSON.parse(privateKeyTheme);
+        //     console.log(privateKeyThemes, "private");
+        //     dispatch(addMultipleKeyTheme(privateKeyThemes));
+        // }
     }, []);
+
+    useEffect(() => {
+        // if (globalKeyTheme) {
+        //     let globalKeyThemes = JSON.parse(globalKeyTheme);
+        //     dispatch(addMultipleKeyTheme(globalKeyThemes));
+        //     if (auth.user && auth.user.roles != "admin") {
+        //         dispatch(getListKeyTheme());
+        //     }
+        // }
+        dispatch(deleteAllTheme());
+        if (auth.user) {
+            dispatch(getListKeyTheme());
+        }
+    }, [auth]);
 
     return (
         <>
@@ -178,6 +210,14 @@ const Main = ({ data, globalKeyTheme }) => {
                     }}
                 >
                     <ModalMyLayout />
+                </ModalLayout>
+                <ModalLayout
+                    open={modalState.createNewThemeModal}
+                    close={closeModal}
+                >
+                    <ModalCreateNewTheme
+                        modalCreateNewThemeOpen={modalState.createNewThemeModal}
+                    />
                 </ModalLayout>
             </>
         </>

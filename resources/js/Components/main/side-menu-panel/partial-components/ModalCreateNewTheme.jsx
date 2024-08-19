@@ -7,7 +7,7 @@ import SubmitBtnWithLoading from "../../../utils/SubmitBtnWithLoading";
 import axios from "axios";
 import { Inertia } from "@inertiajs/inertia";
 import { addKeyTheme } from "../../../../Store/Slices/main/keyThemeSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const ModalCreateNewTheme = ({ modalCreateNewThemeOpen }) => {
     const { session, auth, errors } = usePage().props;
@@ -19,6 +19,7 @@ const ModalCreateNewTheme = ({ modalCreateNewThemeOpen }) => {
         id: "",
         label: "custom",
         value: "",
+        createdBy: auth.user ? auth.user.id : null,
         style: [
             {
                 //layer1 = index 0
@@ -48,8 +49,8 @@ const ModalCreateNewTheme = ({ modalCreateNewThemeOpen }) => {
     };
     // AIzaSyDI1zX6JuqVR3bUB99OmVEnI0KLBB1L4AE  google font api token key
     const [colorthemeData, setColorthemeData] = useState({ ...template });
-
     const [sketchPickerColor, setSketchPickerColor] = useState("#A8A29E");
+    const keyThemeList = useSelector((state) => state.keyTheme);
 
     const fontList = [
         "arial",
@@ -120,23 +121,24 @@ const ModalCreateNewTheme = ({ modalCreateNewThemeOpen }) => {
         }
         setButtonSubmit(true);
 
-        let data = await axios
-            .get("/key-theme/")
-            .then((res) => {
-                return JSON.parse(res.data.key_theme_data);
-            })
-            .catch((err) => {
-                console.log(err.message);
+        // let data = await axios
+        //     .get("/key-theme/")
+        //     .then((res) => {
+        //         console.log(res.data);
+        //         return JSON.parse(res.data);
+        //     })
+        //     .catch((err) => {
+        //         console.log(err.message);
 
-                setButtonSubmit(false);
-                toastFireFailed(
-                    `failed to save, try again later, ${err.message}`
-                );
-                return false;
-            });
+        //         setButtonSubmit(false);
+        //         toastFireFailed(
+        //             `failed to save, try again later, ${err.message}`
+        //         );
+        //         return false;
+        //     });
 
-        if (data) {
-            const keyThemeArr = [...data];
+        if (keyThemeList) {
+            const keyThemeArr = [...keyThemeList];
             let colorThemeDatas = { ...colorthemeData, id: v4() }; //set ID
             dispatch(addKeyTheme({ themes: colorThemeDatas }));
             keyThemeArr.push(colorThemeDatas);
@@ -153,11 +155,11 @@ const ModalCreateNewTheme = ({ modalCreateNewThemeOpen }) => {
         setButtonSubmit(false);
     }, [session, errors]);
 
-    useEffect(() => {
-        if (modalCreateNewThemeOpen == true) {
-            setColorthemeData(template);
-        }
-    }, [modalCreateNewThemeOpen]);
+    // useEffect(() => {
+    //     if (modalCreateNewThemeOpen == true) {
+    //         setColorthemeData(template);
+    //     }
+    // }, [modalCreateNewThemeOpen]);
 
     return (
         <form onSubmit={submitForm}>
