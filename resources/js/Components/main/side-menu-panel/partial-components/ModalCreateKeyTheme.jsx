@@ -9,17 +9,19 @@ import { Inertia } from "@inertiajs/inertia";
 import { addKeyTheme } from "../../../../Store/Slices/main/keyThemeSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const ModalCreateNewTheme = ({ modalCreateNewThemeOpen }) => {
+const ModalCreateKeyTheme = ({ modalCreateNewThemeOpen }) => {
     const { session, auth, errors } = usePage().props;
     const dispatch = useDispatch();
     const [selectLayer, setSelectLayer] = useState(2);
     const [radioBtnValue, setRadioBtnValue] = useState("background");
     const [buttonSubmit, setButtonSubmit] = useState(false);
+    const modal = useSelector((state) => state.modal);
+
     let template = {
         id: "",
         label: "custom",
         value: "",
-        createdBy: auth.user ? auth.user.id : null,
+        createdBy: 0,
         style: [
             {
                 //layer1 = index 0
@@ -47,10 +49,21 @@ const ModalCreateNewTheme = ({ modalCreateNewThemeOpen }) => {
             },
         ],
     };
+    const modalKeyThemeState = JSON.parse(
+        JSON.stringify(useSelector((state) => state.modalKeyTheme))
+    );
     // AIzaSyDI1zX6JuqVR3bUB99OmVEnI0KLBB1L4AE  google font api token key
-    const [colorthemeData, setColorthemeData] = useState({ ...template });
+    const [colorthemeData, setColorthemeData] = useState(template);
     const [sketchPickerColor, setSketchPickerColor] = useState("#A8A29E");
     const keyThemeList = useSelector((state) => state.keyTheme);
+
+    useEffect(() => {
+        if (modal.createNewThemeModal == true) {
+            setColorthemeData((prev) => {
+                return { ...modalKeyThemeState };
+            });
+        }
+    }, [modal.createNewThemeModal]);
 
     const fontList = [
         "arial",
@@ -121,27 +134,28 @@ const ModalCreateNewTheme = ({ modalCreateNewThemeOpen }) => {
         }
         setButtonSubmit(true);
 
-        // let data = await axios
-        //     .get("/key-theme/")
-        //     .then((res) => {
-        //         console.log(res.data);
-        //         return JSON.parse(res.data);
-        //     })
-        //     .catch((err) => {
-        //         console.log(err.message);
-
-        //         setButtonSubmit(false);
-        //         toastFireFailed(
-        //             `failed to save, try again later, ${err.message}`
-        //         );
-        //         return false;
-        //     });
-
         if (keyThemeList) {
             const keyThemeArr = [...keyThemeList];
-            let colorThemeDatas = { ...colorthemeData, id: v4() }; //set ID
+            let findById = keyThemeArr.findIndex((keyThemeArrs) => {
+                return keyThemeArrs.id === colorthemeData.id;
+            });
+
+            let colorThemeDatas = { ...colorthemeData };
+            if (findById > 0) {
+                //update
+                keyThemeArr.splice(findById, 1);
+            } else {
+                //create new id
+                colorThemeDatas = {
+                    ...colorThemeDatas,
+                    id: v4(),
+                    createdBy: auth.user.id,
+                }; //set ID & created by
+            }
+
             dispatch(addKeyTheme({ themes: colorThemeDatas }));
             keyThemeArr.push(colorThemeDatas);
+
             Inertia.post("key-theme/update", {
                 keyThemeData: keyThemeArr,
             });
@@ -155,14 +169,8 @@ const ModalCreateNewTheme = ({ modalCreateNewThemeOpen }) => {
         setButtonSubmit(false);
     }, [session, errors]);
 
-    // useEffect(() => {
-    //     if (modalCreateNewThemeOpen == true) {
-    //         setColorthemeData(template);
-    //     }
-    // }, [modalCreateNewThemeOpen]);
-
     return (
-        <form onSubmit={submitForm}>
+        <form onSubmit={submitForm} className="text-white">
             <div className="semibold text-[20px] text-white">
                 Create new theme
             </div>
@@ -435,4 +443,4 @@ const ModalCreateNewTheme = ({ modalCreateNewThemeOpen }) => {
     );
 };
 
-export default ModalCreateNewTheme;
+export default ModalCreateKeyTheme;

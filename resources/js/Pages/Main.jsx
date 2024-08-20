@@ -6,11 +6,7 @@ import MainLayout from "../Components/main/main-panel/MainLayout";
 import PreviewLayout from "../Components/main/preview-panel/PreviewLayout";
 import Footer from "../Components/main/footer-panel/Footer";
 import { useSelector, useDispatch } from "react-redux";
-import {
-    modalSaveAsOpen,
-    modalCreateNewThemeOpen,
-    closeModal,
-} from "../Store/Slices/modalSlice";
+import { closeModal } from "../Store/Slices/modalSlice";
 import ModalLayout from "../Components/template-layout/ModalLayout";
 import ModalMyLayout from "../Components/auth/ModalMyLayout";
 import { usePage } from "@inertiajs/inertia-react";
@@ -22,7 +18,7 @@ import {
     getListKeyTheme,
     deleteAllTheme,
 } from "../Store/Slices/main/keyThemeSlice";
-import ModalCreateNewTheme from "../Components/main/side-menu-panel/partial-components/ModalCreateNewTheme";
+import ModalCreateKeyTheme from "../Components/main/side-menu-panel/partial-components/ModalCreateKeyTheme";
 
 const Main = ({ data, globalKeyTheme, privateKeyTheme }) => {
     const dispatch = useDispatch();
@@ -41,8 +37,8 @@ const Main = ({ data, globalKeyTheme, privateKeyTheme }) => {
                         uid: session.data.uid, //set uid to global state
                     })
                 );
-                dispatch(closeModal());
             }
+            dispatch(closeModal());
         }
         if (auth.user == null) {
             dispatch(updateLayoutData({ ...startingLayout }));
@@ -213,10 +209,12 @@ const Main = ({ data, globalKeyTheme, privateKeyTheme }) => {
                 </ModalLayout>
                 <ModalLayout
                     open={modalState.createNewThemeModal}
-                    close={closeModal}
+                    close={() => {
+                        dispatch(closeModal());
+                    }}
                 >
-                    <ModalCreateNewTheme
-                        modalCreateNewThemeOpen={modalState.createNewThemeModal}
+                    <ModalCreateKeyTheme
+                    // modalCreateNewThemeOpen={modalState.createNewThemeModal}
                     />
                 </ModalLayout>
             </>

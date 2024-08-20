@@ -1,13 +1,12 @@
 import { usePage } from "@inertiajs/inertia-react";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import confirmButtonFire from "../../../../utils/ConfirmDialog";
 import { Inertia } from "@inertiajs/inertia";
 import { deleteThemeById } from "../../../../../Store/Slices/main/keyThemeSlice";
 import { modalCreateNewThemeOpen } from "../../../../../Store/Slices/modalSlice";
-import { updateKeyThemeModal } from "../../../../../Store/Slices/main/modalKeyThemeSlice";
 
-const CustomOptionKeyTheme = ({
+const CustomOptionCaseTheme = ({
     value,
     label,
     data,
@@ -20,13 +19,10 @@ const CustomOptionKeyTheme = ({
     const { auth } = usePage().props;
     const dispatch = useDispatch();
     const keyThemeList = useSelector((state) => state.keyTheme);
-    const modalKeyTheme = useSelector((state) => state.modalKeyTheme);
 
-    const editTheme = (keyTheme) => {
-        dispatch(updateKeyThemeModal({ keyTheme: { ...keyTheme } }));
-        dispatch(modalCreateNewThemeOpen());
+    const editTheme = () => {
+        return console.log("tes edit");
     };
-
     const deleteTheme = (id, label) => {
         confirmButtonFire(
             `Are you sure want delete "${label}" theme ?`,
@@ -40,12 +36,14 @@ const CustomOptionKeyTheme = ({
                 Inertia.post("key-theme/update", {
                     keyThemeData: keyThemeArr,
                 });
+                return console.log("succcess");
             },
             () => {
-                return false;
+                return console.log("cancel");
             }
         );
         return false;
+        // return console.log("tes delete");
     };
 
     return (
@@ -68,7 +66,7 @@ const CustomOptionKeyTheme = ({
                         className="hover:text-green-500 inline-block pe-1"
                         onClick={(e) => {
                             e.stopPropagation();
-                            return editTheme(data);
+                            // dispatch(modalCreateNewThemeOpen());
                         }}
                     >
                         <i className="bi bi-pencil-square"></i>
@@ -77,7 +75,7 @@ const CustomOptionKeyTheme = ({
                         className="hover:text-red-500 inline-block"
                         onClick={(e) => {
                             e.stopPropagation();
-                            deleteTheme(data.id, label);
+                            // deleteTheme(data.id, label);
                         }}
                     >
                         <i className="bi bi-trash-fill"></i>
@@ -88,4 +86,4 @@ const CustomOptionKeyTheme = ({
     );
 };
 
-export default CustomOptionKeyTheme;
+export default CustomOptionCaseTheme;

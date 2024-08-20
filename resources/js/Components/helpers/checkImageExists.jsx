@@ -3,16 +3,16 @@ const checkImageExists = async (url) => {
     img.src = url;
 
     if (img.complete) {
-        console.log(true);
+        // console.log(true);
         return true;
     } else {
         img.onload = () => {
-            console.log(true);
+            // console.log(true);
             return true;
         };
 
         img.onerror = () => {
-            console.log(false);
+            // console.log(false);
             return false;
         };
     }

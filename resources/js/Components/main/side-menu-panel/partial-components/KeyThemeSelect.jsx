@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AsyncSelect from "react-select";
 import ModalLayout from "../../../template-layout/ModalLayout";
-import ModalCreateNewTheme from "./ModalCreateNewTheme";
+import ModalCreateNewTheme from "./ModalCreateKeyTheme";
 import { customStyleSelect } from "../../../../Styles/customStyleReactSelect";
 import { useSelector, useDispatch } from "react-redux";
 import { usePage } from "@inertiajs/inertia-react";
@@ -9,10 +9,8 @@ import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import CustomOptionKeyTheme from "./partial-components/CustomOptionKeyTheme";
 import axios from "axios";
-import {
-    closeModal,
-    modaCreateNewThemeOpen,
-} from "../../../../Store/Slices/modalSlice";
+import { modalCreateNewThemeOpen } from "../../../../Store/Slices/modalSlice";
+import { setToDefault } from "../../../../Store/Slices/main/modalKeyThemeSlice";
 
 const KeyThemeSelect = ({
     selectedTheme,
@@ -21,12 +19,12 @@ const KeyThemeSelect = ({
     selectedKeyDetail,
 }) => {
     const dispatch = useDispatch();
-    const [modalCreateNewThemeOpen, setModalCreateNewThemeOpen] =
-        useState(false);
+    // const [modalCreateNewThemeOpen, setModalCreateNewThemeOpen] =
+    //     useState(false);
     const keyThemeList = useSelector((state) => state.keyTheme);
-    const CloseModalCreateNewTheme = () => {
-        setModalCreateNewThemeOpen(false);
-    };
+    // const CloseModalCreateNewTheme = () => {
+    //     setModalCreateNewThemeOpen(false);
+    // };
     const [defaultOption, setDefaultOption] = useState([]);
     const { auth } = usePage().props;
 
@@ -159,7 +157,7 @@ const KeyThemeSelect = ({
 
     const onChangeSelectTheme = (val) => {
         if (val.label == "Create new theme") {
-            dispatch(modaCreateNewThemeOpen());
+            dispatch(modalCreateNewThemeOpen());
             // return setModalCreateNewThemeOpen(true);
         } else {
             return onChangeFormData("keycapsTheme", val);
@@ -194,17 +192,26 @@ const KeyThemeSelect = ({
         }
     }, [auth.user]);
 
-    const CustomMenu = ({ innerRef, innerProps, isDisabled, children }) => {
+    const CustomMenuList = ({ innerRef, innerProps, isDisabled, children }) => {
         return (
             <div
                 {...innerProps}
                 style={{ maxHeight: "200px" }}
                 className="border overflow-auto"
             >
+                {children}
+            </div>
+        );
+    };
+
+    const customMenu = ({ innerRef, innerProps, isDisabled, children }) => {
+        return (
+            <div {...innerProps} className="mt-1">
                 <button
-                    className="bg-[#2c508a] w-full font-semibold text-sm py-1 text-white hover:text-zinc-300"
+                    className="bg-[#2c508a] border border-b-0 w-full font-semibold text-sm py-1 text-white hover:text-zinc-300"
                     onClick={() => {
-                        setModalCreateNewThemeOpen(true);
+                        dispatch(setToDefault()); //set modal data to default
+                        dispatch(modalCreateNewThemeOpen());
                     }}
                 >
                     + Create theme
@@ -227,7 +234,8 @@ const KeyThemeSelect = ({
                 isDisabled={selectedKey.length < 1 ? true : false}
                 components={{
                     Option: CustomOptionKeyTheme,
-                    MenuList: CustomMenu,
+                    MenuList: CustomMenuList,
+                    Menu: customMenu,
                 }}
             />
         </>

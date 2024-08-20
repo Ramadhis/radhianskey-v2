@@ -23,7 +23,7 @@ const ContainerBody = ({ id, index, children }) => {
                                                 minWidth: "1000px",
                                                 minHeight: "70px",
                                             }}
-                                            className=" p-2 bg-gray-700 border group hover:border-[#0d6efd] rounded-sm flex flex-shrink-0"
+                                            className=" p-2 bg-gray-700 border group hover:border-[#0078d4] rounded-sm flex flex-shrink-0"
                                         >
                                             {children}
                                             {provided.placeholder}
