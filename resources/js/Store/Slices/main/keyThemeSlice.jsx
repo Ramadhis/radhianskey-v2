@@ -9,7 +9,7 @@ export const getListKeyTheme = createAsyncThunk(
     async (arg, { rejectWithValue }) => {
         //load private theme
         const data = await axios
-            .get("/key-theme/key-theme_byId")
+            .get("/key-theme/key-theme-byId")
             .then((res) => {
                 return JSON.parse(res.data);
             })

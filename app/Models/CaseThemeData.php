@@ -10,6 +10,6 @@ class CaseThemeData extends Model
     use HasFactory;
     protected $fillable = [
         'id_user',
-        'key_theme_data',
+        'case_theme_data',
     ];
 }

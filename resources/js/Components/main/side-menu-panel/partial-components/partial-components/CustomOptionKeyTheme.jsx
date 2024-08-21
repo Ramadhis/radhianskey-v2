@@ -5,7 +5,7 @@ import confirmButtonFire from "../../../../utils/ConfirmDialog";
 import { Inertia } from "@inertiajs/inertia";
 import { deleteThemeById } from "../../../../../Store/Slices/main/keyThemeSlice";
 import { modalCreateNewThemeOpen } from "../../../../../Store/Slices/modalSlice";
-import { updateKeyThemeModal } from "../../../../../Store/Slices/main/modalKeyThemeSlice";
+import { updateKeyThemeModal } from "../../../../../Store/Slices/main/modalKeyThemeDataSlice";
 
 const CustomOptionKeyTheme = ({
     value,

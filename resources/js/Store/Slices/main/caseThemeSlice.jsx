@@ -1,23 +1,67 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-const initialState = [
-    {
-        label: "Create new theme",
-        value: "new",
-        style: {
-            outer_border: "#706662",
-            inner_border: "#706662",
-            outer_background: "#e8c4b8",
-            inner_background: "#332b29",
-        },
-    },
-];
+const initialState = [];
+
+export const getListCaseTheme = createAsyncThunk(
+    "case-theme/getListCaseTheme",
+    async (arg, { rejectWithValue }) => {
+        //load private theme
+        const data = await axios
+            .get("/case-theme/case-theme-byId")
+            .then((res) => {
+                console.log(JSON.parse(res.data));
+                return JSON.parse(res.data);
+            })
+            .catch((err) => {
+                console.log(err.message);
+                return rejectWithValue(err.message);
+            });
+        return data;
+    }
+);
 
 const caseThemeSlice = createSlice({
     name: "caseTheme",
     initialState,
-    reducers: {},
+    reducers: {
+        addCaseTheme: (state, action) => {
+            state.push(action.payload.themes);
+        },
+        addMultipleCaseTheme: (state, action) => {
+            state.push(...action.payload);
+        },
+        deleteAllCaseTheme: (state, action) => {
+            state.splice(0, state.length);
+        },
+        deleteThemeById: (state, action) => {
+            const findState = state.findIndex((val) => {
+                val.id === action.payload.id;
+            });
+            state.splice(findState, 1);
+        },
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(getListCaseTheme.pending, (state, action) => {
+                // state.isLoading = true;
+            })
+            .addCase(getListCaseTheme.fulfilled, (state, action) => {
+                // state.isLoading = false;
+                state.push(...action.payload);
+            })
+            .addCase(getListCaseTheme.rejected, (state, action) => {
+                // state.isLoading = false;
+                // state.isErrors = true;
+                // state.message = action.payload;
+            });
+    },
 });
 
-export const {} = caseThemeSlice.actions;
+export const {
+    addKeyTheme,
+    addMultipleKeyTheme,
+    deleteAllCaseTheme,
+    deleteThemeById,
+} = caseThemeSlice.actions;
 export default caseThemeSlice.reducer;

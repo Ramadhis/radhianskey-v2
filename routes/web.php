@@ -5,6 +5,7 @@ use App\Http\Controllers\MainController;
 use App\Http\Controllers\LayoutKeyController;
 use App\Http\Controllers\KeyboardTestController;
 use App\Http\Controllers\KeyThemeController;
+use App\Http\Controllers\CaseThemeController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\EditAccountController;
@@ -43,6 +44,12 @@ Route::delete('/delete-layout/{id}', [LayoutKeyController::class,'deleteLayout']
 Route::prefix('key-theme')->name('key-theme.')->middleware(['auth'])->group(function(){
     Route::get('/', [KeyThemeController::class, 'index'])->name('index');
     Route::post('/update', [KeyThemeController::class, 'update'])->name('update');
-    Route::get('/key-theme_byId', [KeyThemeController::class, 'getKeyThemeById'])->name('getKeyThemeById');
+    Route::get('/key-theme-byId', [KeyThemeController::class, 'getKeyThemeById'])->name('getKeyThemeById');
 });
 Route::get('key-theme/get-default-key-theme', [KeyThemeController::class, 'getDefaultKeyTheme'])->name('getDefaultKeyTheme');
+
+Route::prefix('case-theme')->name('case-theme.')->middleware(['auth'])->group(function(){
+    Route::get('/case-theme-byId', [CaseThemeController::class, 'getCaseThemeById'])->name('getCaseThemeById');
+    Route::post('/update', [CaseThemeController::class, 'update'])->name('update');
+});
+Route::get('case-theme/get-default-case-theme', [CaseThemeController::class, 'getDefaultCaseTheme'])->name('getDefaultCaseTheme');

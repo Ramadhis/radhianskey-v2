@@ -19,6 +19,11 @@ import {
     deleteAllTheme,
 } from "../Store/Slices/main/keyThemeSlice";
 import ModalCreateKeyTheme from "../Components/main/side-menu-panel/partial-components/ModalCreateKeyTheme";
+import {
+    getListCaseTheme,
+    deleteAllCaseTheme,
+} from "../Store/Slices/main/caseThemeSlice";
+import ModalCreateCaseTheme from "../Components/main/side-menu-panel/partial-components/ModalCreateCaseTheme";
 
 const Main = ({ data, globalKeyTheme, privateKeyTheme }) => {
     const dispatch = useDispatch();
@@ -90,9 +95,11 @@ const Main = ({ data, globalKeyTheme, privateKeyTheme }) => {
         //         dispatch(getListKeyTheme());
         //     }
         // }
-        dispatch(deleteAllTheme());
+        dispatch(deleteAllTheme()); //keyTheme
+        dispatch(deleteAllCaseTheme());
         if (auth.user) {
             dispatch(getListKeyTheme());
+            dispatch(getListCaseTheme());
         }
     }, [auth]);
 
@@ -216,6 +223,15 @@ const Main = ({ data, globalKeyTheme, privateKeyTheme }) => {
                     <ModalCreateKeyTheme
                     // modalCreateNewThemeOpen={modalState.createNewThemeModal}
                     />
+                </ModalLayout>
+
+                <ModalLayout
+                    open={modalState.createCaseThemeModal}
+                    close={() => {
+                        dispatch(closeModal());
+                    }}
+                >
+                    <ModalCreateCaseTheme />
                 </ModalLayout>
             </>
         </>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import ModalLayout from "../../../template-layout/ModalLayout";
 import { customStyleSelect } from "../../../../Styles/customStyleReactSelect";
@@ -6,12 +6,20 @@ import ModalCreateCaseTheme from "./ModalCreateCaseTheme";
 import { useSelector, useDispatch } from "react-redux";
 import { updateCaseTheme } from "../../../../Store/Slices/main/layoutSlice";
 import CustomOptionCaseTheme from "./partial-components/CustomOptionCaseTheme";
+import { usePage } from "@inertiajs/inertia-react";
+import axios from "axios";
+import { modalCreateCaseThemeOpen } from "../../../../Store/Slices/modalSlice";
+import { updateCaseThemeModal } from "../../../../Store/Slices/main/modalCaseThemeDataSlice";
+import { caseThemeTemplate } from "../../../../Store/Slices/format-data/caseThemeTemplate";
 
 const CaseThemeSelect = () => {
     const dispatch = useDispatch();
+    const { auth } = usePage().props;
     const layout = useSelector((state) => state.layout);
     const [modalCreateNewThemeOpen, setModalCreateNewThemeOpen] =
         useState(false);
+    const [defaultOption, setDefaultOption] = useState([]);
+    const caseThemeList = useSelector((state) => state.caseTheme);
 
     const options = [
         {
@@ -45,6 +53,34 @@ const CaseThemeSelect = () => {
         return setModalCreateNewThemeOpen(false);
     };
 
+    const loadDefaultCaseTheme = async () => {
+        return await axios
+            .get("/case-theme/get-default-case-theme")
+            .then((res) => {
+                return setDefaultOption(JSON.parse(res.data.case_theme_data));
+            })
+            .catch((err) => {
+                return console.log(err.message);
+            });
+    };
+
+    useEffect(() => {
+        let loadDefault = false;
+        if (auth.user) {
+            if (auth.user.roles != "admin") {
+                loadDefault = true;
+            } else {
+                loadDefault = false;
+            }
+        } else {
+            loadDefault = true;
+        }
+
+        if (loadDefault) {
+            return loadDefaultCaseTheme();
+        }
+    }, [auth.user]);
+
     const CustomMenuList = ({ innerRef, innerProps, isDisabled, children }) => {
         return (
             <div
@@ -63,8 +99,13 @@ const CaseThemeSelect = () => {
                 <button
                     className="bg-[#2c508a] border border-b-0 w-full font-semibold text-sm py-1 text-white hover:text-zinc-300"
                     onClick={() => {
-                        setModalCreateNewThemeOpen(true);
-                        // dispatch(modalCreateNewThemeOpen());
+                        // setModalCreateNewThemeOpen(true);
+                        dispatch(
+                            updateCaseThemeModal({
+                                caseTheme: caseThemeTemplate,
+                            })
+                        );
+                        dispatch(modalCreateCaseThemeOpen());
                     }}
                 >
                     + Create theme
@@ -76,7 +117,7 @@ const CaseThemeSelect = () => {
     return (
         <>
             <Select
-                options={options}
+                options={[...caseThemeList, ...defaultOption]}
                 styles={customStyleSelect}
                 value={layout.layout_data.caseData.caseTheme}
                 onChange={onChangeSelectTheme}
@@ -86,12 +127,12 @@ const CaseThemeSelect = () => {
                     Menu: customMenu,
                 }}
             />
-            <ModalLayout
+            {/* <ModalLayout
                 open={modalCreateNewThemeOpen}
                 close={CloseModalCreateNewTheme}
             >
                 <ModalCreateCaseTheme />
-            </ModalLayout>
+            </ModalLayout> */}
         </>
     );
 };

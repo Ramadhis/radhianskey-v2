@@ -3,7 +3,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 const initialState = {
     saveAsModal: false,
     myLayoutModal: false,
-    createNewThemeModal: false,
+    createKeyThemeModal: false,
+    createCaseThemeModal: false,
 };
 
 const modalSlice = createSlice({
@@ -17,7 +18,10 @@ const modalSlice = createSlice({
             state.myLayoutModal = true;
         },
         modalCreateNewThemeOpen: (state, action) => {
-            state.createNewThemeModal = true;
+            state.createKeyThemeModal = true;
+        },
+        modalCreateCaseThemeOpen: (state, action) => {
+            state.createCaseThemeModal = true;
         },
         closeModal: (state, action) => {
             Object.keys(state).map((val, index) => {
@@ -34,6 +38,7 @@ export const {
     modalSaveAsOpen,
     modalMyLayoutOpen,
     modalCreateNewThemeOpen,
+    modalCreateCaseThemeOpen,
     closeModal,
 } = modalSlice.actions;
 export default modalSlice.reducer;

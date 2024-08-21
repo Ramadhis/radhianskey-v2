@@ -5,8 +5,8 @@ const initialState = {
     ...keyThemeTemplate,
 };
 
-const modalKeyThemeSlice = createSlice({
-    name: "modalKeyTheme",
+const modalKeyThemeDataSlice = createSlice({
+    name: "modalKeyThemeData",
     initialState,
     reducers: {
         updateKeyThemeModal: (state, action) => {
@@ -18,5 +18,6 @@ const modalKeyThemeSlice = createSlice({
     },
 });
 
-export const { updateKeyThemeModal, setToDefault } = modalKeyThemeSlice.actions;
-export default modalKeyThemeSlice.reducer;
+export const { updateKeyThemeModal, setToDefault } =
+    modalKeyThemeDataSlice.actions;
+export default modalKeyThemeDataSlice.reducer;

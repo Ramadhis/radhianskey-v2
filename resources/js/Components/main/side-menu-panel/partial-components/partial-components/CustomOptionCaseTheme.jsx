@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import confirmButtonFire from "../../../../utils/ConfirmDialog";
 import { Inertia } from "@inertiajs/inertia";
 import { deleteThemeById } from "../../../../../Store/Slices/main/keyThemeSlice";
-import { modalCreateNewThemeOpen } from "../../../../../Store/Slices/modalSlice";
+import { modalCreateCaseThemeOpen } from "../../../../../Store/Slices/modalSlice";
+import { updateCaseThemeModal } from "../../../../../Store/Slices/main/modalCaseThemeDataSlice";
 
 const CustomOptionCaseTheme = ({
     value,
@@ -18,25 +19,29 @@ const CustomOptionCaseTheme = ({
 }) => {
     const { auth } = usePage().props;
     const dispatch = useDispatch();
-    const keyThemeList = useSelector((state) => state.keyTheme);
+    const caseThemeList = useSelector((state) => state.caseTheme);
 
-    const editTheme = () => {
-        return console.log("tes edit");
+    const editTheme = (data) => {
+        dispatch(updateCaseThemeModal({ caseTheme: data }));
+        dispatch(modalCreateCaseThemeOpen());
+        return true;
     };
+
     const deleteTheme = (id, label) => {
         confirmButtonFire(
             `Are you sure want delete "${label}" theme ?`,
             () => {
                 // dispatch(deleteThemeById({ id: id }));
-                const keyThemeArr = [...keyThemeList];
-                const findState = keyThemeArr.findIndex((val) => {
+                const caseThemeArr = [...caseThemeList];
+
+                const findState = caseThemeArr.findIndex((val) => {
                     return val.id === id;
                 });
-                keyThemeArr.splice(findState, 1);
-                Inertia.post("key-theme/update", {
-                    keyThemeData: keyThemeArr,
+                caseThemeArr.splice(findState, 1);
+
+                Inertia.post("/case-theme/update", {
+                    caseThemeData: caseThemeArr,
                 });
-                return console.log("succcess");
             },
             () => {
                 return console.log("cancel");
@@ -66,6 +71,7 @@ const CustomOptionCaseTheme = ({
                         className="hover:text-green-500 inline-block pe-1"
                         onClick={(e) => {
                             e.stopPropagation();
+                            return editTheme(data);
                             // dispatch(modalCreateNewThemeOpen());
                         }}
                     >
@@ -75,7 +81,8 @@ const CustomOptionCaseTheme = ({
                         className="hover:text-red-500 inline-block"
                         onClick={(e) => {
                             e.stopPropagation();
-                            // deleteTheme(data.id, label);
+
+                            deleteTheme(data.id, label);
                         }}
                     >
                         <i className="bi bi-trash-fill"></i>
