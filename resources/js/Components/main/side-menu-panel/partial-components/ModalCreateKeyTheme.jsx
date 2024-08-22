@@ -58,12 +58,12 @@ const ModalCreateKeyTheme = ({ modalCreateNewThemeOpen }) => {
     const keyThemeList = useSelector((state) => state.keyTheme);
 
     useEffect(() => {
-        if (modal.createNewThemeModal == true) {
+        if (modal.createKeyThemeModal == true) {
             setColorthemeData((prev) => {
                 return { ...modalKeyThemeState };
             });
         }
-    }, [modal.createNewThemeModal]);
+    }, [modal.createKeyThemeModal]);
 
     const fontList = [
         "arial",
@@ -156,7 +156,7 @@ const ModalCreateKeyTheme = ({ modalCreateNewThemeOpen }) => {
             dispatch(addKeyTheme({ themes: colorThemeDatas }));
             keyThemeArr.push(colorThemeDatas);
 
-            Inertia.post("key-theme/update", {
+            Inertia.post("/key-theme/update", {
                 keyThemeData: keyThemeArr,
             });
         }

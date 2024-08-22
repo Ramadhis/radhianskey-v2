@@ -6,7 +6,7 @@ import listLayoutReducer from "./Slices/main/listLayoutSlice";
 import keyThemeReducer from "./Slices/main/keyThemeSlice";
 import caseThemeReducer from "./Slices/main/caseThemeSlice";
 import modalKeyThemeDataReducer from "./Slices/main/modalKeyThemeDataSlice";
-import modalCaseThemeDataSlice from "./Slices/main/modalCaseThemeDataSlice";
+import modalCaseThemeDataReducer from "./Slices/main/modalCaseThemeDataSlice";
 
 export const store = configureStore({
     reducer: {
@@ -17,6 +17,6 @@ export const store = configureStore({
         keyTheme: keyThemeReducer,
         caseTheme: caseThemeReducer,
         modalKeyTheme: modalKeyThemeDataReducer,
-        modalCaseTheme: modalCaseThemeDataSlice,
+        modalCaseTheme: modalCaseThemeDataReducer,
     },
 });

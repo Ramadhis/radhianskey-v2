@@ -21,16 +21,6 @@ const ModalCreateCaseTheme = () => {
     const [sketchPickerColor, setSketchPickerColor] = useState(
         modalCaseThemeData.style[radioBtnValue]
     );
-    // const [caseThemeData, setCaseThemeData] = useState({
-    //     label: "",
-    //     value: "",
-    //     style: {
-    //         outer_border: "#706662",
-    //         inner_border: "#706662",
-    //         outer_background: "#e8c4b8",
-    //         inner_background: "#332b29",
-    //     },
-    // });
 
     const changeColor = (color, event) => {
         setSketchPickerColor(color.hex);
@@ -41,10 +31,6 @@ const ModalCreateCaseTheme = () => {
             })
         );
     };
-
-    // useEffect(() => {
-    //     console.log(modalCaseThemeData);
-    // }, [modalCaseThemeData]);
 
     const submitForm = (e) => {
         e.preventDefault();
@@ -72,7 +58,7 @@ const ModalCreateCaseTheme = () => {
 
         caseThemeArr.push(modalCaseThemeDatas);
 
-        Inertia.post("case-theme/update", {
+        Inertia.post("/case-theme/update", {
             caseThemeData: caseThemeArr,
         });
     };

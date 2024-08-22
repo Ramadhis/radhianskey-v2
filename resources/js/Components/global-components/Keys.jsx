@@ -8,7 +8,7 @@ const Keys = ({ keysData, previewMode }) => {
     return (
         <div
             //default 58x58
-            className={`m-[2px] rounded-sm text-black relative inline-block`}
+            className={`rounded-sm text-black relative inline-block scale-[98%]`}
             style={{
                 width: `${keySize}px`,
                 height: "58px",

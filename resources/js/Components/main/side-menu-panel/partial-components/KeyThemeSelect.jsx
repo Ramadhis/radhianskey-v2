@@ -10,7 +10,7 @@ import "simplebar-react/dist/simplebar.min.css";
 import CustomOptionKeyTheme from "./partial-components/CustomOptionKeyTheme";
 import axios from "axios";
 import { modalCreateNewThemeOpen } from "../../../../Store/Slices/modalSlice";
-import { setToDefault } from "../../../../Store/Slices/main/ModalKeyThemeDataSlice";
+import { setToDefault } from "../../../../Store/Slices/main/modalKeyThemeDataSlice";
 
 const KeyThemeSelect = ({
     selectedTheme,

@@ -215,7 +215,7 @@ const Main = ({ data, globalKeyTheme, privateKeyTheme }) => {
                     <ModalMyLayout />
                 </ModalLayout>
                 <ModalLayout
-                    open={modalState.createNewThemeModal}
+                    open={modalState.createKeyThemeModal}
                     close={() => {
                         dispatch(closeModal());
                     }}

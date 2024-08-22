@@ -48,7 +48,7 @@ const ItemColumn = ({ keysData, index }) => {
                                 )
                                     ? `border-white`
                                     : `border-transparent hover:border-white`
-                            }  rounded-md mx-[1px] flex flex-shrink-0`}
+                            }  rounded-md p-[1px] flex flex-shrink-0`}
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
