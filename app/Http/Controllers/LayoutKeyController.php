@@ -38,12 +38,14 @@ class LayoutKeyController extends Controller
     }
 
     public function edit($uid) {
-        $layoutData = LayoutsKey::where('uid',htmlspecialchars($uid))->where("id_user",Auth::user()->id)->first();
-        // $global_key_theme = $this->globalKeyTheme();
-        return inertia('Main',[
-            'data' => $layoutData,
-            // 'globalKeyTheme' => $global_key_theme->key_theme_data
-        ]);
+        try {
+            $layoutData = LayoutsKey::where('uid',htmlspecialchars($uid))->where("id_user",Auth::user()->id)->first();
+            return inertia('Main',[
+                'data' => $layoutData,
+            ]);
+        } catch (\Exception $e) {
+            return abort(404);
+        }
     }
 
     public function getListLayout(){

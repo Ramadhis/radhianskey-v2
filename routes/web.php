@@ -21,13 +21,14 @@ use App\Http\Controllers\Auth\EditAccountController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/create-layout', [LayoutKeyController::class, 'index'])->name('create.layout');
 Route::get('/create-layout/{uid}', [LayoutKeyController::class, 'edit'])->name('edit.layout');
-Route::get('/keyboard-test', [KeyboardTestController::class, 'index'])->name('home');
+Route::get('/', [KeyboardTestController::class, 'index'])->name('home');
+Route::get('/get-layout-test', [KeyboardTestController::class, 'getLayoutTest'])->name('get-layout-test');
 
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 Route::post('/login', [LoginController::class, 'login'])->name('login');

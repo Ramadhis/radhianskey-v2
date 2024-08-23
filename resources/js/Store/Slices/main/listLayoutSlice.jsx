@@ -7,7 +7,6 @@ export const getListLayout = createAsyncThunk(
         const data = await axios
             .get("/list-layout")
             .then((res) => {
-                console.log(res);
                 return res.data;
             })
             .catch((err) => {

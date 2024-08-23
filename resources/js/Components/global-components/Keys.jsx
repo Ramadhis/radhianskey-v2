@@ -75,7 +75,7 @@ const Keys = ({ keysData, previewMode }) => {
                         }}
                     ></div>
                     <div
-                        className={`h-[22px]  absolute top-[-15px]`}
+                        className={`h-[24px]  absolute top-[-16px]`}
                         style={{
                             //default 45x22
                             width: `${58 * keysData.keycapsSize - 13}px`,
@@ -106,7 +106,7 @@ const Keys = ({ keysData, previewMode }) => {
                         }}
                     ></div>
                     <div
-                        className={`w-[22px] h-[45px] mt-[3px]  absolute -top-15 left-[-15px]`}
+                        className={`w-[24px] h-[45px] mt-[3px]  absolute -top-15 left-[-16px]`}
                         style={{
                             background:
                                 keysData.keycapsTheme.style[1]["background"],

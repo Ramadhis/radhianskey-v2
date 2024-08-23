@@ -5,6 +5,7 @@ import Keys from "../../global-components/Keys";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import { toPng } from "html-to-image";
+import LayoutKeys from "../../global-components/LayoutKeys";
 
 const PreviewLayout = ({ layoutScreenhotRef }) => {
     // const listKeysContext = useListKeys();
@@ -31,7 +32,7 @@ const PreviewLayout = ({ layoutScreenhotRef }) => {
 
     return (
         <SimpleBar className="h-full z-10">
-            <div className=" text-sm ps-1 pe-3 pt-3 pb-2 w-full fixed bg-[#181818] z-[1]">
+            <div className=" text-sm ps-1 pe-3 pt-3 w-full fixed bg-[#181818] z-[1]">
                 <div className="ms-3 mt-2 text-zinc-100 font-bold hover:text-zinc-300 inline text-[12px] cursor-pointer">
                     PREVIEW LAYOUT
                 </div>
@@ -42,55 +43,11 @@ const PreviewLayout = ({ layoutScreenhotRef }) => {
                     TAKE SCREENSHOT
                 </div>
             </div>
-            <div className="case flex flex-shrink-0 mt-3">
-                <div ref={layoutScreenhotRef}>
-                    <div
-                        className="rounded-[4px] ms-4 me-4 mt-12 mb-11 p-2 whitespace-nowrap"
-                        style={{
-                            background:
-                                listKeys.layout_data.caseData.caseTheme.style[
-                                    "outer_background"
-                                ],
-                            border: `1px solid ${listKeys.layout_data.caseData.caseTheme.style["outer_border"]}`,
-                        }}
-                    >
-                        <div
-                            className="rounded-[9px] p-3 whitespace-nowrap"
-                            style={{
-                                background:
-                                    listKeys.layout_data.caseData.caseTheme
-                                        .style["inner_background"],
-                                border: `1px solid ${listKeys.layout_data.caseData.caseTheme.style["inner_border"]}`,
-                            }}
-                        >
-                            {listKeys.layout_data.layoutData.map(
-                                (row, index) => {
-                                    return (
-                                        <div
-                                            className="flex flex-shrink-0 whitespace-nowrap min-h-[57px] "
-                                            key={index}
-                                        >
-                                            {row.column.map((col, index2) => {
-                                                return (
-                                                    <div className="hover:scale-[90%] transition-all flex flex-shrink-0">
-                                                        <Keys
-                                                            key={index2}
-                                                            keysData={col}
-                                                            previewMode={true}
-                                                        />
-                                                    </div>
-                                                );
-                                            })}
-                                        </div>
-                                    );
-                                }
-                            )}
-                        </div>
-                    </div>
-                </div>
-                <div className="w-10 text-[#181818]">End layout</div>
-                {/* end layout */}
-            </div>
+            <LayoutKeys
+                layoutScreenhotRef={layoutScreenhotRef}
+                layout_data={listKeys.layout_data}
+                previewMode={true}
+            />
         </SimpleBar>
     );
 };
