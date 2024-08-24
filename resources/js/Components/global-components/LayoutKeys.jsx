@@ -33,7 +33,16 @@ const LayoutKeys = ({ layoutScreenhotRef, layout_data, previewMode }) => {
                                 >
                                     {row.column.map((col, index2) => {
                                         return (
-                                            <div className="hover:scale-[93%] transition-all flex flex-shrink-0">
+                                            <div
+                                                key={index2}
+                                                className={`hover:scale-[93%] ${
+                                                    col.pressedKey == true
+                                                        ? col.keycapsSize < 5
+                                                            ? `scale-[85%]`
+                                                            : `scale-[93%]`
+                                                        : ``
+                                                } transition-all flex flex-shrink-0`}
+                                            >
                                                 <Keys
                                                     key={index2}
                                                     keysData={col}

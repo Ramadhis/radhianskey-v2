@@ -92,6 +92,18 @@ export const onKeyPressCodeList = [
         label: "0 )",
         value: "Digit0",
     },
+    {
+        label: "- _",
+        value: "Minus",
+    },
+    {
+        label: "= +",
+        value: "Equal",
+    },
+    {
+        label: "Backspace",
+        value: "Backspace",
+    },
     //
     {
         label: "Tab",
@@ -138,7 +150,27 @@ export const onKeyPressCodeList = [
         label: "P",
         value: "KeyP",
     },
+    {
+        label: "[ {",
+        value: "BracketLeft",
+    },
+    {
+        label: "] }",
+        value: "BracketRight",
+    },
+    {
+        label: `\\ |`,
+        value: "Backslash",
+    },
     //
+    {
+        label: `\\ |`,
+        value: "Backslash",
+    },
+    {
+        label: `Capslock`,
+        value: "CapsLock",
+    },
     {
         label: "A",
         value: "KeyA",
@@ -231,7 +263,7 @@ export const onKeyPressCodeList = [
     },
     {
         label: "/ ?",
-        value: "KeyM",
+        value: "Slash",
     },
     {
         label: "Right Shift",
@@ -243,7 +275,7 @@ export const onKeyPressCodeList = [
         value: "Escape",
     },
     {
-        label: "Left Crtl",
+        label: "Left Ctrl",
         value: "ControlLeft",
     },
     {
@@ -264,7 +296,7 @@ export const onKeyPressCodeList = [
     },
     {
         label: "Space",
-        value: "SpaceSpace",
+        value: "Space",
     },
     {
         label: "Menu",

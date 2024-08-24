@@ -36,7 +36,13 @@ export const getLayoutTest = createAsyncThunk(
 const layoutTestSlice = createSlice({
     name: "layout-test",
     initialState,
-    reducers: {},
+    reducers: {
+        addPressed: (state, action) => {
+            state.data.layout_data.layoutData[action.payload.indexRow].column[
+                action.payload.indexColumn
+            ].pressedKey = action.payload.pressed;
+        },
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getLayoutTest.pending, (state, action) => {
@@ -54,5 +60,5 @@ const layoutTestSlice = createSlice({
     },
 });
 
-export const {} = layoutTestSlice.actions;
+export const { addPressed } = layoutTestSlice.actions;
 export default layoutTestSlice.reducer;
