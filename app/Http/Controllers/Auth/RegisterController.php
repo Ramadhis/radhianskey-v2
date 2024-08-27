@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use Str;
 
 class RegisterController extends Controller
 {
@@ -21,10 +22,13 @@ class RegisterController extends Controller
         ]);
 
         $emailCheck = User::where(['email' => $req->email])->first();
+        $name_slug = Str::slug(htmlspecialchars(strtolower($req->name)));
+        $name_slug_check = User::where(['name_slug' => $name_slug])->first();
 
-        if(!$emailCheck) {
+        if(!$emailCheck && !$name_slug_check) {
             $create = User::create([
                 'name' => $req->name,
+                'name_slug' => $name_slug,
                 'email' => $req->email,
                 'password' => Hash::make($req->password),
                 'profile_picture' => 'default.png',
@@ -32,9 +36,16 @@ class RegisterController extends Controller
             ]);
 
         }else {
-            return back()->withErrors([
-                'email' => 'email has been used, try another email',
-            ]);
+            if($emailCheck) {
+                return back()->withErrors([
+                    'email' => 'email has been used, try another email',
+                ]);
+            }
+            if($name_slug_check) {
+                return back()->withErrors([
+                    'name' => 'Username has been used, make the name more unique using numbers',
+                ]);
+            }
         }
 
         if($create){

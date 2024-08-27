@@ -75,7 +75,11 @@ const Keys = ({ keysData, previewMode }) => {
                         }}
                     ></div>
                     <div
-                        className={`h-[24px]  absolute top-[-16px]`}
+                        className={`  absolute ${
+                            keysData.pressedKey == true //for connect 2 keys, if scale decrease and increase
+                                ? `h-[33px] top-[-25px]`
+                                : `h-[33px] top-[-23px]`
+                        }`}
                         style={{
                             //default 45x22
                             width: `${58 * keysData.keycapsSize - 13}px`,
@@ -106,7 +110,11 @@ const Keys = ({ keysData, previewMode }) => {
                         }}
                     ></div>
                     <div
-                        className={`w-[24px] h-[45px] mt-[3px]  absolute -top-15 left-[-16px]`}
+                        className={`w-[24px] h-[45px] mt-[3px]  absolute -top-15 ${
+                            keysData.pressedKey == true //for connect 2 keys, if scale decrease and increase
+                                ? `w-[33px] left-[-25px]`
+                                : `w-[33px] left-[-23px]`
+                        }`}
                         style={{
                             background:
                                 keysData.keycapsTheme.style[1]["background"],

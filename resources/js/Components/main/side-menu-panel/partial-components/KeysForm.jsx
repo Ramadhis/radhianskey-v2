@@ -119,7 +119,10 @@ const KeysForm = () => {
                 />
             </div>
             <div className="w-full mt-1">
-                <label className="text-sm">Key connect to top</label>
+                <label className="text-sm">
+                    Key connect to top{" "}
+                    <p className="italic inline-block text-red-600">(*Beta)</p>
+                </label>
                 <Select
                     options={keyConnectOption}
                     styles={customStyleSelect}
@@ -139,7 +142,10 @@ const KeysForm = () => {
                 />
             </div>
             <div className="w-full mt-1">
-                <label className="text-sm">Key connect to left</label>
+                <label className="text-sm">
+                    Key connect to left{" "}
+                    <p className="italic inline-block text-red-600">(*Beta)</p>
+                </label>
                 <Select
                     options={keyConnectOption}
                     styles={customStyleSelect}

@@ -35,6 +35,6 @@ class LoginController extends Controller
 
         auth()->logout();
 
-        return redirect("/create-layout")->with(['status' => "success",'message'=>'Sign-out success']);
+        return redirect("/")->with(['status' => "success",'message'=>'Sign-out success']);
     }
 }

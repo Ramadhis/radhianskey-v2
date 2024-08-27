@@ -15,17 +15,31 @@ class KeyboardTestController extends Controller
         return inertia('KeyboardTest');
     }
 
+    public function keyboardTest($username_slug,$layout_slug){
+        return inertia('KeyboardTest', [
+            'usernameSlug' => $username_slug,
+            'layoutSlug' => $layout_slug
+        ]);
+    }
+
     public function getLayoutTest(Request $req){
         // dd($req->query('uid'));
         try {
             if($req->uid == "default"){
                 $get_id_admin = User::select("id")->where('roles', 'admin')->first();
                 if($get_id_admin){
-                    $get_layout = LayoutsKey::where('id', "134")
-                    ->where('id_user',$get_id_admin->id)
+                    $get_layout = LayoutsKey::where('id_user',$get_id_admin->id)
                     ->first();
                 }
                 return response()->json($get_layout);
+            }else{
+                $find_user = User::select("id")->where('name_slug', $req->usernameSlug)->first();
+                if($find_user){
+                    $get_layout = LayoutsKey::where('name_slug', $req->layoutSlug)
+                    ->where('id_user',$find_user->id)
+                    ->first();
+                    return response()->json($get_layout);
+                }
             }
         } catch (Throwable $th) {
             return response()->json([

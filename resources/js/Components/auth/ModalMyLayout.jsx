@@ -19,7 +19,7 @@ import SubmitBtnWithLoading from "../utils/SubmitBtnWithLoading";
 
 const ModalMyLayout = () => {
     const dispatch = useDispatch();
-    const { session, errors } = usePage().props;
+    const { auth, session, errors } = usePage().props;
     const [buttonSave, setButtonSave] = useState(false);
     const list = useSelector((state) => state.listLayout);
     const layout = useSelector((state) => state.layout);
@@ -215,20 +215,42 @@ const ModalMyLayout = () => {
                         !modal.saveAsModal &&
                         list.data.length > 0 &&
                         selectedRadioBtn != 0 && (
-                            <Link
-                                href={`/create-layout/${selectedRadioBtn}`}
-                                className="bg-[#2c508a] rounded-sm px-6 py-1 font-semibold text-sm "
-                            >
-                                Open layout
-                            </Link>
+                            <>
+                                <Link
+                                    href={`/${auth.user.name_slug}/${
+                                        list.data.find(
+                                            (val) => val.uid == selectedRadioBtn
+                                        ).name_slug
+                                    }`}
+                                    className="bg-[#2c508a] me-2 rounded-sm px-6 py-1 font-semibold text-sm "
+                                >
+                                    <i className="bi bi-play-fill"></i> Run test
+                                </Link>
+                                <Link
+                                    href={`/create-layout/${selectedRadioBtn}`}
+                                    className="bg-[#2c508a] rounded-sm px-6 py-1 font-semibold text-sm "
+                                >
+                                    <i className="bi bi-folder2-open"></i> Open
+                                    layout
+                                </Link>
+                            </>
                         )}
                     {selectedRadioBtn == 0 && !modal.saveAsModal && (
-                        <button
-                            disabled={true}
-                            className="bg-[#596b86] rounded-sm px-6 py-1 font-semibold text-sm cursor-not-allowed"
-                        >
-                            Open layout
-                        </button>
+                        <>
+                            <button
+                                disabled={true}
+                                className="bg-[#596b86] me-2 rounded-sm px-6 py-1 font-semibold text-sm cursor-not-allowed"
+                            >
+                                <i className="bi bi-play-fill"></i> Run test
+                            </button>
+                            <button
+                                disabled={true}
+                                className="bg-[#596b86] rounded-sm px-6 py-1 font-semibold text-sm cursor-not-allowed"
+                            >
+                                <i className="bi bi-folder2-open"></i> Open
+                                layout
+                            </button>
+                        </>
                     )}
                     <button
                         onClick={(e) => {
@@ -237,7 +259,7 @@ const ModalMyLayout = () => {
                         }}
                         className="bg-red-600 ms-2 rounded-sm px-6 py-1  font-semibold text-sm "
                     >
-                        Cancel
+                        <i className="bi bi-x-circle"></i> Cancel
                     </button>
                 </div>
             </form>

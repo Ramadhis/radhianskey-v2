@@ -10,7 +10,7 @@ export const getListCaseTheme = createAsyncThunk(
         const data = await axios
             .get("/case-theme/case-theme-byId")
             .then((res) => {
-                console.log(JSON.parse(res.data));
+                // console.log(JSON.parse(res.data));
                 return JSON.parse(res.data);
             })
             .catch((err) => {

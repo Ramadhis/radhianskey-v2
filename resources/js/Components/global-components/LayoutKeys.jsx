@@ -3,7 +3,7 @@ import Keys from "./Keys";
 
 const LayoutKeys = ({ layoutScreenhotRef, layout_data, previewMode }) => {
     return (
-        <div className="case flex flex-shrink-0 mt-3">
+        <div className="case flex flex-shrink-0">
             <div ref={layoutScreenhotRef}>
                 <div
                     className="rounded-[4px] ms-4 me-4 mt-12 mb-11 p-2 whitespace-nowrap"
@@ -34,7 +34,7 @@ const LayoutKeys = ({ layoutScreenhotRef, layout_data, previewMode }) => {
                                     {row.column.map((col, index2) => {
                                         return (
                                             <div
-                                                key={index2}
+                                                key={col.id}
                                                 className={`hover:scale-[93%] ${
                                                     col.pressedKey == true
                                                         ? col.keycapsSize < 5
@@ -44,7 +44,7 @@ const LayoutKeys = ({ layoutScreenhotRef, layout_data, previewMode }) => {
                                                 } transition-all flex flex-shrink-0`}
                                             >
                                                 <Keys
-                                                    key={index2}
+                                                    key={col.id}
                                                     keysData={col}
                                                     previewMode={previewMode}
                                                 />
