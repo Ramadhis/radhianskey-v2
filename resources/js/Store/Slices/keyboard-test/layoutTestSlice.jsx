@@ -39,15 +39,40 @@ const layoutTestSlice = createSlice({
     reducers: {
         addPressed: (state, action) => {
             //ketika keyboard ditekan, true ketika keydown dan false ketika key up
-            state.data.layout_data.layoutData[action.payload.indexRow].column[
-                action.payload.indexColumn
-            ].pressedKey = action.payload.pressed;
+            // state.data.layout_data.layoutData[action.payload.indexRow].column[
+            //     action.payload.indexColumn
+            // ].pressedKey = action.payload.pressed;
+
+            state.data.layout_data.layoutData.map((element, index) => {
+                if (element.id == action.payload.idRow) {
+                    element.column.map((elements, index2) => {
+                        if (elements.id == action.payload.idCol) {
+                            return (state.data.layout_data.layoutData[
+                                index
+                            ].column[index2].pressedKey =
+                                action.payload.pressed);
+                        }
+                    });
+                }
+            });
         },
         addPressedStatus: (state, action) => {
             //status bahwa key berhasil di tekan, akan bernilai true
-            state.data.layout_data.layoutData[action.payload.indexRow].column[
-                action.payload.indexColumn
-            ].pressedStatus = true;
+            // state.data.layout_data.layoutData[action.payload.indexRow].column[
+            //     action.payload.indexColumn
+            // ].pressedStatus = true;
+
+            state.data.layout_data.layoutData.map((element, index) => {
+                if (element.id == action.payload.idRow) {
+                    element.column.map((elements, index2) => {
+                        if (elements.id == action.payload.idCol) {
+                            return (state.data.layout_data.layoutData[
+                                index
+                            ].column[index2].pressedStatus = true);
+                        }
+                    });
+                }
+            });
         },
         reset: (state, action) => {
             state.data.layout_data.layoutData.forEach(
@@ -68,6 +93,7 @@ const layoutTestSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getLayoutTest.pending, (state, action) => {
+                state.data = null;
                 state.isLoading = true;
             })
             .addCase(getLayoutTest.fulfilled, (state, action) => {

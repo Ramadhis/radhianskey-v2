@@ -2,6 +2,10 @@ import React, { useEffect } from "react";
 import Keys from "./Keys";
 
 const LayoutKeys = ({ layoutScreenhotRef, layout_data, previewMode }) => {
+    useEffect(() => {
+        console.log("update");
+    }, []);
+
     return (
         <div className="case flex flex-shrink-0">
             <div ref={layoutScreenhotRef}>
@@ -29,7 +33,7 @@ const LayoutKeys = ({ layoutScreenhotRef, layout_data, previewMode }) => {
                             return (
                                 <div
                                     className="flex flex-shrink-0 whitespace-nowrap min-h-[57px] "
-                                    key={index}
+                                    key={row.id}
                                 >
                                     {row.column.map((col, index2) => {
                                         return (

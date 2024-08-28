@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import AuthHeaderTemplate from "../Components/auth/AuthHeaderTemplate";
 import {
     addPressed,
     addPressedStatus,
@@ -15,6 +14,7 @@ import StatisticLayout from "../Components/keyboard-test/StatisticLayout";
 import { Link, usePage } from "@inertiajs/inertia-react";
 import { toastFireFailed } from "../Components/utils/Toast";
 import { closeModal, modalMyLayoutOpen } from "../Store/Slices/modalSlice";
+import Header from "../Components/global-components/Header";
 
 const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
     // const loginStatus = false;
@@ -24,25 +24,31 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
     const layoutScreenhotRef = useRef(null);
     const [menu, setMenu] = useState("layout-test");
 
-    const pressedControl = (typeKeyPress, code, pressed) => {
-        const layoutData = JSON.parse(
-            JSON.stringify(layouts.data.layout_data.layoutData)
-        );
-        layoutData.forEach((element, index) => {
-            element.column.forEach((elements, index2) => {
+    const pressedControl = (typeKeyPress, code, pressed, layout) => {
+        // const layoutData = JSON.parse(
+        //     JSON.stringify(layouts.data.layout_data.layoutData)
+        // );
+        layout.data.layout_data.layoutData.map((element, index) => {
+            element.column.map((elements, index2) => {
                 if (elements.onKeyPress.value == code) {
                     dispatch(
                         addPressed({
-                            indexRow: index,
-                            indexColumn: index2,
+                            // indexRow: index,
+                            // indexColumn: index2,
+
                             pressed: pressed,
+                            idRow: element.id,
+                            idCol: elements.id,
                         })
                     );
                     if (typeKeyPress == "keyUp") {
                         dispatch(
                             addPressedStatus({
-                                indexRow: index,
-                                indexColumn: index2,
+                                // indexRow: index,
+                                // indexColumn: index2,
+
+                                idRow: element.id,
+                                idCol: elements.id,
                             })
                         );
                     }
@@ -114,13 +120,13 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
                 break;
         }
         // console.log(`down ${e.code}`);
-        pressedControl("keyDown", e.code, true);
+        pressedControl("keyDown", e.code, true, layouts);
     };
 
     const keyUpPressed = (e) => {
         e.preventDefault();
         // console.log(`up ${e.code}`);
-        pressedControl("keyUp", e.code, false);
+        pressedControl("keyUp", e.code, false, layouts);
     };
 
     const myLayoutMenu = () => {
@@ -134,12 +140,15 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
 
     useEffect(() => {
         if (usernameSlug != null && layoutSlug !== null) {
-            dispatch(resetToDefault());
+            // console.log("UPDATE STATE");
+            // dispatch(resetToDefault());
             dispatch(getLayoutTest({ usernameSlug, layoutSlug }));
-            console.log(layouts, "dats");
+            // console.log(layouts, "dats");
         } else {
+            // dispatch(resetToDefault());
             dispatch(getLayoutTest({ uid: "default" }));
         }
+        // layouts = useSelector((state) => state.layoutTest);
     }, []);
 
     useEffect(() => {
@@ -163,27 +172,10 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
 
     return (
         <div>
-            <div className="Header flex justify-between p-2">
-                <div className="flex grow-0 items-center">
-                    <div className="text-[25px] font-bold text-white">
-                        Radhianskey
-                    </div>
-                    <Link
-                        href={"/create-layout"}
-                        className="group text-zinc-300 font-semibold hover:text-white cursor-pointer transition-all text-[17px] ms-5 me-1"
-                    >
-                        Create-layout
-                        <div className="h-0.5 bg-[#0d6efd] w-0 group-hover:w-full transition-all duration-300 rounded-md"></div>
-                    </Link>
-                    {/* <div className="text-white text-[17px] mx-1">menu 2</div> */}
-                </div>
-                <div className="">
-                    <AuthHeaderTemplate />
-                </div>
-            </div>
+            <Header />
             <div className="container mx-auto px-1">
                 <div className="w-full body flex justify-center mt-6 z-10 opacity-40 hover:opacity-90 transition-all">
-                    <nav className="text-[15px] w-[600px] bg-[#181818] shadow-lg border border-[#313131] rounded-md px-5 py-2 flex justify-around">
+                    <nav className="text-[15px] font-semibold w-[600px] bg-[#181818] shadow-lg border border-[#313131] rounded-md px-5 py-2 flex justify-around">
                         <div
                             className="text-white group hover:text-red-600 font-bold cursor-pointer transition delay-75"
                             onClick={() => {
@@ -284,13 +276,29 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
                             layouts.data != null ? (
                                 <>
                                     {menu == "layout-test" ? (
-                                        <LayoutKeys
-                                            layoutScreenhotRef={null}
-                                            layout_data={
-                                                layouts.data.layout_data
-                                            }
-                                            previewMode={true}
-                                        />
+                                        <>
+                                            <LayoutKeys
+                                                layoutScreenhotRef={null}
+                                                layout_data={
+                                                    layouts.data.layout_data
+                                                }
+                                                previewMode={true}
+                                            />
+                                            <div className="relative">
+                                                <div className="absolute -bottom-[260px] scale-y-[40%] scale-x-[40%]">
+                                                    <SkeletonLayout
+                                                        layoutScreenhotRef={
+                                                            null
+                                                        }
+                                                        layout_data={
+                                                            layouts.data
+                                                                .layout_data
+                                                        }
+                                                        previewMode={true}
+                                                    />
+                                                </div>
+                                            </div>
+                                        </>
                                     ) : null}
 
                                     {menu == "skeleton-layout" ? (

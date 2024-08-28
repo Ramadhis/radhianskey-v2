@@ -136,25 +136,27 @@ const ModalCreateKeyTheme = ({ modalCreateNewThemeOpen }) => {
 
         if (keyThemeList) {
             const keyThemeArr = [...keyThemeList];
-            let findById = keyThemeArr.findIndex((keyThemeArrs) => {
-                return keyThemeArrs.id === colorthemeData.id;
-            });
 
             let colorThemeDatas = { ...colorthemeData };
-            if (findById > 0) {
+            let findById = keyThemeArr.findIndex((keyThemeArrs) => {
+                return keyThemeArrs.id == colorThemeDatas.id;
+            });
+
+            // return console.log(findById);
+
+            if (findById > -1) {
                 //update
                 keyThemeArr.splice(findById, 1);
-            } else {
-                //create new id
-                colorThemeDatas = {
-                    ...colorThemeDatas,
-                    id: v4(),
-                    createdBy: auth.user.id,
-                }; //set ID & created by
             }
+            //create new id
+            const newColorThemeDatas = {
+                ...colorThemeDatas,
+                id: v4(),
+                createdBy: auth.user.id,
+            }; //set ID & created by
 
-            dispatch(addKeyTheme({ themes: colorThemeDatas }));
-            keyThemeArr.push(colorThemeDatas);
+            dispatch(addKeyTheme({ themes: newColorThemeDatas }));
+            keyThemeArr.push(newColorThemeDatas);
 
             Inertia.post("/key-theme/update", {
                 keyThemeData: keyThemeArr,
@@ -168,6 +170,10 @@ const ModalCreateKeyTheme = ({ modalCreateNewThemeOpen }) => {
     useEffect(() => {
         setButtonSubmit(false);
     }, [session, errors]);
+
+    useEffect(() => {
+        console.log(colorthemeData);
+    }, [colorthemeData]);
 
     return (
         <form onSubmit={submitForm} className="text-white">

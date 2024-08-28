@@ -27,11 +27,12 @@ class KeyThemeController extends Controller
             if($get_id_admin){
                 return $get_key_theme_default = KeyThemeData::where('id_user',$get_id_admin->id)->first();
             }
+
             return response()->json($get_key_theme_default->key_theme_data);
         } catch (Throwable $th) {
             return response()->json([
                 'message' => $th->getMessage(),
-            ],$th->getCode());
+            ]);
         }
     }
 

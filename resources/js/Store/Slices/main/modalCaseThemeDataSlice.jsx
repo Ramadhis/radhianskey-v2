@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { caseThemeTemplate } from "../format-data/caseThemeTemplate";
 
 const initialState = {
+    id: null,
     label: "Yellow theme",
     value: "dark",
     createdBy: 12,

@@ -39,24 +39,28 @@ const ModalCreateCaseTheme = () => {
         }
         setButtonSubmit(true);
         const caseThemeArr = [...caseThemeState];
-        let findById = caseThemeArr.findIndex((caseThemeArrs) => {
-            return caseThemeArrs.id == modalCaseThemeData.id;
-        });
 
         let modalCaseThemeDatas = { ...modalCaseThemeData };
-        if (findById > 0) {
+
+        let findById = caseThemeArr.findIndex((caseThemeArrs) => {
+            return caseThemeArrs.id == modalCaseThemeDatas.id;
+        });
+
+        // return console.log(findById);
+
+        if (findById > -1) {
             //update
             caseThemeArr.splice(findById, 1);
-        } else {
-            //create new id
-            modalCaseThemeDatas = {
-                ...modalCaseThemeData,
-                id: v4(),
-                createdBy: auth.user.id,
-            }; //set ID & created by
         }
 
-        caseThemeArr.push(modalCaseThemeDatas);
+        //create new id
+        const newModalCaseThemeDatas = {
+            ...modalCaseThemeDatas,
+            id: v4(),
+            createdBy: auth.user.id,
+        }; //set ID & created by
+
+        caseThemeArr.push(newModalCaseThemeDatas);
 
         Inertia.post("/case-theme/update", {
             caseThemeData: caseThemeArr,
