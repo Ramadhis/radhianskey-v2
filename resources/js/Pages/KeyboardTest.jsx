@@ -15,6 +15,8 @@ import { Link, usePage } from "@inertiajs/inertia-react";
 import { toastFireFailed } from "../Components/utils/Toast";
 import { closeModal, modalMyLayoutOpen } from "../Store/Slices/modalSlice";
 import Header from "../Components/global-components/Header";
+import ChangeLayout from "../Components/keyboard-test/ChangeLayout";
+import MenuKeybTest from "../Components/keyboard-test/MenuKeybTest";
 
 const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
     // const loginStatus = false;
@@ -118,6 +120,9 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
             case "AltRight":
                 e.preventDefault();
                 break;
+            case "Space":
+                e.preventDefault();
+                break;
         }
         // console.log(`down ${e.code}`);
         pressedControl("keyDown", e.code, true, layouts);
@@ -136,6 +141,10 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
             );
         }
         return dispatch(modalMyLayoutOpen(true));
+    };
+
+    const changeMenu = (menu) => {
+        setMenu(menu);
     };
 
     useEffect(() => {
@@ -171,122 +180,35 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
     // }, [layouts]);
 
     return (
-        <div>
-            <Header />
-            <div className="container mx-auto px-1">
-                <div className="w-full body flex justify-center mt-6 z-10 opacity-40 hover:opacity-90 transition-all">
-                    <nav className="text-[15px] font-semibold w-[600px] bg-[#181818] shadow-lg border border-[#313131] rounded-md px-5 py-2 flex justify-around">
-                        <div
-                            className="text-white group hover:text-red-600 font-bold cursor-pointer transition delay-75"
-                            onClick={() => {
-                                dispatch(reset());
-                            }}
-                        >
-                            <i className="bi bi-arrow-clockwise"></i> Reset
-                        </div>
-                        <div
-                            className="group text-zinc-300 hover:text-white cursor-pointer transition-all self-center"
-                            onClick={() => {
-                                return setMenu("layout-test");
-                            }}
-                        >
-                            Layout test
-                            <div className="w-full flex justify-center">
-                                <div
-                                    className={`h-0.5 bg-zinc-100 ${
-                                        menu == "layout-test"
-                                            ? `w-[80%]`
-                                            : `w-0`
-                                    } group-hover:w-[80%] transition-all duration-300 rounded-md`}
-                                ></div>
-                            </div>
-                        </div>
-                        <div
-                            className="group text-zinc-300 hover:text-white cursor-pointer transition-all"
-                            onClick={() => {
-                                return setMenu("skeleton-layout");
-                            }}
-                        >
-                            Skeleton layout
-                            <div className="w-full flex justify-center">
-                                <div
-                                    className={`h-0.5 bg-zinc-100 ${
-                                        menu == "skeleton-layout"
-                                            ? `w-[80%]`
-                                            : `w-0`
-                                    } group-hover:w-[80%] transition-all duration-300 rounded-md`}
-                                ></div>
-                            </div>
-                        </div>
-                        <div
-                            className="text-white group hover:text-[#0d6efd] cursor-pointer transition delay-75"
-                            onClick={myLayoutMenu}
-                        >
-                            My layout
-                        </div>
-                        {/* <div
-                            className="group text-zinc-300 hover:text-white cursor-pointer transition-all"
-                            onClick={() => {
-                                return setMenu("statistic-test");
-                            }}
-                        >
-                            Statistic test
-                            <div className="w-full flex justify-center">
-                                <div
-                                    className={`h-0.5 bg-zinc-100 ${
-                                        menu == "statistic-test"
-                                            ? `w-[80%]`
-                                            : `w-0`
-                                    } group-hover:w-[80%] transition-all duration-300 rounded-md`}
-                                ></div>
-                            </div>
-                        </div> */}
-
-                        {/* <div className="text-zinc-300 hover:text-white cursor-pointer transition-all">
-                            My-layout
-                        </div> */}
-                    </nav>
-                </div>
-                <div className="flex justify-center items-center ">
-                    {layouts.isLoading == true && (
-                        <div className="w-80 h-[300px] flex items-center justify-center">
-                            <div className="align-center">
-                                <div className="mx-auto w-[35px] h-[35px] border-[6px] border-blue-200 border-t-[6px] border-t-blue-500 rounded-[50%] animate-spin"></div>
-                                <div className="text-white mx-auto text-center">
-                                    Please wait...
+        <>
+            <div className="">
+                <Header />
+                <div className="container mx-auto px-1">
+                    <MenuKeybTest menu={menu} changeMenu={changeMenu} />
+                    <div className="flex justify-center items-center ">
+                        {layouts.isLoading == true && (
+                            <div className="w-80 h-[300px] flex items-center justify-center">
+                                <div className="align-center">
+                                    <div className="mx-auto w-[35px] h-[35px] border-[6px] border-blue-200 border-t-[6px] border-t-blue-500 rounded-[50%] animate-spin"></div>
+                                    <div className="text-white mx-auto text-center">
+                                        Please wait...
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    )}
-                    {layouts.isErrors && (
-                        <>
-                            <div className="text-lg">{layouts.message}</div>
-                        </>
-                    )}
-                    {/*
-                {layouts.data == null && layouts.isLoading == false && (
-                    <>
-                        <div className="ms-2">
-                            There is no layout data yet...
-                        </div>
-                    </>
-                )} */}
-                    <div className="-mt-6">
-                        {!layouts.isErrors && layouts.isLoading == false ? (
-                            layouts.data != null ? (
-                                <>
-                                    {menu == "layout-test" ? (
-                                        <>
-                                            <LayoutKeys
-                                                layoutScreenhotRef={null}
-                                                layout_data={
-                                                    layouts.data.layout_data
-                                                }
-                                                previewMode={true}
-                                            />
-                                            <div className="relative">
-                                                <div className="absolute -bottom-[260px] scale-y-[40%] scale-x-[40%]">
-                                                    <SkeletonLayout
+                        )}
+                        {layouts.isErrors && (
+                            <>
+                                <div className="text-lg">{layouts.message}</div>
+                            </>
+                        )}
+                        <div className="">
+                            {!layouts.isErrors && layouts.isLoading == false ? (
+                                layouts.data != null ? (
+                                    <>
+                                        {menu == "layout-test" ? (
+                                            <>
+                                                <div className="mt-5">
+                                                    <LayoutKeys
                                                         layoutScreenhotRef={
                                                             null
                                                         }
@@ -297,29 +219,55 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
                                                         previewMode={true}
                                                     />
                                                 </div>
-                                            </div>
-                                        </>
-                                    ) : null}
+                                                <div className="mt-5 mb-5 scale-90">
+                                                    <SkeletonLayout
+                                                        layoutScreenhotRef={
+                                                            null
+                                                        }
+                                                        layout_data={
+                                                            layouts.data
+                                                                .layout_data
+                                                        }
+                                                        previewMode={true}
+                                                        scale={true}
+                                                    />
+                                                </div>
+                                            </>
+                                        ) : null}
 
-                                    {menu == "skeleton-layout" ? (
-                                        <SkeletonLayout
-                                            layoutScreenhotRef={null}
-                                            layout_data={
-                                                layouts.data.layout_data
-                                            }
-                                            previewMode={true}
-                                        />
-                                    ) : null}
-                                    {menu == "statistic-test" ? (
-                                        <StatisticLayout />
-                                    ) : null}
-                                </>
-                            ) : null
-                        ) : null}
+                                        {menu == "skeleton-layout" ? (
+                                            <div className="mt-5">
+                                                <SkeletonLayout
+                                                    layoutScreenhotRef={null}
+                                                    layout_data={
+                                                        layouts.data.layout_data
+                                                    }
+                                                    previewMode={true}
+                                                    scale={false}
+                                                />
+                                            </div>
+                                        ) : null}
+                                        {menu == "change-layout" ? (
+                                            <ChangeLayout menu={menu} />
+                                        ) : null}
+                                    </>
+                                ) : null
+                            ) : null}
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div className="fixed bottom-0 w-full">
+                        <div className="text-sm text-white ms-1 flex justify-between">
+                            <div></div>
+                            <div className="pe-1 text-zinc-300 hover:text-white ">
+                                © 2023 Radhians-Keys
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };
 

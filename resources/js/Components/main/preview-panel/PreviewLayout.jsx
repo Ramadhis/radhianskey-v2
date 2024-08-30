@@ -43,12 +43,16 @@ const PreviewLayout = ({ layoutScreenhotRef }) => {
                     TAKE SCREENSHOT
                 </div>
             </div>
-            <div className="mt-2">
-                <LayoutKeys
-                    layoutScreenhotRef={layoutScreenhotRef}
-                    layout_data={listKeys.layout_data}
-                    previewMode={true}
-                />
+            <div className="mt-2 case flex flex-shrink-0">
+                <div ref={layoutScreenhotRef}>
+                    <div className="h-full mt-12 mb-11">
+                        <LayoutKeys
+                            // layoutScreenhotRef={layoutScreenhotRef}
+                            layout_data={listKeys.layout_data}
+                            previewMode={true}
+                        />
+                    </div>
+                </div>
             </div>
         </SimpleBar>
     );

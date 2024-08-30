@@ -8,7 +8,7 @@ import SelectType from "./partial-components/SelectType";
 import DeleteKeysBtn from "./partial-components/DeleteKeysBtn";
 import { useSelector } from "react-redux";
 import { toPng } from "html-to-image";
-
+import NewLayoutBtn from "./partial-components/NewLayoutBtn";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 
@@ -44,6 +44,7 @@ const MainLayout = ({ layoutScreenhotRef }) => {
                     option position
                 </a> */}
                         <DeleteKeysBtn />
+                        <NewLayoutBtn />
                     </div>
                     <hr className="mt-2 mb-1"></hr>
                     <SelectType />

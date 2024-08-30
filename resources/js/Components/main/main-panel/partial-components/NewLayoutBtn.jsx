@@ -1,0 +1,29 @@
+import React from "react";
+import confirmButtonFire from "../../../utils/ConfirmDialog";
+
+const NewLayoutBtn = () => {
+    const newLayout = () => {
+        return confirmButtonFire(
+            "Are you sure ? Make sure you have saved your current work",
+            () => {
+                var url = window.location.toString();
+                window.location.replace("/create-layout");
+                return true;
+            },
+            () => {
+                return false;
+            }
+        );
+    };
+
+    return (
+        <button
+            onClick={newLayout}
+            className="bg-[#2c508a] p-1 rounded-sm px-4 ms-2 text-sm text-white font-medium inline"
+        >
+            <i class="bi bi-file-earmark-fill"></i> New Blank layout
+        </button>
+    );
+};
+
+export default NewLayoutBtn;

@@ -1,15 +1,28 @@
 import React from "react";
 
-const SkeletonLayout = ({ layoutScreenhotRef, layout_data, previewMode }) => {
+const SkeletonLayout = ({
+    layoutScreenhotRef,
+    layout_data,
+    previewMode,
+    scale,
+}) => {
     return (
-        <div className="case flex flex-shrink-0 mt-12">
+        <div className={`case flex flex-shrink-0 justify-center`}>
             <div ref={layoutScreenhotRef}>
-                <div className="rounded-[4px] ms-4 me-4 mb-11 p-2 whitespace-nowrap border">
-                    <div className="rounded-[9px] p-3 whitespace-nowrap border">
+                <div
+                    className={`rounded-[4px] ${
+                        scale ? `ms-1 me-1 p-1` : `ms-4 me-4 p-2`
+                    }  whitespace-nowrap border`}
+                >
+                    <div
+                        className={`rounded-[9px] ${
+                            scale ? `p-1.5` : `p-3`
+                        } whitespace-nowrap border`}
+                    >
                         {layout_data.layoutData.map((row, index) => {
                             return (
                                 <div
-                                    className="flex flex-shrink-0 whitespace-nowrap min-h-[57px] "
+                                    className="flex flex-shrink-0 whitespace-nowrap"
                                     key={index}
                                 >
                                     {row.column.map((col, index2) => {
@@ -28,13 +41,25 @@ const SkeletonLayout = ({ layoutScreenhotRef, layout_data, previewMode }) => {
                                                     `}
                                                     style={{
                                                         width: `${
-                                                            58 * col.keycapsSize
+                                                            scale
+                                                                ? 29 *
+                                                                  col.keycapsSize
+                                                                : 58 *
+                                                                  col.keycapsSize
                                                         }px`,
-                                                        height: "58px",
+                                                        height: ` ${
+                                                            scale
+                                                                ? `29px`
+                                                                : `58px`
+                                                        }`,
                                                     }}
                                                 >
                                                     <div
-                                                        className={`text-white w-full h-full overflow-hidden flex justify-center items-center
+                                                        className={`text-white ${
+                                                            scale
+                                                                ? `text-[8px]`
+                                                                : ``
+                                                        } w-full h-full overflow-hidden flex justify-center items-center
                                                         ${
                                                             col.pressedKey ==
                                                             true

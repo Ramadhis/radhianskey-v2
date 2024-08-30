@@ -156,7 +156,7 @@ const ModalMyLayout = () => {
                                               {val.name}
                                           </div>
                                           <div className="text-[11px]">
-                                              Last saved {val.updated_date}
+                                              Last update {val.updated_date}
                                           </div>
                                       </label>
                                   );

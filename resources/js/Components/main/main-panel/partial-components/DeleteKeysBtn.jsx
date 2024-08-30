@@ -21,7 +21,7 @@ const DeleteKeysBtn = () => {
     return (
         <button
             onClick={deleteKeyPressed}
-            className="bg-red-600 ms-2 p-1 rounded-sm px-4 text-sm text-white font-medium "
+            className="bg-red-600 ms-2 p-1 rounded-sm px-3 text-sm text-white font-medium "
         >
             <i className="bi bi-trash3"></i> Delete selected keys
         </button>
