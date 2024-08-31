@@ -12,7 +12,7 @@ import LayoutKeys from "../Components/global-components/LayoutKeys";
 import SkeletonLayout from "../Components/keyboard-test/SkeletonLayout";
 import StatisticLayout from "../Components/keyboard-test/StatisticLayout";
 import { Link, usePage } from "@inertiajs/inertia-react";
-import { toastFireFailed } from "../Components/utils/Toast";
+import { toastFire, toastFireFailed } from "../Components/utils/Toast";
 import { closeModal, modalMyLayoutOpen } from "../Store/Slices/modalSlice";
 import Header from "../Components/global-components/Header";
 import ChangeLayout from "../Components/keyboard-test/ChangeLayout";
@@ -21,7 +21,7 @@ import MenuKeybTest from "../Components/keyboard-test/MenuKeybTest";
 const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
     // const loginStatus = false;
     const dispatch = useDispatch();
-    const { auth } = usePage().props;
+    const { auth, session } = usePage().props;
     const layouts = useSelector((state) => state.layoutTest);
     const layoutScreenhotRef = useRef(null);
     const [menu, setMenu] = useState("layout-test");
@@ -129,7 +129,11 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
     };
 
     const keyUpPressed = (e) => {
-        e.preventDefault();
+        switch (e.code) {
+            case "Tab":
+                e.preventDefault();
+                break;
+        }
         // console.log(`up ${e.code}`);
         pressedControl("keyUp", e.code, false, layouts);
     };
@@ -161,7 +165,14 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
     }, []);
 
     useEffect(() => {
-        console.log("LOADED COMPLETED");
+        if (session.status == "success") {
+            toastFire(session.message);
+            dispatch(closeModal());
+        }
+    }, [session]);
+
+    useEffect(() => {
+        // console.log("LOADED COMPLETED");
         if (layouts.data != null) {
             // console.log(layouts.data);
             //detect key down keyboard
@@ -173,18 +184,16 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
         }
     }, [layouts.data !== null]);
 
-    // useEffect(() => {
-    //     if (layouts.data != null) {
-    //         console.log(layouts.data.layout_data);
-    //     }
-    // }, [layouts]);
-
     return (
         <>
             <div className="">
                 <Header />
                 <div className="container mx-auto px-1">
-                    <MenuKeybTest menu={menu} changeMenu={changeMenu} />
+                    <MenuKeybTest
+                        menu={menu}
+                        changeMenu={changeMenu}
+                        data={layouts.data}
+                    />
                     <div className="flex justify-center items-center ">
                         {layouts.isLoading == true && (
                             <div className="w-80 h-[300px] flex items-center justify-center">
@@ -247,11 +256,32 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
                                                 />
                                             </div>
                                         ) : null}
-                                        {menu == "change-layout" ? (
-                                            <ChangeLayout menu={menu} />
+                                    </>
+                                ) : (
+                                    <>
+                                        {menu != "change-layout" ? (
+                                            <div className="w-80 h-[300px] flex items-center justify-center">
+                                                <div className="align-center">
+                                                    <div className=" flex items-center justify-center">
+                                                        <i className="bi bi-database-fill-x text-[60px] text-white"></i>
+                                                    </div>
+                                                    <div className="text-white font-semibold mx-auto text-center">
+                                                        <div>
+                                                            Layout not found,
+                                                        </div>
+                                                        <div>
+                                                            select another
+                                                            layout
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         ) : null}
                                     </>
-                                ) : null
+                                )
+                            ) : null}
+                            {menu == "change-layout" ? (
+                                <ChangeLayout menu={menu} />
                             ) : null}
                         </div>
                     </div>

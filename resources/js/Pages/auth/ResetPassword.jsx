@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Header from "../../Components/global-components/Header";
 import SubmitBtnWithLoading from "../../Components/utils/SubmitBtnWithLoading";
 import { usePage } from "@inertiajs/inertia-react";
+import { Inertia } from "@inertiajs/inertia";
 
 const ResetPassword = ({ token }) => {
     const { session, errors } = usePage().props;
@@ -12,16 +13,20 @@ const ResetPassword = ({ token }) => {
         confirm_password: "",
     });
 
-    const submit = () => {
+    const submit = (e) => {
+        e.preventDefault();
         setButtonSubmit(true);
-        Inertia.post("/submit-reset-password", form);
+        Inertia.post("/submit-reset-password", { ...form, token });
     };
 
     useEffect(() => {
-        if (session.status == "success") {
-            setButtonSubmit(false);
-        }
-    }, [session]);
+        // console.log(errors);
+        // if (session.status == "success") {
+        //     setButtonSubmit(false);
+        // }
+        // console.log(session);
+        setButtonSubmit(false);
+    }, [session, errors]);
 
     return (
         <div>
@@ -41,10 +46,8 @@ const ResetPassword = ({ token }) => {
                                     className="w-full h-9 mt-1 bg-[#1f1f1f] text-md ring-1 rounded-sm focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
                                     value={form.password}
                                     onChange={(e) => {
-                                        e.preventDefault();
-                                        return setForm((prev) => {
-                                            prev.confirm_password =
-                                                e.target.value;
+                                        setForm((prev) => {
+                                            prev.password = e.target.value;
                                             return { ...prev };
                                         });
                                     }}
@@ -66,8 +69,7 @@ const ResetPassword = ({ token }) => {
                                     className="w-full h-9 mt-1 bg-[#1f1f1f] text-md ring-1 rounded-sm focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
                                     value={form.confirm_password}
                                     onChange={(e) => {
-                                        e.preventDefault();
-                                        return setForm((prev) => {
+                                        setForm((prev) => {
                                             prev.confirm_password =
                                                 e.target.value;
                                             return { ...prev };

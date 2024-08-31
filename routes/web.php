@@ -37,6 +37,8 @@ Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 Route::post('/update-account', [EditAccountController::class, 'update'])->name('account.update')->middleware('auth');
 Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'index'])->name('reset.password');
+Route::post('/submit-forgot-password', [ForgotPasswordController::class, 'submitForgotPassword'])->name('forgot.password');
+Route::post('/submit-reset-password', [ForgotPasswordController::class, 'submitResetPassword'])->name('submit.reset.password');
 
 Route::post('/save-as', [LayoutKeyController::class, 'store'])->name('save-as')->middleware('auth');
 Route::post('/open-layout', [LayoutKeyController::class, 'open'])->name('open-layout')->middleware('auth');
@@ -44,6 +46,7 @@ Route::post('/save', [LayoutKeyController::class, 'update'])->name('save')->midd
 Route::get('/list-layout', [LayoutKeyController::class,'getListLayout'])->name('layout.list')->middleware('auth');
 Route::delete('/delete-layout/{id}', [LayoutKeyController::class,'deleteLayout'])->name('layout.delete')->middleware('auth');
 
+Route::get('/get-default-layout', [KeyboardTestController::class, 'getListDefaultLayout'])->name('getListDefaultLayout');
 Route::get('/key-theme/get-default-key-theme', [KeyThemeController::class, 'getDefaultKeyTheme'])->name('getDefaultKeyTheme');
 Route::prefix('key-theme')->name('key-theme.')->middleware(['auth'])->group(function(){
     Route::get('/', [KeyThemeController::class, 'index'])->name('index');

@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { reset } from "../../Store/Slices/keyboard-test/layoutTestSlice";
 
-const MenuKeybTest = ({ menu, changeMenu }) => {
+const MenuKeybTest = ({ menu, changeMenu, data }) => {
     const dispatch = useDispatch();
 
     return (
@@ -11,7 +11,11 @@ const MenuKeybTest = ({ menu, changeMenu }) => {
                 <div
                     className="text-white group hover:text-red-600 font-bold cursor-pointer transition delay-75"
                     onClick={() => {
-                        dispatch(reset());
+                        if (data != null) {
+                            dispatch(reset());
+                        } else {
+                            return false;
+                        }
                     }}
                 >
                     <i className="bi bi-arrow-clockwise"></i> Reset

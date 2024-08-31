@@ -4,16 +4,16 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "@inertiajs/inertia-react";
-import { getListLayout } from "../../Store/Slices/main/listLayoutSlice";
+import { getListDefaultLayout } from "../../Store/Slices/keyboard-test/defaulLayoutSlice";
 
 const ChangeLayout = ({ menu }) => {
     const dispatch = useDispatch();
-    const list = useSelector((state) => state.listLayout);
+    const list = useSelector((state) => state.defaultLayout);
     const [selectedRadioBtn, setSelectedRadioBtn] = useState(0);
 
     useEffect(() => {
         if (menu == "change-layout") {
-            dispatch(getListLayout());
+            dispatch(getListDefaultLayout());
         }
     }, [menu]);
 

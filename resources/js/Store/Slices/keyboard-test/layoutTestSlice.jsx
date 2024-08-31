@@ -19,11 +19,15 @@ export const getLayoutTest = createAsyncThunk(
                 },
             })
             .then((res) => {
-                // console.log(JSON.parse(res.data.layout_data));
-                return {
-                    ...res.data,
-                    layout_data: JSON.parse(res.data.layout_data),
-                };
+                // console.log(Object.keys(res.data).length, "ini tes");
+                if (Object.keys(res.data).length != 0) {
+                    return {
+                        ...res.data,
+                        layout_data: JSON.parse(res.data.layout_data),
+                    };
+                } else {
+                    return null;
+                }
             })
             .catch((err) => {
                 console.log(err.message);

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\LayoutsKey;
 use App\Models\User;
 use Auth;
+use DB;
 
 class KeyboardTestController extends Controller
 {
@@ -45,6 +46,24 @@ class KeyboardTestController extends Controller
             return response()->json([
                 'message' => $th->getMessage(),
             ]);
+        }
+    }
+
+    public function getListDefaultLayout(){
+        try {
+        	$get_id_admin = User::select("id")->where('roles', 'admin')->first();
+        	$get_layout_default = null;
+        	if($get_id_admin){
+        	    $get_layout_default = LayoutsKey::select('uid','name','name_slug',"preview_image",DB::raw("date(updated_at) as updated_date"))
+                ->where('id_user',$get_id_admin->id)
+                ->get();
+        	}
+        	return response()->json($get_layout_default);
+
+        } catch (Throwable $th) {
+          return response()->json([
+            'message' => $th->getMessage(),
+          ]);
         }
     }
 }

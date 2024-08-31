@@ -226,13 +226,13 @@ const ModalMyLayout = () => {
                                 >
                                     <i className="bi bi-play-fill"></i> Run test
                                 </Link>
-                                <Link
+                                <a
                                     href={`/create-layout/${selectedRadioBtn}`}
                                     className="bg-[#2c508a] rounded-sm px-6 py-1 font-semibold text-sm "
                                 >
                                     <i className="bi bi-folder2-open"></i> Open
                                     layout
-                                </Link>
+                                </a>
                             </>
                         )}
                     {selectedRadioBtn == 0 && !modal.saveAsModal && (

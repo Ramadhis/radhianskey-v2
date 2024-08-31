@@ -48,8 +48,7 @@ const KeysForm = () => {
                     type="text"
                     value={selectionKey.selectedKeyDetail.legend}
                     onChange={(e) => {
-                        e.preventDefault();
-                        return onChangeFormData("legend", e.target.value);
+                        onChangeFormData("legend", e.target.value);
                     }}
                     placeholder="keys legend (Max 5 character)"
                     className="w-full h-7 bg-[#1f1f1f] text-sm ring-1 rounded-md focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
@@ -66,7 +65,7 @@ const KeysForm = () => {
                     styles={customStyleSelect}
                     value={selectionKey.selectedKeyDetail.onKeyPress}
                     onChange={(e) => {
-                        return onChangeFormData("onKeyPress", {
+                        onChangeFormData("onKeyPress", {
                             label: e.label,
                             value: e.value,
                         });
