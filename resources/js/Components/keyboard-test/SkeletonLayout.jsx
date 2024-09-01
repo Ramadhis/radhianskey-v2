@@ -10,13 +10,17 @@ const SkeletonLayout = ({
         <div className={`case flex flex-shrink-0 justify-center`}>
             <div ref={layoutScreenhotRef}>
                 <div
-                    className={`rounded-[4px] ${
-                        scale ? `ms-1 me-1 p-1` : `ms-4 me-4 p-2`
+                    className={` ${
+                        scale
+                            ? `rounded-[2px] ms-1 me-1 p-1`
+                            : `rounded-[4px] ms-4 me-4 p-2`
                     }  whitespace-nowrap border`}
                 >
                     <div
-                        className={`rounded-[9px] ${
-                            scale ? `p-1.5` : `p-3`
+                        className={` ${
+                            scale
+                                ? `rounded-[4.5px] p-1.5`
+                                : `rounded-[9px] p-3`
                         } whitespace-nowrap border`}
                     >
                         {layout_data.layoutData.map((row, index) => {
@@ -67,7 +71,12 @@ const SkeletonLayout = ({
                                                                 : ``
                                                         }`}
                                                     >
-                                                        <div>{col.legend}</div>
+                                                        <div>
+                                                            {
+                                                                col.onKeyPress
+                                                                    .label
+                                                            }
+                                                        </div>
                                                     </div>
                                                     <div />
                                                 </div>

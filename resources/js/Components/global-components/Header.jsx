@@ -10,7 +10,7 @@ const Header = () => {
                 </div>
                 <a
                     href={"/create-layout"}
-                    className="group text-zinc-300 font-semibold hover:text-white cursor-pointer transition-all text-[17px] ms-5 me-1"
+                    className="group text-zinc-300 font-semibold hover:text-white cursor-pointer transition-all text-[16px] ms-5 me-1"
                 >
                     Create-layout
                     <div className="h-0.5 bg-[#0d6efd] w-0 group-hover:w-full transition-all duration-300 rounded-md"></div>

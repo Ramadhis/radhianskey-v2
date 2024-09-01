@@ -21,7 +21,7 @@ const NewLayoutBtn = () => {
             onClick={newLayout}
             className="bg-[#2c508a] p-1 rounded-sm px-4 ms-2 text-sm text-white font-medium inline"
         >
-            <i class="bi bi-file-earmark-fill"></i> New Blank layout
+            <i className="bi bi-file-earmark-fill"></i> New Blank layout
         </button>
     );
 };

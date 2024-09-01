@@ -34,6 +34,7 @@ const ModalAccountSetting = () => {
     }, [session, errors]);
 
     useEffect(() => {
+        console.log("tes");
         if (auth.user) {
             setForm((prev) => {
                 return {
@@ -129,10 +130,8 @@ const ModalAccountSetting = () => {
                             className="w-full h-9 mt-1 bg-[#1f1f1f] text-md ring-1 rounded-sm focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
                             value={form.name}
                             onChange={(e) => {
-                                e.preventDefault();
                                 return setForm((prev) => {
-                                    prev.name = e.target.value;
-                                    return { ...prev };
+                                    return { ...prev, name: e.target.value };
                                 });
                             }}
                         />
@@ -150,10 +149,8 @@ const ModalAccountSetting = () => {
                             className="w-full h-9 mt-1 bg-[#1f1f1f] text-md ring-1 rounded-sm focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
                             value={form.email}
                             onChange={(e) => {
-                                e.preventDefault();
                                 return setForm((prev) => {
-                                    prev.email = e.target.value;
-                                    return { ...prev };
+                                    return { ...prev, email: e.target.value };
                                 });
                             }}
                         />

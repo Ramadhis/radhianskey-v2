@@ -1,11 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Keys from "./Keys";
 
 const LayoutKeys = ({ layoutScreenhotRef, layout_data, previewMode }) => {
-    useEffect(() => {
-        console.log("update");
-    }, []);
-
     return (
         <div className="case flex flex-shrink-0 justify-center">
             <div

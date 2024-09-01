@@ -120,9 +120,9 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
             case "AltRight":
                 e.preventDefault();
                 break;
-            case "Space":
-                e.preventDefault();
-                break;
+            // case "Space":
+            //     e.preventDefault();
+            //     break;
         }
         // console.log(`down ${e.code}`);
         pressedControl("keyDown", e.code, true, layouts);

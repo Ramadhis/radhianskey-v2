@@ -171,10 +171,6 @@ const ModalCreateKeyTheme = ({ modalCreateNewThemeOpen }) => {
         setButtonSubmit(false);
     }, [session, errors]);
 
-    useEffect(() => {
-        console.log(colorthemeData);
-    }, [colorthemeData]);
-
     return (
         <form onSubmit={submitForm} className="text-white">
             <div className="semibold text-[20px] text-white">
