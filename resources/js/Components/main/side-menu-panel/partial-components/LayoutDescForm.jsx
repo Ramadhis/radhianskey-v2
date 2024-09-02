@@ -15,7 +15,7 @@ const LayoutDescForm = () => {
     return (
         <div className="mb-2">
             <div className="w-full mt-1">
-                <label className="text-sm w-full whitespace-nowrap text-ellipsis overflow-hidden">
+                <label className="flex flex-shrink-0 whitespace-nowrap overflow-hidden text-sm">
                     Layout Name
                 </label>
                 <input
@@ -32,7 +32,7 @@ const LayoutDescForm = () => {
                 ) : null}
             </div>
             <div className="w-full mt-1  ">
-                <label className="text-sm whitespace-nowrap text-ellipsis overflow-hidden">
+                <label className="flex flex-shrink-0 whitespace-nowrap overflow-hidden text-sm">
                     Layout Description
                 </label>
                 <textarea

@@ -6,7 +6,9 @@ const CaseForm = () => {
     return (
         <div className="mb-2">
             <div className="w-full mt-1">
-                <label className="text-sm">Case theme</label>
+                <label className="flex flex-shrink-0 whitespace-nowrap overflow-hidden text-sm">
+                    Case theme
+                </label>
                 <CaseThemeSelect />
             </div>
             {/* <div className="w-full mt-1">

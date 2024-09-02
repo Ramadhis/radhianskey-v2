@@ -34,7 +34,6 @@ const ModalAccountSetting = () => {
     }, [session, errors]);
 
     useEffect(() => {
-        console.log("tes");
         if (auth.user) {
             setForm((prev) => {
                 return {

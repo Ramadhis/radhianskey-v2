@@ -43,7 +43,9 @@ const KeysForm = () => {
     return (
         <div className="pb-3">
             <div className="w-full mt-1">
-                <label className="text-sm">Keys legend</label>
+                <label className="flex flex-shrink-0 whitespace-nowrap overflow-hidden text-sm">
+                    Keys legend
+                </label>
                 <input
                     type="text"
                     value={selectionKey.selectedKeyDetail.legend}
@@ -59,7 +61,9 @@ const KeysForm = () => {
                 />
             </div>
             <div className="w-full mt-1">
-                <label className="text-sm">On key pressed</label>
+                <label className="flex flex-shrink-0 whitespace-nowrap overflow-hidden text-sm">
+                    On key pressed
+                </label>
                 <Select
                     options={onKeyPressCodeList}
                     styles={customStyleSelect}
@@ -76,7 +80,9 @@ const KeysForm = () => {
                 />
             </div>
             <div className="w-full mt-1">
-                <label className="text-sm">Keycaps size</label>
+                <label className="flex flex-shrink-0 whitespace-nowrap overflow-hidden text-sm">
+                    Keycaps size
+                </label>
                 <NumericFormat
                     thousandSeparator={"."}
                     decimalSeparator={","}
@@ -109,7 +115,9 @@ const KeysForm = () => {
                 />
             </div>
             <div className="w-full mt-1">
-                <label className="text-sm">Keycaps theme</label>
+                <label className="flex flex-shrink-0 whitespace-nowrap overflow-hidden text-sm">
+                    Keycaps theme
+                </label>
                 <KeyThemeSelect
                     selectedTheme={selectionKey.selectedKeyDetail.keycapsTheme}
                     selectedKey={selectionKey.selectedKey}
@@ -118,7 +126,7 @@ const KeysForm = () => {
                 />
             </div>
             <div className="w-full mt-1">
-                <label className="text-sm">
+                <label className="flex flex-shrink-0 whitespace-nowrap overflow-hidden text-sm">
                     Key connect to top{" "}
                     <p className="italic inline-block text-red-600">(*Beta)</p>
                 </label>
@@ -141,7 +149,7 @@ const KeysForm = () => {
                 />
             </div>
             <div className="w-full mt-1">
-                <label className="text-sm">
+                <label className="flex flex-shrink-0 whitespace-nowrap overflow-hidden text-sm">
                     Key connect to left{" "}
                     <p className="italic inline-block text-red-600">(*Beta)</p>
                 </label>
