@@ -107,7 +107,7 @@ const Main = ({ data, globalKeyTheme, privateKeyTheme }) => {
     return (
         <>
             <Helmet>
-                <title>Create layout | RadhiansKeys</title>
+                <title>Create layout | Radhianskeys</title>
                 <meta
                     name="description"
                     content="Test your computer's mechanical keyboard for free, and you can also create your own computer keyboard layout and design your dream mechanical keyboard."
