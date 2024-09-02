@@ -6,6 +6,7 @@ import { InertiaProgress } from "@inertiajs/progress";
 import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { Provider } from "react-redux";
 import { store } from "./Store/store";
+import { HelmetProvider } from "react-helmet-async";
 
 createInertiaApp({
     resolve: (name) =>
@@ -15,9 +16,11 @@ createInertiaApp({
         ),
     setup({ el, App, props }) {
         return render(
-            <Provider store={store}>
-                <App {...props} />
-            </Provider>,
+            <HelmetProvider>
+                <Provider store={store}>
+                    <App {...props} />
+                </Provider>
+            </HelmetProvider>,
             el
         );
     },

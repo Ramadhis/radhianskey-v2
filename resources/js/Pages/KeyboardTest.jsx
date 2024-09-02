@@ -17,6 +17,7 @@ import { closeModal, modalMyLayoutOpen } from "../Store/Slices/modalSlice";
 import Header from "../Components/global-components/Header";
 import ChangeLayout from "../Components/keyboard-test/ChangeLayout";
 import MenuKeybTest from "../Components/keyboard-test/MenuKeybTest";
+import { Helmet } from "react-helmet-async";
 
 const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
     // const loginStatus = false;
@@ -186,6 +187,14 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
 
     return (
         <>
+            <Helmet>
+                <title>Keyboard Tes | RadhiansKeys</title>
+                <meta
+                    name="description"
+                    content="Test your computer's mechanical keyboard for free, and you can also create your own computer keyboard layout and design your dream mechanical keyboard."
+                ></meta>
+                <link rel="canonical" href="/" />
+            </Helmet>
             <div className="">
                 <Header />
                 <div className="container mx-auto px-1">

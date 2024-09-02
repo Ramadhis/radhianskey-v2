@@ -24,6 +24,7 @@ import {
     deleteAllCaseTheme,
 } from "../Store/Slices/main/caseThemeSlice";
 import ModalCreateCaseTheme from "../Components/main/side-menu-panel/partial-components/ModalCreateCaseTheme";
+import { Helmet } from "react-helmet-async";
 
 const Main = ({ data, globalKeyTheme, privateKeyTheme }) => {
     const dispatch = useDispatch();
@@ -105,6 +106,14 @@ const Main = ({ data, globalKeyTheme, privateKeyTheme }) => {
 
     return (
         <>
+            <Helmet>
+                <title>Create layout | RadhiansKeys</title>
+                <meta
+                    name="description"
+                    content="Test your computer's mechanical keyboard for free, and you can also create your own computer keyboard layout and design your dream mechanical keyboard."
+                ></meta>
+                <link rel="canonical" href="/create-layout" />
+            </Helmet>
             <PanelGroup direction="horizontal" className="w-full h-screen">
                 <Panel className="h-screen" minSize={20} defaultSize={40}>
                     <PanelGroup direction="vertical">
