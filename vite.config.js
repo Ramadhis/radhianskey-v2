@@ -7,7 +7,7 @@ export default defineConfig({
         //     input: ['resources/css/app.css', 'resources/js/app.js'],
         //     refresh: true,
         // }),
-        laravel(["resources/js/app.jsx"]),
+        laravel(["resources/css/app.css", "resources/js/app.jsx"]),
     ],
     resolve: {
         alias: {

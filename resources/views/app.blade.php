@@ -8,6 +8,7 @@
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
   <link rel="icon" href="{{ asset('/icon-head.png') }}">
   @vite('resources/js/app.jsx')
+  @vite('resources/css/app.css')
   @inertiaHead
   <style>
   body {
