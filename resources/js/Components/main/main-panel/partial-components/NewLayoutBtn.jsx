@@ -19,7 +19,7 @@ const NewLayoutBtn = () => {
     return (
         <button
             onClick={newLayout}
-            className="bg-[#2c508a] hover:bg-[#0d6efd] border border-white p-1 rounded-sm px-4 ms-2 text-sm  text-white font-medium inline"
+            className="bg-[#2c508a] hover:bg-[#213e6d] border border-white p-1 rounded-sm px-4 ms-2 text-sm  text-white font-medium inline"
         >
             <i className="bi bi-file-earmark-fill"></i> New blank layout
         </button>

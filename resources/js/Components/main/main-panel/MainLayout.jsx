@@ -24,19 +24,22 @@ const MainLayout = ({ layoutScreenhotRef }) => {
                     scrollbarColor: "#616161 #66000000",
                 }}
             > */}
-            <SimpleBar className="h-full">
-                <div className="ps-1 pt-2 pb-1 pe-2 fixed w-full z-[1] bg-[#1f1f1f] ">
-                    <div className="">
-                        <AddRowBtn />
-                        <DeleteKeysBtn />
-                        <SaveBtn
-                            saveType={"save"}
-                            layoutScreenhotRef={layoutScreenhotRef}
-                        />
-                        <SaveBtn
-                            saveType={"save-as"}
-                            layoutScreenhotRef={layoutScreenhotRef}
-                        />
+            <SimpleBar className="h-full w-full">
+                <div className="ps-1 pt-2 pb-1 pe-2 w-full z-[1] bg-[#1f1f1f] sticky top-0">
+                    <div className="flex justify-between">
+                        <div>
+                            <AddRowBtn />
+
+                            <SaveBtn
+                                saveType={"save"}
+                                layoutScreenhotRef={layoutScreenhotRef}
+                            />
+                            <SaveBtn
+                                saveType={"save-as"}
+                                layoutScreenhotRef={layoutScreenhotRef}
+                            />
+                            <DeleteKeysBtn />
+                        </div>
                         {/* <a
                     href="#"
                     className="bg-[#2c508a] ms-2 p-1 rounded-sm px-4 h-4 text-sm text-white font-medium "
@@ -44,13 +47,14 @@ const MainLayout = ({ layoutScreenhotRef }) => {
                     <i className="bi bi-arrow-left-right"></i> Reverse
                     option position
                 </a> */}
-
-                        <NewLayoutBtn />
+                        <div>
+                            <NewLayoutBtn />
+                        </div>
                     </div>
                     <hr className="mt-2 mb-1"></hr>
                     <SelectType />
                 </div>
-                <div className="mt-[80px] ps-2">
+                <div className="mt-3 ps-1 h-full overflow-auto">
                     {/* <DragAndDrop /> */}
                     <DndMain></DndMain>
                 </div>
