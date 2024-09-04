@@ -14,7 +14,7 @@ const LayoutDescForm = () => {
 
     return (
         <div className="mb-2">
-            <div className="w-full mt-1">
+            <div className="w-full mt-2">
                 <label className="flex flex-shrink-0 whitespace-nowrap overflow-hidden text-sm">
                     Layout Name
                 </label>
@@ -31,7 +31,7 @@ const LayoutDescForm = () => {
                     <div className="text-red-600 text-sm">{errors.name}</div>
                 ) : null}
             </div>
-            <div className="w-full mt-1  ">
+            <div className="w-full mt-2  mb-2">
                 <label className="flex flex-shrink-0 whitespace-nowrap overflow-hidden text-sm">
                     Layout Description
                 </label>

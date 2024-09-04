@@ -72,7 +72,12 @@ const SaveBtn = ({ saveType, layoutScreenhotRef }) => {
                         ? save
                         : openSaveAsModal
                 }
-                className={`bg-[#2c508a] ms-2 py-1 rounded-sm px-4 text-sm text-white font-medium inline ${
+                //border border-[#2c508a] hover:border-zinc-300 text-[13px] hover:bg-[#2c508a] p-1 rounded-sm px-6 text-zinc-300 hover:text-white font-medium inline transition-all
+                className={` ${
+                    saveType == "save-as"
+                        ? `bg-[#0d6efd] border-white hover:text-white`
+                        : `border-[#2c508a] `
+                }  border hover:bg-[#2c508a] hover:border-zinc-300 ms-2 py-1 rounded-sm px-4 text-sm text-white font-medium inline ${
                     buttonSave == true ? `bg-blue-300 cursor-not-allowed ` : ``
                 }`}
                 disabled={buttonSave}

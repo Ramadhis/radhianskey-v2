@@ -28,6 +28,7 @@ const MainLayout = ({ layoutScreenhotRef }) => {
                 <div className="ps-1 pt-2 pb-1 pe-2 fixed w-full z-[1] bg-[#1f1f1f] ">
                     <div className="">
                         <AddRowBtn />
+                        <DeleteKeysBtn />
                         <SaveBtn
                             saveType={"save"}
                             layoutScreenhotRef={layoutScreenhotRef}
@@ -43,7 +44,7 @@ const MainLayout = ({ layoutScreenhotRef }) => {
                     <i className="bi bi-arrow-left-right"></i> Reverse
                     option position
                 </a> */}
-                        <DeleteKeysBtn />
+
                         <NewLayoutBtn />
                     </div>
                     <hr className="mt-2 mb-1"></hr>

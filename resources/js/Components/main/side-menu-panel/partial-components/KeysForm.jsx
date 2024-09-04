@@ -42,7 +42,7 @@ const KeysForm = () => {
 
     return (
         <div className="pb-3">
-            <div className="w-full mt-1">
+            <div className="w-full mt-2">
                 <label className="flex flex-shrink-0 whitespace-nowrap overflow-hidden text-sm">
                     Keys legend
                 </label>
@@ -60,7 +60,7 @@ const KeysForm = () => {
                     maxLength={5}
                 />
             </div>
-            <div className="w-full mt-1">
+            <div className="w-full mt-2">
                 <label className="flex flex-shrink-0 whitespace-nowrap overflow-hidden text-sm">
                     On key pressed
                 </label>
@@ -79,7 +79,7 @@ const KeysForm = () => {
                     }
                 />
             </div>
-            <div className="w-full mt-1">
+            <div className="w-full mt-2">
                 <label className="flex flex-shrink-0 whitespace-nowrap overflow-hidden text-sm">
                     Keycaps size
                 </label>
@@ -114,7 +114,7 @@ const KeysForm = () => {
                     }
                 />
             </div>
-            <div className="w-full mt-1">
+            <div className="w-full mt-2">
                 <label className="flex flex-shrink-0 whitespace-nowrap overflow-hidden text-sm">
                     Keycaps theme
                 </label>
@@ -125,7 +125,7 @@ const KeysForm = () => {
                     onChangeFormData={onChangeFormData}
                 />
             </div>
-            <div className="w-full mt-1">
+            <div className="w-full mt-2">
                 <label className="flex flex-shrink-0 whitespace-nowrap overflow-hidden text-sm">
                     Key connect to top{" "}
                     <p className="italic inline-block text-red-600">(*Beta)</p>
@@ -148,7 +148,7 @@ const KeysForm = () => {
                     }
                 />
             </div>
-            <div className="w-full mt-1">
+            <div className="w-full mt-2 mb-2">
                 <label className="flex flex-shrink-0 whitespace-nowrap overflow-hidden text-sm">
                     Key connect to left{" "}
                     <p className="italic inline-block text-red-600">(*Beta)</p>

@@ -62,7 +62,7 @@ const ChangeLayout = ({ menu }) => {
                                           key={index}
                                           className="bg-blue-400 h-32 border group border-white hover:border-[#2c508a] hover:border-2 hover:scale-[98%] transition-all delay-100 cursor-pointer"
                                       >
-                                          <Link
+                                          <a
                                               href={`/radhians/${val.name_slug}`}
                                           >
                                               <div className="overflow-hidden w-full h-full relative">
@@ -109,7 +109,7 @@ const ChangeLayout = ({ menu }) => {
                                               <div className="text-[11px]">
                                                   Last update {val.updated_date}
                                               </div>
-                                          </Link>
+                                          </a>
                                       </label>
                                   );
                               })

@@ -22,7 +22,7 @@ const AddRowBtn = () => {
     return (
         <button
             onClick={add}
-            className="bg-[#2c508a] p-1 rounded-sm px-6 text-sm text-white font-medium inline"
+            className="border border-[#2c508a] hover:border-zinc-300 text-[13px] hover:bg-[#2c508a] p-1 rounded-sm px-6 text-zinc-300 hover:text-white font-medium inline transition-all"
         >
             <i className="bi bi-plus-square me-1 "></i>
             Add row

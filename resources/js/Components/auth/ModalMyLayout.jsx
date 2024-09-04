@@ -216,7 +216,7 @@ const ModalMyLayout = () => {
                         list.data.length > 0 &&
                         selectedRadioBtn != 0 && (
                             <>
-                                <Link
+                                <a
                                     href={`/${auth.user.name_slug}/${
                                         list.data.find(
                                             (val) => val.uid == selectedRadioBtn
@@ -225,7 +225,7 @@ const ModalMyLayout = () => {
                                     className="bg-[#2c508a] me-2 rounded-sm px-6 py-1 font-semibold text-sm "
                                 >
                                     <i className="bi bi-play-fill"></i> Run test
-                                </Link>
+                                </a>
                                 <a
                                     href={`/create-layout/${selectedRadioBtn}`}
                                     className="bg-[#2c508a] rounded-sm px-6 py-1 font-semibold text-sm "

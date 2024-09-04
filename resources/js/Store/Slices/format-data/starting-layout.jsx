@@ -12,12 +12,12 @@ const startingLayout = {
         },
         caseData: {
             caseTheme: {
-                label: "Pink Theme",
-                value: "pink",
+                label: "white and black",
+                value: "white-and-black",
                 style: {
-                    outer_border: "#706662",
-                    inner_border: "#fff",
-                    outer_background: "#e8c4b8",
+                    outer_border: "#0d0900",
+                    inner_border: "#e7e5e4",
+                    outer_background: "#e7e5e4",
                     inner_background: "#282828",
                 },
             },

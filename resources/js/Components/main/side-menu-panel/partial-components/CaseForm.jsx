@@ -5,7 +5,7 @@ import CaseThemeSelect from "./CaseThemeSelect";
 const CaseForm = () => {
     return (
         <div className="mb-2">
-            <div className="w-full mt-1">
+            <div className="w-full mt-2 mb-2">
                 <label className="flex flex-shrink-0 whitespace-nowrap overflow-hidden text-sm">
                     Case theme
                 </label>
