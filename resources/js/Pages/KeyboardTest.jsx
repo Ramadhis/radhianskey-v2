@@ -207,7 +207,7 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
                         {layouts.isLoading == true && (
                             <div className="w-80 h-[300px] flex items-center justify-center">
                                 <div className="align-center">
-                                    <div className="mx-auto w-[35px] h-[35px] border-[6px] border-blue-200 border-t-[6px] border-t-blue-500 rounded-[50%] animate-spin"></div>
+                                    <div className="mx-auto w-[35px] h-[35px] border-[6px] border-[#06a8e7] border-t-[6px] border-t-[#3ddef8] rounded-[50%] animate-spin"></div>
                                     <div className="text-white mx-auto text-center">
                                         Please wait...
                                     </div>

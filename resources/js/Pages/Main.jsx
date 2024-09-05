@@ -24,7 +24,10 @@ import {
     deleteAllCaseTheme,
 } from "../Store/Slices/main/caseThemeSlice";
 import ModalCreateCaseTheme from "../Components/main/side-menu-panel/partial-components/ModalCreateCaseTheme";
+import SimpleBar from "simplebar-react";
+import "simplebar-react/dist/simplebar.min.css";
 import { Helmet } from "react-helmet-async";
+import MenuMain from "../Components/main/main-panel/partial-components/MenuMain";
 
 const Main = ({ data, globalKeyTheme, privateKeyTheme }) => {
     const dispatch = useDispatch();
@@ -160,14 +163,24 @@ const Main = ({ data, globalKeyTheme, privateKeyTheme }) => {
                                 <Panel defaultSize={85} className="w-max-full">
                                     <PanelGroup direction="vertical">
                                         <Panel
-                                            className="bg-[#1f1f1f] w-full mx-auto ps-2 pb-1"
-                                            defaultSize={70}
+                                            className="bg-[#1f1f1f] w-full mx-auto "
+                                            defaultSize={13}
+                                            minSize={13}
                                         >
-                                            <MainLayout
+                                            <MenuMain
                                                 layoutScreenhotRef={
                                                     layoutScreenhotRef
                                                 }
                                             />
+                                        </Panel>
+                                        <PanelResizeHandle disabled={true}>
+                                            <div className="w-full h-px bg-[#1f1f1f]"></div>
+                                        </PanelResizeHandle>
+                                        <Panel
+                                            className="bg-[#1f1f1f] w-full mx-auto ps-1 pb-1"
+                                            defaultSize={70}
+                                        >
+                                            <MainLayout />
                                         </Panel>
                                         <PanelResizeHandle
                                             onDragging={setIsDragging}
