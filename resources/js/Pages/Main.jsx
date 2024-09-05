@@ -24,8 +24,7 @@ import {
     deleteAllCaseTheme,
 } from "../Store/Slices/main/caseThemeSlice";
 import ModalCreateCaseTheme from "../Components/main/side-menu-panel/partial-components/ModalCreateCaseTheme";
-import SimpleBar from "simplebar-react";
-import "simplebar-react/dist/simplebar.min.css";
+
 import { Helmet } from "react-helmet-async";
 import MenuMain from "../Components/main/main-panel/partial-components/MenuMain";
 
@@ -117,7 +116,10 @@ const Main = ({ data, globalKeyTheme, privateKeyTheme }) => {
                 ></meta>
                 <link rel="canonical" href="/create-layout" />
             </Helmet>
-            <PanelGroup direction="horizontal" className="w-full h-screen">
+            <PanelGroup
+                direction="horizontal"
+                className="w-full h-screen flex flex-shrink-0"
+            >
                 <Panel className="h-screen" minSize={20} defaultSize={40}>
                     <PanelGroup direction="vertical">
                         <Panel

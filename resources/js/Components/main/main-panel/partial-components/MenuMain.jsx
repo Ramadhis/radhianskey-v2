@@ -8,7 +8,7 @@ import SelectType from "./SelectType";
 const MenuMain = ({ layoutScreenhotRef }) => {
     return (
         <div className="ps-1 pt-2 pb-1 pe-2 w-full z-[1] bg-[#1f1f1f] top-0 right-0">
-            <div className="flex justify-between">
+            <div className="flex justify-between flex-shrink-0">
                 <div>
                     <AddRowBtn />
 

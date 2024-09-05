@@ -33,7 +33,12 @@ const SkeletonLayout = ({
                                         return (
                                             <div
                                                 key={index2}
-                                                className={`flex flex-shrink-0`}
+                                                className={`flex flex-shrink-0 ${
+                                                    col.keycapsTheme.value ==
+                                                    "Invisible"
+                                                        ? `invisible`
+                                                        : ``
+                                                }`}
                                             >
                                                 <div
                                                     className={`border scale-[98%]
@@ -69,7 +74,8 @@ const SkeletonLayout = ({
                                                             true
                                                                 ? `bg-[#87cefa]`
                                                                 : ``
-                                                        }`}
+                                                        }
+                                                        `}
                                                     >
                                                         <div>
                                                             {
