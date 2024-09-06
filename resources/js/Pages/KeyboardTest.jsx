@@ -121,6 +121,24 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
             case "AltRight":
                 e.preventDefault();
                 break;
+            case "PageUp":
+                e.preventDefault();
+                break;
+            case "PageDown":
+                e.preventDefault();
+                break;
+            case "PageDown":
+                e.preventDefault();
+                break;
+            case "ArrowUp":
+                e.preventDefault();
+                break;
+            case "ArrowDown":
+                e.preventDefault();
+                break;
+            case "PrintScreen":
+                e.preventDefault();
+                break;
             // case "Space":
             //     e.preventDefault();
             //     break;

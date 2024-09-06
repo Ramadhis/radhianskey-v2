@@ -26,8 +26,10 @@ const MenuMain = ({ layoutScreenhotRef }) => {
                     <NewLayoutBtn />
                 </div>
             </div>
-            <hr className="mt-2 mb-1"></hr>
-            <SelectType />
+            <div className="bottom-0">
+                <hr className="mt-2 mb-1"></hr>
+                <SelectType />
+            </div>
         </div>
     );
 };

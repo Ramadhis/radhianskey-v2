@@ -164,7 +164,7 @@ const Main = ({ data, globalKeyTheme, privateKeyTheme }) => {
                                 </PanelResizeHandle>
                                 <Panel defaultSize={85} className="w-max-full">
                                     <PanelGroup direction="vertical">
-                                        <Panel
+                                        {/* <Panel
                                             className="bg-[#1f1f1f] w-full mx-auto "
                                             defaultSize={13}
                                             minSize={13}
@@ -175,6 +175,15 @@ const Main = ({ data, globalKeyTheme, privateKeyTheme }) => {
                                                 }
                                             />
                                         </Panel>
+                                        <PanelResizeHandle disabled={true}>
+                                            <div className="w-full h-px bg-[#1f1f1f]"></div>
+                                        </PanelResizeHandle> */}
+
+                                        <MenuMain
+                                            layoutScreenhotRef={
+                                                layoutScreenhotRef
+                                            }
+                                        />
                                         <PanelResizeHandle disabled={true}>
                                             <div className="w-full h-px bg-[#1f1f1f]"></div>
                                         </PanelResizeHandle>
