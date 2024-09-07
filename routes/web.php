@@ -6,6 +6,7 @@ use App\Http\Controllers\LayoutKeyController;
 use App\Http\Controllers\KeyboardTestController;
 use App\Http\Controllers\KeyThemeController;
 use App\Http\Controllers\CaseThemeController;
+use App\Http\Controllers\LayoutSearchController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\EditAccountController;
@@ -28,6 +29,7 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 
 Route::get('/create-layout', [LayoutKeyController::class, 'index'])->name('create.layout');
 Route::get('/create-layout/{uid}', [LayoutKeyController::class, 'edit'])->name('edit.layout');
+Route::get('/layout-search', [LayoutSearchController::class, 'index'])->name('search.layout');
 Route::get('/', [KeyboardTestController::class, 'index'])->name('home');
 
 Route::get('/get-layout-test', [KeyboardTestController::class, 'getLayoutTest'])->name('get-layout-test');

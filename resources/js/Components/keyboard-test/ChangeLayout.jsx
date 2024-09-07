@@ -20,7 +20,7 @@ const ChangeLayout = ({ menu }) => {
     return (
         <div className="lg:w-[1024px] md:w-[768px] w-[320px] text-white mt-12">
             {/* <div className="rounded-sm ms-4 me-4 mb-11 p-2 border">Change</div> */}
-            <div className="w-full border border-[#313131] my-1 mt-2 p-1 bg-[#1f1f1f]">
+            <div className="w-full border border-zinc-600 my-1 mt-2 p-1 bg-[#181818]">
                 <SimpleBar className="h-full">
                     <div className="w-full h-[400px] grid grid-cols-1 md:grid-cols-3 gap-y-3 gap-x-3">
                         <SkeletonTheme

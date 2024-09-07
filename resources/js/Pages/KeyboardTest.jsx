@@ -127,9 +127,6 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
             case "PageDown":
                 e.preventDefault();
                 break;
-            case "PageDown":
-                e.preventDefault();
-                break;
             case "ArrowUp":
                 e.preventDefault();
                 break;

@@ -21,6 +21,7 @@ export const customStyleSelect = {
             // borderRight: "1px solid white",
             cursor: isDisabled ? "not-allowed" : "default",
             fontSize: "0.875rem",
+            textAlign: "left",
         };
     },
     valueContainer: (provided, state) => ({
@@ -32,11 +33,13 @@ export const customStyleSelect = {
         paddingTop: "1px",
         color: "#d4d4d8",
         fontSize: "0.875rem",
+        textAlign: "left",
     }),
     placeHolder: (styles) => ({
         ...styles,
         color: "#d4d4d8",
         backgroundColor: "#1f1f1f",
+        textAlign: "left",
     }),
     singleValue: (styles, { data }) => ({
         ...styles,

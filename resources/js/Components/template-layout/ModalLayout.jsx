@@ -10,7 +10,7 @@ const ModalLayout = ({ open, close, children }) => {
         >
             <div
                 onClick={(e) => e.stopPropagation()}
-                className={`bg-[#1f1f1f] rounded-md shadow p-6 transition-all -mt-10 border border-white ${
+                className={`bg-[#1f1f1f] rounded-md shadow p-6 transition-all -mt-10 border border-zinc-500 ${
                     open ? "scale-100 opacity-100" : "scale-125 opacity-0"
                 }`}
             >
