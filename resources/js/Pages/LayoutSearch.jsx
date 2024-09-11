@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "../Components/global-components/Header";
 import LayoutSearchList from "../Components/layout-search/LayoutSearchList";
 import MenuSearch from "../Components/layout-search/MenuSearch";
+import { useDispatch, useSelector } from "react-redux";
+import { usePage } from "@inertiajs/inertia-react";
+import { getSearchLayout } from "../Store/Slices/layout-search/SearchLayoutSlice";
+import Pagination from "../Components/utils/Pagination";
 
 const LayoutSearch = () => {
+    const dispatch = useDispatch();
+    const { auth, session } = usePage().props;
+    const searchLayout = useSelector((state) => state.searchLayout);
+
+    useEffect(() => {
+        dispatch(getSearchLayout());
+    }, []);
+
     return (
         <>
             <Helmet>
@@ -30,7 +42,27 @@ const LayoutSearch = () => {
                 <div className="border border-zinc-600 px-3 py-4 bg-[#181818] rounded-md">
                     <MenuSearch />
                     <hr className="mt-3 border-zinc-500" />
-                    <LayoutSearchList />
+                    {searchLayout.isLoading == false &&
+                    searchLayout.isErrors == false ? (
+                        searchLayout.data.data != null ? (
+                            <>
+                                <LayoutSearchList
+                                    list={searchLayout.data.data}
+                                />
+                                {/* <Pagination
+                                    pagination={searchLayout.data.links}
+                                /> */}
+                            </>
+                        ) : null
+                    ) : null}
+                    {/* {!searchLayout.isErrors &&
+                    searchLayout.isLoading == false &&
+                    searchLayout.data.data.length > 0 ? (
+                        <>
+                            <LayoutSearchList list={searchLayout.data.data} />
+                            <Pagination pagination={searchLayout.data.links} />
+                        </>
+                    ) : null} */}
                 </div>
             </div>
         </>

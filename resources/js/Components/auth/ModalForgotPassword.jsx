@@ -44,7 +44,13 @@ const ModalForgotPassword = ({ closeForgotPassword }) => {
                         type="text"
                         placeholder="Email"
                         className="w-full h-9 mt-1 bg-[#1f1f1f] text-md ring-1 rounded-sm focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
+                        required
                     />
+                    {errors.email ? (
+                        <div className="text-red-600 text-sm">
+                            {errors.email}
+                        </div>
+                    ) : null}
                 </div>
                 <div className="w-full mt-5 mb-3">
                     <SubmitBtnWithLoading

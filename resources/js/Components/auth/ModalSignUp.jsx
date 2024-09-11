@@ -26,7 +26,7 @@ const ModalSignUp = ({ openSignIn, openForgotPassword }) => {
     return (
         <div className="w-[320px] text-white">
             <div className="text-center font-semibold text-[20px] mb-6">
-                Create Radhians-key account
+                Create Radhianskey account
             </div>
             <form onSubmit={submit}>
                 <div className="w-full mt-1">
@@ -35,7 +35,7 @@ const ModalSignUp = ({ openSignIn, openForgotPassword }) => {
                         type="text"
                         min={3}
                         max={20}
-                        placeholder="Layout name"
+                        placeholder="Username"
                         className="w-full h-9 mt-1 bg-[#1f1f1f] text-md ring-1 rounded-sm focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
                         value={form.name}
                         onChange={(e) => {
@@ -79,7 +79,7 @@ const ModalSignUp = ({ openSignIn, openForgotPassword }) => {
                     <label className="text-md">Password</label>
                     <input
                         type="password"
-                        placeholder="Layout name"
+                        placeholder="Password"
                         className="w-full h-9 mt-1 bg-[#1f1f1f] text-md ring-1 rounded-sm focus:outline-none focus:ring-slate-500 focus:ring-1 p-2"
                         value={form.password}
                         onChange={(e) => {

@@ -8,7 +8,8 @@ import caseThemeReducer from "./Slices/main/caseThemeSlice";
 import modalKeyThemeDataReducer from "./Slices/main/modalKeyThemeDataSlice";
 import modalCaseThemeDataReducer from "./Slices/main/modalCaseThemeDataSlice";
 import layoutTestReducer from "./Slices/keyboard-test/layoutTestSlice";
-import defaulLayoutSlice from "./Slices/keyboard-test/defaulLayoutSlice";
+import defaulLayoutReducer from "./Slices/keyboard-test/defaulLayoutSlice";
+import searchLayoutReducer from "./Slices/layout-search/SearchLayoutSlice";
 
 export const store = configureStore({
     reducer: {
@@ -21,6 +22,7 @@ export const store = configureStore({
         modalKeyTheme: modalKeyThemeDataReducer,
         modalCaseTheme: modalCaseThemeDataReducer,
         layoutTest: layoutTestReducer,
-        defaultLayout: defaulLayoutSlice,
+        defaultLayout: defaulLayoutReducer,
+        searchLayout: searchLayoutReducer,
     },
 });

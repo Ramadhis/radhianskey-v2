@@ -30,7 +30,9 @@ use App\Http\Controllers\Auth\ForgotPasswordController;
 Route::get('/create-layout', [LayoutKeyController::class, 'index'])->name('create.layout');
 Route::get('/create-layout/{uid}', [LayoutKeyController::class, 'edit'])->name('edit.layout');
 Route::get('/layout-search', [LayoutSearchController::class, 'index'])->name('search.layout');
+Route::get('/get-layout-search', [LayoutSearchController::class, 'getLayoutSearch'])->name('search.getLayout');
 Route::get('/', [KeyboardTestController::class, 'index'])->name('home');
+
 
 Route::get('/get-layout-test', [KeyboardTestController::class, 'getLayoutTest'])->name('get-layout-test');
 

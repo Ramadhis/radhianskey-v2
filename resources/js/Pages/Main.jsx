@@ -184,9 +184,6 @@ const Main = ({ data, globalKeyTheme, privateKeyTheme }) => {
                                                 layoutScreenhotRef
                                             }
                                         />
-                                        <PanelResizeHandle disabled={true}>
-                                            <div className="w-full h-px bg-[#1f1f1f]"></div>
-                                        </PanelResizeHandle>
                                         <Panel
                                             className="bg-[#1f1f1f] w-full mx-auto ps-1 pb-1"
                                             defaultSize={70}
