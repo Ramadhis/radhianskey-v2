@@ -1,21 +1,25 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import Header from "../Components/global-components/Header";
 import LayoutSearchList from "../Components/layout-search/LayoutSearchList";
 import MenuSearch from "../Components/layout-search/MenuSearch";
 import { useDispatch, useSelector } from "react-redux";
 import { usePage } from "@inertiajs/inertia-react";
-import { getSearchLayout } from "../Store/Slices/layout-search/SearchLayoutSlice";
 import Pagination from "../Components/utils/Pagination";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import { getSearchLayout } from "../Store/Slices/layout-search/searchLayoutSlice";
 
 const LayoutSearch = () => {
     const dispatch = useDispatch();
     const { auth, session } = usePage().props;
     const searchLayout = useSelector((state) => state.searchLayout);
+    const url = new URL(location); //pagination
 
     useEffect(() => {
-        dispatch(getSearchLayout());
+        dispatch(getSearchLayout({ url: url.searchParams }));
+        // console.log(url.searchParams);
     }, []);
+    // console.log(searchLayout);
 
     return (
         <>
@@ -36,26 +40,68 @@ const LayoutSearch = () => {
                         Layout Search
                     </div>
                     <div className="text-md mt-2 text-zinc-200">
-                        Home / Layout
+                        <a href="/" className="text-blue-500 underline">
+                            Home
+                        </a>{" "}
+                        / Search layout
                     </div>
                 </div>
                 <div className="border border-zinc-600 px-3 py-4 bg-[#181818] rounded-md">
                     <MenuSearch />
                     <hr className="mt-3 border-zinc-500" />
-                    {searchLayout.isLoading == false &&
-                    searchLayout.isErrors == false ? (
-                        searchLayout.data.data != null ? (
+                    <div className="grid md:grid-cols-3 grid-cols-1 gap-3 mt-4">
+                        <SkeletonTheme
+                            baseColor="#2c2b2c"
+                            highlightColor="#444"
+                        >
+                            {searchLayout.isLoading &&
+                                [...Array(9)].map((val, index) => {
+                                    return (
+                                        <div key={index}>
+                                            <Skeleton className="h-40" />
+                                            <Skeleton />
+                                            <Skeleton
+                                            // className="pt-1 pb-1"
+                                            // height={2}
+                                            />
+                                        </div>
+                                    );
+                                })}
+                        </SkeletonTheme>
+                        {searchLayout.isErrors && (
                             <>
-                                <LayoutSearchList
-                                    list={searchLayout.data.data}
-                                />
-                                {/* <Pagination
-                                    pagination={searchLayout.data.links}
-                                /> */}
+                                <div className="text-lg">{list.message}</div>
                             </>
-                        ) : null
-                    ) : null}
-                    {/* {!searchLayout.isErrors &&
+                        )}
+
+                        {searchLayout.isLoading == false &&
+                        searchLayout.isErrors == false &&
+                        searchLayout.data !== null ? (
+                            searchLayout["data"] !== undefined ? (
+                                <>
+                                    {searchLayout["data"]["data"] !==
+                                    undefined ? (
+                                        searchLayout["data"]["data"].length <
+                                        1 ? (
+                                            <div className="font-semibold text-zinc-200 mt-8 md:col-span-6 col-span-1 ms-2 text-center">
+                                                Layout not found, try searching
+                                                with other keywords
+                                            </div>
+                                        ) : (
+                                            <LayoutSearchList
+                                                list={searchLayout.data.data}
+                                            />
+                                        )
+                                    ) : (
+                                        <div className="md:cols-span-3 cols-span-1 ms-2">
+                                            There is no layout data yet...
+                                        </div>
+                                    )}
+                                </>
+                            ) : null
+                        ) : null}
+
+                        {/* {!searchLayout.isErrors &&
                     searchLayout.isLoading == false &&
                     searchLayout.data.data.length > 0 ? (
                         <>
@@ -63,6 +109,23 @@ const LayoutSearch = () => {
                             <Pagination pagination={searchLayout.data.links} />
                         </>
                     ) : null} */}
+                    </div>
+                    <div className="mt-14">
+                        {searchLayout.isLoading == false &&
+                        searchLayout.isErrors == false &&
+                        searchLayout.data !== null ? (
+                            searchLayout["data"] !== undefined ? (
+                                <>
+                                    {searchLayout["data"]["data"] !==
+                                    undefined ? (
+                                        <Pagination
+                                            pagination={searchLayout.data.links}
+                                        />
+                                    ) : null}
+                                </>
+                            ) : null
+                        ) : null}
+                    </div>
                 </div>
             </div>
         </>

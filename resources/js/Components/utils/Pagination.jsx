@@ -49,38 +49,30 @@ const Pagination = ({ pagination }) => {
     return (
         <>
             <nav className="mt-2">
-                <ul className="pagination flex-wrap">
-                    {/* <li className="page-item disabled">
-                        <a className="page-link" href="#" tabindex="-1">
-                            Previous
-                        </a>
-                    </li> */}
+                <ul className="pagination flex justify-center">
                     <Link
                         ref={pagRef}
-                        className="btn btn-success visually-hidden"
+                        className="btn btn-success hidden"
                         href={href}
                         method="get"
                     >
                         2
                     </Link>
-                    {pagination.map((val, index) => {
-                        return (
-                            <li
-                                className={`page-item
-                                    ${val.active ? `active` : null}
-                                    ${val.url ? null : `disabled`}
-                                    `}
-                                key={index}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    return changePage(val.label, val.url);
-                                }}
-                            >
-                                <a
-                                    className={`page-link ${
-                                        val.url ? null : `disabled`
-                                    }`}
+                    <div className="overflow-auto inline-block">
+                        {pagination.map((val, index) => {
+                            return (
+                                <li
+                                    className={`inline-block`}
+                                    key={index}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        return changePage(val.label, val.url);
+                                    }}
+                                >
+                                    {/* <button
+                                    className={`border border-zinc-300 px-3 py-1 text-white bg-[#2c508a] hover:bg-[#213e6d] disabled:bg-slate-400 disabled:cursor-not-allowed`}
                                     href="#"
+                                    disabled={val.url ? false : true}
                                 >
                                     {val.label
                                         .replace(
@@ -88,31 +80,32 @@ const Pagination = ({ pagination }) => {
                                             "Sebelumnya"
                                         )
                                         .replace("Next &raquo;", "Berikutnya")}
-                                </a>
-                            </li>
-                        );
-                    })}
+                                </button> */}
 
-                    {/* <li className="page-item">
-                        <a className="page-link" href="#">
-                            1
-                        </a>
-                    </li>
-                    <li className="page-item active">
-                        <a className="page-link" href="#">
-                            2
-                        </a>
-                    </li>
-                    <li className="page-item">
-                        <a className="page-link" href="#">
-                            3
-                        </a>
-                    </li> */}
-                    {/* <li className="page-item">
-                        <a className="page-link" href="#">
-                            Next
-                        </a>
-                    </li> */}
+                                    <button
+                                        className={`inline-block px-3 py-1 text-white ${
+                                            url.searchParams.get("page") ==
+                                                val.label ||
+                                            (url.searchParams.get("page") ==
+                                                null &&
+                                                val.label == "1")
+                                                ? `bg-[#213e6d]`
+                                                : ``
+                                        } font-semibold hover:bg-[#213e6d] disabled:text-zinc-400 disabled:cursor-not-allowed`}
+                                        href="#"
+                                        disabled={val.url ? false : true}
+                                    >
+                                        {val.label
+                                            .replace(
+                                                "&laquo; Previous",
+                                                "Previous"
+                                            )
+                                            .replace("Next &raquo;", "Next")}
+                                    </button>
+                                </li>
+                            );
+                        })}
+                    </div>
                 </ul>
             </nav>
         </>

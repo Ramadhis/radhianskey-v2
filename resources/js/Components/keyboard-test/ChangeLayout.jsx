@@ -116,9 +116,11 @@ const ChangeLayout = ({ menu }) => {
                             : null}
                     </div>
                 </SimpleBar>
-                <button className="w-full h-8 bg-blue-500 hover:bg-white rounded-sm border font-semibold border-white hover:border-blue-500 text-center hover:text-blue-500 cursor-pointer px-2">
-                    Load more (in development)
-                </button>
+                <a href="/layout-search" className="w-full">
+                    <button className="w-full h-9 bg-blue-500 hover:bg-white rounded-sm border font-semibold border-white hover:border-blue-500 text-center hover:text-blue-500 cursor-pointer px-2">
+                        Load more layout
+                    </button>
+                </a>
             </div>
         </div>
     );

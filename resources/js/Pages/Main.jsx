@@ -206,7 +206,7 @@ const Main = ({ data, globalKeyTheme, privateKeyTheme }) => {
                                         </PanelResizeHandle>
                                         <Panel
                                             className="bg-[#181818] w-full mx-auto pb-1"
-                                            minSize={10}
+                                            minSize={7}
                                             maxSize={90}
                                             defaultSize={30}
                                         >

@@ -4,9 +4,13 @@ import axios from "axios";
 export const getSearchLayout = createAsyncThunk(
     "searchLayout/getListData",
     async (arg, { rejectWithValue }) => {
+        const url = new URL(location);
         const data = await axios
-            .get("/get-layout-search")
+            .get("/get-layout-search", {
+                params: url.searchParams,
+            })
             .then((res) => {
+                console.log(res.data);
                 return res.data;
             })
             .catch((err) => {
@@ -20,7 +24,7 @@ export const getSearchLayout = createAsyncThunk(
 const searchLayoutSlice = createSlice({
     name: "searchLayout",
     initialState: {
-        data: null,
+        data: {},
         message: "",
         isLoading: false,
         isErrors: false,

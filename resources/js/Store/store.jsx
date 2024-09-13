@@ -9,7 +9,7 @@ import modalKeyThemeDataReducer from "./Slices/main/modalKeyThemeDataSlice";
 import modalCaseThemeDataReducer from "./Slices/main/modalCaseThemeDataSlice";
 import layoutTestReducer from "./Slices/keyboard-test/layoutTestSlice";
 import defaulLayoutReducer from "./Slices/keyboard-test/defaulLayoutSlice";
-import searchLayoutReducer from "./Slices/layout-search/SearchLayoutSlice";
+import searchLayoutReducer from "./Slices/layout-search/searchLayoutSlice";
 
 export const store = configureStore({
     reducer: {
