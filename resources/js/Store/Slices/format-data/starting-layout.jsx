@@ -4,6 +4,7 @@ const startingLayout = {
     uid: null,
     name: "",
     description: "",
+    publication_type: "public",
     preview_image: "default.png",
     layout_data: {
         keyDownData: {

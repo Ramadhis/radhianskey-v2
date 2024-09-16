@@ -37,6 +37,7 @@ class LayoutKeyController extends Controller
         // ]
     }
 
+    //create-layout with code uid
     public function edit($uid) {
         try {
             $layoutData = LayoutsKey::where('uid',htmlspecialchars($uid))->where("id_user",Auth::user()->id)->first();
@@ -48,6 +49,7 @@ class LayoutKeyController extends Controller
         }
     }
 
+    //list layout for my-layout
     public function getListLayout(){
         try {
             $list_layout = LayoutsKey::select('uid','name','name_slug',"preview_image",DB::raw("date(updated_at) as updated_date"))
@@ -89,6 +91,7 @@ class LayoutKeyController extends Controller
             'name' => 'required|min:3|max:60',
             'description'  => 'max:300',
             'layout_data'  => 'required',
+            'publication_type'  => 'required',
             'preview_image'  => 'required',
         ]);
 
@@ -128,6 +131,7 @@ class LayoutKeyController extends Controller
             'id_user' => Auth::user()->id,
             'name' => htmlspecialchars($req->name),
             'name_slug' => $slug_name,
+            'publication_type' => htmlspecialchars($req->publication_type),
             'description' => htmlspecialchars($req->description),
             'preview_image' => $fileName,
             'layout_data' => json_encode($req->layout_data),
@@ -151,6 +155,7 @@ class LayoutKeyController extends Controller
         $this->validate($req,[
             'uid' => 'required',
             'name' => 'required|min:3|max:60',
+            'publication_type'  => 'required',
             'description'  => 'max:300',
             'layout_data'  => 'required',
             'preview_image'  => 'required',
@@ -208,6 +213,7 @@ class LayoutKeyController extends Controller
             $update = LayoutsKey::where('uid',$req->uid)->update([
                 'name' => htmlspecialchars($req->name),
                 'name_slug' => Str::slug(htmlspecialchars($req->name)),
+                'publication_type' => htmlspecialchars($req->publication_type),
                 'description' => htmlspecialchars($req->description),
                 'preview_image' => $newFileName,
                 'layout_data' => json_encode($req->layout_data),

@@ -43,7 +43,7 @@ const LayoutSearch = () => {
                         <a href="/" className="text-blue-500 underline">
                             Home
                         </a>{" "}
-                        / Search layout
+                        / Layout Search
                     </div>
                 </div>
                 <div className="border border-zinc-600 px-3 py-4 bg-[#181818] rounded-md">

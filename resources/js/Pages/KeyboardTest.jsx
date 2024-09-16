@@ -229,11 +229,22 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
                                 </div>
                             </div>
                         )}
-                        {layouts.isErrors && (
+                        {menu == "layout-test" || menu == "skeleton-layout" ? (
                             <>
-                                <div className="text-lg">{layouts.message}</div>
+                                {layouts.isErrors && (
+                                    <div className="w-80 h-[300px] flex items-center justify-center">
+                                        <div className="align-center">
+                                            <div className=" flex items-center justify-center">
+                                                <i className="bi bi-database-fill-x text-[60px] text-white"></i>
+                                            </div>
+                                            <div className="text-lg text-white">
+                                                {layouts.message}
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                             </>
-                        )}
+                        ) : null}
                         <div className="">
                             {!layouts.isErrors && layouts.isLoading == false ? (
                                 layouts.data != null ? (

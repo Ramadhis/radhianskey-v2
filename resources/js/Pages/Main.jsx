@@ -69,6 +69,7 @@ const Main = ({ data, globalKeyTheme, privateKeyTheme }) => {
                     name: data.name,
                     description: data.description,
                     preview_image: data.preview_image,
+                    publication_type: data.publication_type,
                     layout_data: JSON.parse(data.layout_data),
                 })
             );

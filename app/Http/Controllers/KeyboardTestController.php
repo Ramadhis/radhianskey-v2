@@ -38,8 +38,14 @@ class KeyboardTestController extends Controller
                 if($find_user){
                     $get_layout = LayoutsKey::where('name_slug', $req->layoutSlug)
                     ->where('id_user',$find_user->id)
+                    ->where('publication_type','public')
                     ->first();
-                    return response()->json($get_layout);
+                    if($get_layout){
+                        return response()->json($get_layout);
+                    }else{
+                        abort(404);
+                    }
+
                 }
             }
         } catch (Throwable $th) {

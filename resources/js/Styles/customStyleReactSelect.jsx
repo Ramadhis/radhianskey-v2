@@ -50,7 +50,7 @@ export const customStyleSelect = {
         ...base,
         background: "#1f1f1f",
         border: "solid 1px white",
-        height: "200px",
+        // height: "200px",
 
         // "::-webkit-scrollbar": {
         //     width: "9px",

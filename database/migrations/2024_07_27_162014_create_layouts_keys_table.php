@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('id_user');
             $table->string('name');
             $table->string('name_slug');
+            $table->enum('publication_type',['public', 'private'])->default('private');
             $table->string('description');
             $table->text('preview_image');
             $table->json('layout_data');

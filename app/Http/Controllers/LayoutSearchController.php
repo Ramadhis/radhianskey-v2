@@ -21,6 +21,7 @@ class LayoutSearchController extends Controller
         ->where(function ($query) use ($q) {
             return $query->orWhere('name', 'like', '%'.$q.'%')->orWhere('description', 'like', '%'.$q.'%');
         })
+        ->where('publication_type','public')
         ->with('user')
         ->orderBy('id', $sort)
         ->paginate($perPage = 21, $columns = ['*'],'page',$page)

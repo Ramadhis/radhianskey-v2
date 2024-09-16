@@ -14,6 +14,7 @@ class LayoutsKey extends Model
         'id_user',
         'name',
         'name_slug',
+        'publication_type',
         'description',
         'preview_image',
         'layout_data'
