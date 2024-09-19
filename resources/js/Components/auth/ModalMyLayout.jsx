@@ -134,6 +134,10 @@ const ModalMyLayout = () => {
                                               <img
                                                   className="object-contain w-full h-full hover:scale-125 hover:transition-all hover:animate-none hover:duration-150 hover:delay-100"
                                                   src={`/images/preview_layout/${val.preview_image}`}
+                                                  onError={(e) => {
+                                                      return (e.target.src =
+                                                          "/images/preview_layout/no-image.png");
+                                                  }}
                                               />
                                               <div className="absolute top-0 right-1 invisible group-hover:visible">
                                                   <button

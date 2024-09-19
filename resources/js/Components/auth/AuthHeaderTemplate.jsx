@@ -109,16 +109,14 @@ const AuthHeaderTemplate = () => {
                         <img
                             alt="name"
                             src={
-                                auth.user &&
-                                checkImageExists(
-                                    "/images/profile_picture/" +
-                                        auth.user.profile_picture
-                                )
-                                    ? "/images/profile_picture/" +
-                                      auth.user.profile_picture
-                                    : "/images/profile_picture/default.png"
+                                "/images/profile_picture/" +
+                                auth.user.profile_picture
                             }
                             className="w-9 h-9 rounded-full inline border-2 object-cover"
+                            onError={(e) => {
+                                return (e.target.src =
+                                    "/images/profile_picture/default.png");
+                            }}
                         />
                     </a>
                     <div className="bg-[#1f1f1f] border border-zinc-300  w-36 z-50 absolute top-9 right-5 rounded text-black hidden group-hover:block group-hover:transition">

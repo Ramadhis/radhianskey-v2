@@ -18,6 +18,7 @@ import Header from "../Components/global-components/Header";
 import ChangeLayout from "../Components/keyboard-test/ChangeLayout";
 import MenuKeybTest from "../Components/keyboard-test/MenuKeybTest";
 import { Helmet } from "react-helmet-async";
+import FooterFixed from "../Components/global-components/FooterFixed";
 
 const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
     // const loginStatus = false;
@@ -321,17 +322,8 @@ const KeyboardTest = ({ usernameSlug, layoutSlug }) => {
                         </div>
                     </div>
                 </div>
-                <div>
-                    <div className="fixed bottom-0 w-full">
-                        <div className="text-sm text-white ms-1 flex justify-between">
-                            <div></div>
-                            <div className="pe-1 text-zinc-300 hover:text-white ">
-                                © 2024 Radhians-Keys
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
+            <FooterFixed />
         </>
     );
 };

@@ -98,6 +98,10 @@ const ModalAccountSetting = () => {
                                       imageUpload.default
                                     : "/images/profile_picture/default.png"
                             }
+                            onError={(e) => {
+                                return (e.target.src =
+                                    "/images/profile_picture/default.png");
+                            }}
                             className="w-40 h-40 rounded-full inline border-4 border-white object-cover"
                             accept="image/*"
                         />

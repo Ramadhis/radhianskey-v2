@@ -1,6 +1,7 @@
 import { Link } from "@inertiajs/inertia-react";
 import React from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import checkImageExists from "../helpers/checkImageExists";
 
 const LayoutSearchList = ({ list }) => {
     return (
@@ -14,9 +15,20 @@ const LayoutSearchList = ({ list }) => {
                     >
                         <div className="bg-blue-400 border-collapse border-white border-2 group-hover:border-[#2c508a] group-hover:border-2 group-hover:scale-[98%] transition-all delay-100 cursor-pointer">
                             <img
-                                alt={""}
+                                alt={"Image"}
                                 className="object-contain w-full h-40"
                                 src={`/images/preview_layout/${val.preview_image}`}
+                                // src={
+                                //     checkImageExists(
+                                //         `/images/preview_layout/${val.preview_image}`
+                                //     )
+                                //         ? `/images/preview_layout/${val.preview_image}`
+                                //         : "/images/profile_picture/default.png"
+                                // }
+                                onError={(e) => {
+                                    return (e.target.src =
+                                        "/images/preview_layout/no-image.png");
+                                }}
                             />
                             {/* <LazyLoadImage
                                 alt={``}
