@@ -8,6 +8,7 @@ import { usePage } from "@inertiajs/inertia-react";
 import Pagination from "../Components/utils/Pagination";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { getSearchLayout } from "../Store/Slices/layout-search/searchLayoutSlice";
+import { LazyLoadComponent } from "react-lazy-load-image-component";
 
 const LayoutSearch = () => {
     const dispatch = useDispatch();
@@ -88,9 +89,11 @@ const LayoutSearch = () => {
                                                 with other keywords
                                             </div>
                                         ) : (
+                                            // <LazyLoadComponent>
                                             <LayoutSearchList
                                                 list={searchLayout.data.data}
                                             />
+                                            // </LazyLoadComponent>
                                         )
                                     ) : (
                                         <div className="md:cols-span-3 cols-span-1 ms-2">

@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AuthHeaderTemplate from "../auth/AuthHeaderTemplate";
 
 const Header = () => {
+    const url = new URL(location);
+    const segmentationUrl = url.pathname.split("/");
+    useEffect(() => {
+        console.log(segmentationUrl[1]);
+    }, []);
+
     return (
         <div className="Header flex justify-between p-2">
             <div className="flex grow-0 items-center">
@@ -17,21 +23,35 @@ const Header = () => {
                     className="group text-zinc-300 font-semibold hover:text-white cursor-pointer transition-all text-[15px] ms-5 me-1"
                 >
                     Create Layout
-                    <div className="h-0.5 bg-[#0d6efd] w-0 group-hover:w-full transition-all duration-300 rounded-md"></div>
+                    <div
+                        className={`h-0.5 bg-[#0d6efd] w-0 group-hover:w-full transition-all duration-300 rounded-md`}
+                    ></div>
                 </a>
                 <a
                     href={"/layout-search"}
                     className="group text-zinc-300 font-semibold hover:text-white cursor-pointer transition-all text-[15px] ms-5 me-1"
                 >
                     Layout Search
-                    <div className="h-0.5 bg-[#0d6efd] w-0 group-hover:w-full transition-all duration-300 rounded-md"></div>
+                    <div
+                        className={`h-0.5 bg-[#0d6efd] ${
+                            segmentationUrl[1] == "layout-search"
+                                ? " w-[100%] "
+                                : " w-0 "
+                        } group-hover:w-full transition-all duration-300 rounded-md`}
+                    ></div>
                 </a>
                 <a
                     href={"/about"}
                     className="group text-zinc-300 font-semibold hover:text-white cursor-pointer transition-all text-[15px] ms-5 me-1"
                 >
                     About
-                    <div className="h-0.5 bg-[#0d6efd] w-0 group-hover:w-full transition-all duration-300 rounded-md"></div>
+                    <div
+                        className={`h-0.5 bg-[#0d6efd] ${
+                            segmentationUrl[1] == "about"
+                                ? " w-[100%] "
+                                : " w-0 "
+                        } group-hover:w-full transition-all duration-300 rounded-md`}
+                    ></div>
                 </a>
                 {/* <div className="text-white text-[17px] mx-1">menu 2</div> */}
             </div>

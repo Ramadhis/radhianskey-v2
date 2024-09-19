@@ -1,5 +1,6 @@
 import { Link } from "@inertiajs/inertia-react";
 import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const LayoutSearchList = ({ list }) => {
     return (
@@ -13,9 +14,21 @@ const LayoutSearchList = ({ list }) => {
                     >
                         <div className="bg-blue-400 border-collapse border-white border-2 group-hover:border-[#2c508a] group-hover:border-2 group-hover:scale-[98%] transition-all delay-100 cursor-pointer">
                             <img
-                                className="object-contain w-full  h-40"
+                                alt={""}
+                                className="object-contain w-full h-40"
                                 src={`/images/preview_layout/${val.preview_image}`}
                             />
+                            {/* <LazyLoadImage
+                                alt={``}
+                                height={50}
+                                width={50}
+                                effect="blur"
+                                wrapperProps={{
+                                    // If you need to, you can tweak the effect transition using the wrapper style.
+                                    style: { transitionDelay: "1s" },
+                                }}
+                                src={`/images/preview_layout/${val.preview_image}`} // use normal <img> attributes as props
+                            /> */}
                         </div>
                         <div className="">
                             <div className="text-md w-full overflow-hidden whitespace-nowrap text-white">
