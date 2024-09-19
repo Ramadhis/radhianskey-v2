@@ -1,6 +1,5 @@
 import { Link } from "@inertiajs/inertia-react";
 import React from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import checkImageExists from "../helpers/checkImageExists";
 
 const LayoutSearchList = ({ list }) => {
@@ -30,17 +29,6 @@ const LayoutSearchList = ({ list }) => {
                                         "/images/preview_layout/no-image.png");
                                 }}
                             />
-                            {/* <LazyLoadImage
-                                alt={``}
-                                height={50}
-                                width={50}
-                                effect="blur"
-                                wrapperProps={{
-                                    // If you need to, you can tweak the effect transition using the wrapper style.
-                                    style: { transitionDelay: "1s" },
-                                }}
-                                src={`/images/preview_layout/${val.preview_image}`} // use normal <img> attributes as props
-                            /> */}
                         </div>
                         <div className="">
                             <div className="text-md w-full overflow-hidden whitespace-nowrap text-white">
