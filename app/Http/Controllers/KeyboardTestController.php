@@ -29,14 +29,15 @@ class KeyboardTestController extends Controller
             if($req->uid == "default"){
                 $get_id_admin = User::select("id")->where('roles', 'admin')->first();
                 if($get_id_admin){
-                    $get_layout = LayoutsKey::where('id_user',$get_id_admin->id)
+                    $get_layout = LayoutsKey::select('name','name_slug','description','layout_data')->where('id_user',$get_id_admin->id)
                     ->first();
                 }
                 return response()->json($get_layout);
             }else{
                 $find_user = User::select("id")->where('name_slug', $req->usernameSlug)->first();
                 if($find_user){
-                    $get_layout = LayoutsKey::where('name_slug', $req->layoutSlug)
+                    $get_layout = LayoutsKey::select('name','name_slug','description','layout_data')
+                    ->where('name_slug', $req->layoutSlug)
                     ->where('id_user',$find_user->id)
                     ->where('publication_type','public')
                     ->first();
@@ -61,6 +62,7 @@ class KeyboardTestController extends Controller
         	$get_layout_default = null;
         	if($get_id_admin){
         	    $get_layout_default = LayoutsKey::select('uid','name','name_slug',"preview_image",DB::raw("date(updated_at) as updated_date"))
+                ->where('publication_type','public')
                 ->where('id_user',$get_id_admin->id)
                 ->get();
         	}

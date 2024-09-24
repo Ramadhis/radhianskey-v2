@@ -90,13 +90,8 @@ const ModalAccountSetting = () => {
                             src={
                                 imageUpload.uploaded
                                     ? imageUpload.uploaded
-                                    : checkImageExists(
-                                          "/images/profile_picture/" +
-                                              imageUpload.default
-                                      )
-                                    ? "/images/profile_picture/" +
+                                    : "/images/profile_picture/" +
                                       imageUpload.default
-                                    : "/images/profile_picture/default.png"
                             }
                             onError={(e) => {
                                 return (e.target.src =

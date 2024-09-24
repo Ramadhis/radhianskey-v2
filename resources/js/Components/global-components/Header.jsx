@@ -4,9 +4,6 @@ import AuthHeaderTemplate from "../auth/AuthHeaderTemplate";
 const Header = () => {
     const url = new URL(location);
     const segmentationUrl = url.pathname.split("/");
-    useEffect(() => {
-        console.log(segmentationUrl[1]);
-    }, []);
 
     return (
         <div className="Header flex justify-between p-2">
