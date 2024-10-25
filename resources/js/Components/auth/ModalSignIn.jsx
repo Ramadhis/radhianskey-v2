@@ -23,7 +23,7 @@ const ModalSignIn = ({ openSignUp, openForgotPassword }) => {
 
     return (
         <div className="w-[320px] text-white">
-            <div className="text-center font-semibold text-[20px] mb-6">
+            <div className="text-center font-bold text-[20px] mb-6">
                 Sign in to Radhians
             </div>
             <form onSubmit={submit}>
